@@ -27,8 +27,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-frontend_path = os.path.join(os.path.dirname(__file__), "www")
-app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 top_movers = []
 top_losers = []
@@ -95,6 +93,10 @@ async def get_ticker_data(ticker: str):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+    
+frontend_path = os.path.join(os.path.dirname(__file__), "www")
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn
