@@ -19,9 +19,6 @@ class HorizonEnum(str, Enum):
 
 app = FastAPI()
 
-frontend_path = os.path.join(os.path.dirname(__file__), "www")
-app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://prediqt.onrender.com"],
@@ -29,6 +26,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+frontend_path = os.path.join(os.path.dirname(__file__), "www")
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 top_movers = []
 top_losers = []
