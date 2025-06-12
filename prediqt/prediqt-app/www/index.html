@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' data: gap: http://192.168.1.10:8000; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  <title>PredIQT</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="glass">
+      <h1 class="app-title">
+        <span class="pred">Pred</span><span class="iq">IQ</span><span class="t">t</span>
+      </h1>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="top-movers.html">Top Movers</a>
+        <a href="top-losers.html">Top Losers</a>
+        <a href="predict.html">Predict</a>
+      </nav>
+    </header>
+
+  <main class="glass">
+    <h2>Enter a Stock Ticker</h2>
+    <input type="text" id="tickerInput" placeholder="e.g. AAPL">
+    <button type="button" onclick="predict()">Predict</button>
+
+    <div id="predictionsContainer">
+      <div><strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span></div>
+      <div><strong>Next Day Prediction:</strong> <span id="predictionDay">-</span></div>
+      <div><strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span></div>
+      <div><strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span></div>
+    </div>
+  </main>
+
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

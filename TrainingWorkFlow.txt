@@ -1,0 +1,14 @@
+Frontend UI
+   ↓
+main.py (FastAPI: route controller)
+   ↓
+predictor.py (Orchestration logic)
+   ↓
+train_predictor.py (Main trainer, delegates to...)
+   ↓
+├── trainer_1_yfinance.py       ← Price-based
+├── trainer_2_sentiment.py      ← News & NLP
+├── trainer_3_pelosi.py         ← Congress trading
+├── trainer_4_weather.py        ← Geo-economic conditions
+├── trainer_5_macro.py          ← CPI, interest rates, etc.
+└── trainer_fusion.py           ← Merges all outputs into a final prediction
