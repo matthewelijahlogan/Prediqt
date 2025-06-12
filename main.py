@@ -19,7 +19,7 @@ class HorizonEnum(str, Enum):
 
 app = FastAPI()
 
-frontend_path = os.path.join(os.path.dirname(__file__), "..", "www")
+frontend_path = os.path.join(os.path.dirname(__file__), "www")
 app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 app.add_middleware(
