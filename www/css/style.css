@@ -1,0 +1,170 @@
+@font-face {
+  font-family: 'Racing Sans One';
+  src: url('fonts/RacingSansOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #ffffff;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.glass {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.app-title .pred,
+.app-title .t {
+  color: #fff;
+  font-family: 'Racing Sans One', sans-serif;
+}
+
+.app-title .iq {
+  color: gold;
+  font-family: 'Bebas Neue', sans-serif;
+  text-shadow: 0 0 8px gold, 0 0 12px gold;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  background: gold;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #ffd700;
+  box-shadow: 0 0 10px gold, 0 0 20px gold;
+}
+
+#predictionOutput {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.nav a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+.nav a.active {
+  color: white;
+  text-shadow: 0 0 10px gold;
+}
+
+.predictionsContainer {
+  margin-top:20px;
+}
+
+.predictions h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.stock-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.stock-list li {
+  padding: 10px;
+  background-color: #111;
+  margin: 8px 0;
+  border-radius: 8px;
+  color: lime;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.stock-list li:hover {
+  background-color: #222;
+}
