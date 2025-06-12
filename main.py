@@ -24,7 +24,7 @@ app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://prediqt.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -98,4 +98,5 @@ async def get_ticker_data(ticker: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))  # fallback to 8000 locally
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
