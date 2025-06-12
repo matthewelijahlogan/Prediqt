@@ -17,7 +17,8 @@ async function predict() {
   // For each horizon, fetch prediction and update UI
   for (const horizon of horizons) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/predict/${ticker}?horizon=${horizon}`);
+        const response = await fetch(`https://prediqt-api.onrender.com/predict/${ticker}?horizon=${horizon}`);
+
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
