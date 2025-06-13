@@ -25,7 +25,8 @@ app = FastAPI()
 # CORS middleware (allows all origins for now, update later for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For dev only
+    allow_origins=["https://prediqt.onrender.com",
+                   "http://localhose:8000"],  # For dev only
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -112,7 +113,14 @@ def serve_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
 
 # Serve static files like JS/CSS/images
-app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+from fastapi.staticfiles import StaticFiles
+
+# Serve all /www subfolders
+app.mount("/css", StaticFiles(directory=os.path.join(frontend_path, "css")), name="css")
+app.mount("/js", StaticFiles(directory=os.path.join(frontend_path, "js")), name="js")
+app.mount("/img", StaticFiles(directory=os.path.join(frontend_path, "img")), name="img")
+app.mount("/fonts", StaticFiles(directory=os.path.join(frontend_path, "fonts")), name="fonts")
+
 
 # --- LOCAL DEV ENTRY POINT ---
 if __name__ == "__main__":

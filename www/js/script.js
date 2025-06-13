@@ -31,3 +31,5 @@ async function predict() {
     }
   }
 }
+
+window.predict = predict;
