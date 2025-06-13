@@ -22,16 +22,27 @@ class HorizonEnum(str, Enum):
 # Initialize FastAPI app
 app = FastAPI()
 
-# CORS middleware (allows all origins for now, update later for production)
+import os
+
+# Environment-based origin config
+is_dev = os.environ.get("ENV", "dev") == "dev"
+
+allowed_origins = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+if not is_dev:
+    allowed_origins.append("https://prediqt.onrender.com")
+
+# Only ONE CORS middleware registration!
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://prediqt.onrender.com",
-                   "http://localhose:8000"],  # For dev only
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # In-memory data
 top_movers = []
 top_losers = []
@@ -125,5 +136,5 @@ app.mount("/fonts", StaticFiles(directory=os.path.join(frontend_path, "fonts")),
 # --- LOCAL DEV ENTRY POINT ---
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))  # Render will set this automatically
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 8000))  # Render sets this on deployment
+    uvicorn.run("main:app", host="127.0.0.1", port=port, reload=True)

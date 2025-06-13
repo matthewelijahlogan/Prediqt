@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PredIQT</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -20,22 +20,23 @@
       </nav>
     </header>
 
-  <main class="glass">
-    <h2>Enter a Stock Ticker</h2>
-    <input type="text" id="tickerInput" placeholder="e.g. AAPL">
-    <button type="button" onclick="predict()">Predict</button>
+    <main class="glass">
+      <h2>Enter a Stock Ticker</h2>
+      <input type="text" id="tickerInput" placeholder="e.g. AAPL">
+      <button type="button" onclick="predict()">Predict</button>
 
-    <div id="predictionsContainer">
-      <div><strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span></div>
-      <div><strong>Next Day Prediction:</strong> <span id="predictionDay">-</span></div>
-      <div><strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span></div>
-      <div><strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span></div>
-    </div>
-  </main>
 
+      <div id="predictionsContainer">
+        <div><strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span></div>
+        <div><strong>Next Day Prediction:</strong> <span id="predictionDay">-</span></div>
+        <div><strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span></div>
+        <div><strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span></div>
+      </div>
+    </main>
   </div>
 
-  <script type="module" src="/js/script.js"></script>
-  <script type="module" src="/js/api.js"></script>
+  <!-- Load your script as a module -->
+  <script src="/js/script.js"></script>
+  <script src="/js/api.js"></script>
 </body>
 </html>
