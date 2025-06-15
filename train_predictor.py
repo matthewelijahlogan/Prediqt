@@ -30,6 +30,16 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
         print(f"[base_model] Error: {e}")
         results['base'] = {"error": str(e)}
 
+    # Define which models are active for each horizon
+    horizon_model_map = {
+        "hour": ["sentiment", "technical", "volume", "patterns", "volatility"],
+        "day": ["sentiment", "technical", "volume", "patterns", "volatility", "macro"],
+        "week": ["pelosi", "weather", "macro", "earnings", "social", "sector", "insider", "options", "technical", "etf_sector", "volume", "patterns", "volatility"],
+        "month": ["pelosi", "weather", "macro", "earnings", "social", "sector", "insider", "options", "technical", "etf_sector", "volume", "patterns", "volatility"]
+    }
+
+    active_models = set(horizon_model_map.get(horizon, []))
+
     model_list = {
         'sentiment': sentiment_model,
         'pelosi': pelosi_model,
@@ -48,6 +58,11 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
     }
 
     for name, model in model_list.items():
+        if name not in active_models:
+            print(f"[{name}_model] Skipped for horizon '{horizon}'")
+            results[name] = None
+            continue
+
         try:
             results[name] = model.predict(ticker)
             print(f"[{name}_model] Output: {results[name]}")

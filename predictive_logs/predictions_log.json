@@ -3894,5 +3894,3900 @@
         "volatility": 0.05
       }
     }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:17.205130",
+    "ticker": "MRO",
+    "result": {
+      "predicted_next_close": 100.1,
+      "used_models": [
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": null,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:20.647832",
+    "ticker": "WMT",
+    "result": {
+      "predicted_next_close": 94.86,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 3.4404,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:24.238883",
+    "ticker": "PVH",
+    "result": {
+      "predicted_next_close": 66.15,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 14.6784,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:27.965394",
+    "ticker": "USB",
+    "result": {
+      "predicted_next_close": 43.81,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.094,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:31.844884",
+    "ticker": "UNH",
+    "result": {
+      "predicted_next_close": 471.37,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 13473.7265,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:35.505242",
+    "ticker": "SHW",
+    "result": {
+      "predicted_next_close": 357.7,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 53.1342,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:38.961268",
+    "ticker": "MTB",
+    "result": {
+      "predicted_next_close": 185.32,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 19.0467,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:42.452490",
+    "ticker": "PKG",
+    "result": {
+      "predicted_next_close": 191.51,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 16.6792,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:46.040912",
+    "ticker": "RCL",
+    "result": {
+      "predicted_next_close": 265.49,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 77.6908,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:49.209578",
+    "ticker": "BAX",
+    "result": {
+      "predicted_next_close": 32.11,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.063,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:52.980080",
+    "ticker": "PG",
+    "result": {
+      "predicted_next_close": 165.04,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 6.5075,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:04:56.661447",
+    "ticker": "AES",
+    "result": {
+      "predicted_next_close": 11.68,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.187,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:00.823889",
+    "ticker": "V",
+    "result": {
+      "predicted_next_close": 353.71,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 84.0348,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:04.306885",
+    "ticker": "STX",
+    "result": {
+      "predicted_next_close": 108.07,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 149.114,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:07.486390",
+    "ticker": "GLW",
+    "result": {
+      "predicted_next_close": 51.17,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.4773,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:11.038544",
+    "ticker": "CVX",
+    "result": {
+      "predicted_next_close": 145.29,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 12.3414,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:15.116491",
+    "ticker": "MMM",
+    "result": {
+      "predicted_next_close": 147.52,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 20.5932,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:18.615807",
+    "ticker": "XLNX",
+    "result": {
+      "predicted_next_close": 100.03,
+      "used_models": [
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": null,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:22.203165",
+    "ticker": "CMI",
+    "result": {
+      "predicted_next_close": 324.82,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 67.9218,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:26.092672",
+    "ticker": "ICE",
+    "result": {
+      "predicted_next_close": 176.11,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 11.6509,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:29.387398",
+    "ticker": "SBUX",
+    "result": {
+      "predicted_next_close": 94.62,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 14.3767,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:33.191458",
+    "ticker": "DLR",
+    "result": {
+      "predicted_next_close": 177.09,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 9.7049,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:36.684565",
+    "ticker": "BRK-B",
+    "result": {
+      "predicted_next_close": 496.88,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 91.1648,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:40.484606",
+    "ticker": "LOW",
+    "result": {
+      "predicted_next_close": 226.8,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 19.8569,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:43.695966",
+    "ticker": "HSIC",
+    "result": {
+      "predicted_next_close": 72.15,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.7815,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:47.360069",
+    "ticker": "NLOK",
+    "result": {
+      "predicted_next_close": 100.03,
+      "used_models": [
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": null,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:50.901455",
+    "ticker": "VRSK",
+    "result": {
+      "predicted_next_close": 299.85,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 202.8112,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:54.625910",
+    "ticker": "GL",
+    "result": {
+      "predicted_next_close": 120.13,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 8.0902,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:05:58.709574",
+    "ticker": "SO",
+    "result": {
+      "predicted_next_close": 91.2,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.3405,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:02.198017",
+    "ticker": "XRAY",
+    "result": {
+      "predicted_next_close": 16.27,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.4659,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:06.133855",
+    "ticker": "COST",
+    "result": {
+      "predicted_next_close": 1016.38,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 351.3263,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:09.747018",
+    "ticker": "CTXS",
+    "result": {
+      "predicted_next_close": 100.07,
+      "used_models": [
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": null,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:13.314672",
+    "ticker": "NWL",
+    "result": {
+      "predicted_next_close": 6.09,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.877,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:16.607797",
+    "ticker": "ICE",
+    "result": {
+      "predicted_next_close": 176.11,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 11.6509,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:20.265147",
+    "ticker": "QCOM",
+    "result": {
+      "predicted_next_close": 158.01,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 145.1593,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:23.953574",
+    "ticker": "AEE",
+    "result": {
+      "predicted_next_close": 97.76,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.1022,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:27.189014",
+    "ticker": "WRK",
+    "result": {
+      "predicted_next_close": 100.14,
+      "used_models": [
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": null,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:30.512823",
+    "ticker": "MNST",
+    "result": {
+      "predicted_next_close": 59.75,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 8.7075,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:34.384330",
+    "ticker": "FIS",
+    "result": {
+      "predicted_next_close": 82.57,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 3.0908,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:37.763456",
+    "ticker": "AES",
+    "result": {
+      "predicted_next_close": 11.68,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.187,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:41.422030",
+    "ticker": "CB",
+    "result": {
+      "predicted_next_close": 291.38,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 23.7947,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:44.854781",
+    "ticker": "PNR",
+    "result": {
+      "predicted_next_close": 98.97,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 5.7426,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:48.023732",
+    "ticker": "CAG",
+    "result": {
+      "predicted_next_close": 24.33,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.8432,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:51.724441",
+    "ticker": "COF",
+    "result": {
+      "predicted_next_close": 197.77,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 38.8219,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:55.362443",
+    "ticker": "DTE",
+    "result": {
+      "predicted_next_close": 136.2,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 3.3151,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:06:58.859257",
+    "ticker": "HWM",
+    "result": {
+      "predicted_next_close": 136.34,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 646.2645,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:02.258014",
+    "ticker": "BLK",
+    "result": {
+      "predicted_next_close": 996.91,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 514.0397,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:05.944649",
+    "ticker": "ROK",
+    "result": {
+      "predicted_next_close": 300.54,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 269.9774,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:09.884659",
+    "ticker": "GRMN",
+    "result": {
+      "predicted_next_close": 210.02,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 62.163,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:13.226136",
+    "ticker": "WDC",
+    "result": {
+      "predicted_next_close": 53.4,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 15.0124,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:16.960998",
+    "ticker": "ETR",
+    "result": {
+      "predicted_next_close": 83.07,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.2664,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:20.572426",
+    "ticker": "LHX",
+    "result": {
+      "predicted_next_close": 253.98,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 22.6159,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:24.105513",
+    "ticker": "FLS",
+    "result": {
+      "predicted_next_close": 47.36,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 4.176,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:27.725911",
+    "ticker": "ZBRA",
+    "result": {
+      "predicted_next_close": 289.4,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1086.2709,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:30.791489",
+    "ticker": "CI",
+    "result": {
+      "predicted_next_close": 320.52,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 33.6913,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:34.537243",
+    "ticker": "NWL",
+    "result": {
+      "predicted_next_close": 6.09,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.8759,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:38.196726",
+    "ticker": "PFE",
+    "result": {
+      "predicted_next_close": 25.27,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.7663,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:41.598994",
+    "ticker": "DUK",
+    "result": {
+      "predicted_next_close": 116.95,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.4695,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:45.236399",
+    "ticker": "AON",
+    "result": {
+      "predicted_next_close": 359.13,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 64.705,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:48.797618",
+    "ticker": "GD",
+    "result": {
+      "predicted_next_close": 284.13,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 27.14,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:52.373357",
+    "ticker": "UPS",
+    "result": {
+      "predicted_next_close": 108.85,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 147.4632,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:56.070182",
+    "ticker": "XEL",
+    "result": {
+      "predicted_next_close": 69.38,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 1.4069,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:07:59.753957",
+    "ticker": "WM",
+    "result": {
+      "predicted_next_close": 232.61,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 23.9566,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:03.365003",
+    "ticker": "JPM",
+    "result": {
+      "predicted_next_close": 270.17,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 28.7991,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:06.807633",
+    "ticker": "MDT",
+    "result": {
+      "predicted_next_close": 88.45,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.3603,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:10.360395",
+    "ticker": "VMC",
+    "result": {
+      "predicted_next_close": 265.46,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 20.9815,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:13.828545",
+    "ticker": "PM",
+    "result": {
+      "predicted_next_close": 159.67,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 277.2126,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:17.365658",
+    "ticker": "CL",
+    "result": {
+      "predicted_next_close": 92.45,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.5838,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:20.708007",
+    "ticker": "F",
+    "result": {
+      "predicted_next_close": 10.43,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.0631,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:24.343501",
+    "ticker": "IT",
+    "result": {
+      "predicted_next_close": 417.59,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 260.5983,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:27.880396",
+    "ticker": "ADBE",
+    "result": {
+      "predicted_next_close": 411.17,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 548.6241,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:31.580319",
+    "ticker": "PLD",
+    "result": {
+      "predicted_next_close": 109.07,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 16.537,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:35.215513",
+    "ticker": "SPGI",
+    "result": {
+      "predicted_next_close": 509.06,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 114.7404,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:39.142553",
+    "ticker": "CAT",
+    "result": {
+      "predicted_next_close": 358.29,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 311.6925,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:42.655268",
+    "ticker": "XYL",
+    "result": {
+      "predicted_next_close": 128.15,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 17.4882,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:45.948294",
+    "ticker": "SPGI",
+    "result": {
+      "predicted_next_close": 509.06,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 114.7407,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:49.361787",
+    "ticker": "NTRS",
+    "result": {
+      "predicted_next_close": 109.4,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 6.2536,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:52.847188",
+    "ticker": "DOV",
+    "result": {
+      "predicted_next_close": 178.63,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 67.9789,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:56.229962",
+    "ticker": "IDXX",
+    "result": {
+      "predicted_next_close": 514.49,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 263.4866,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:08:59.818190",
+    "ticker": "PPL",
+    "result": {
+      "predicted_next_close": 34.58,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.2687,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:03.291466",
+    "ticker": "MCK",
+    "result": {
+      "predicted_next_close": 695.43,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 529.7169,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:07.101713",
+    "ticker": "ECL",
+    "result": {
+      "predicted_next_close": 270.93,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 14.4829,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:10.154806",
+    "ticker": "INFO",
+    "result": {
+      "predicted_next_close": 21.11,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.0584,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:13.769859",
+    "ticker": "WM",
+    "result": {
+      "predicted_next_close": 232.61,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 23.9566,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:18.177906",
+    "ticker": "IBM",
+    "result": {
+      "predicted_next_close": 258.2,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 87.44,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:21.736151",
+    "ticker": "SWKS",
+    "result": {
+      "predicted_next_close": 68.61,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 29.3518,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:25.305612",
+    "ticker": "JNJ",
+    "result": {
+      "predicted_next_close": 161.06,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 4.2747,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:28.731189",
+    "ticker": "FLS",
+    "result": {
+      "predicted_next_close": 47.35,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 4.1815,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:32.361796",
+    "ticker": "HES",
+    "result": {
+      "predicted_next_close": 142.33,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 14.8287,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:35.834476",
+    "ticker": "NOW",
+    "result": {
+      "predicted_next_close": 1013.13,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 780.0302,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:39.752868",
+    "ticker": "GOOGL",
+    "result": {
+      "predicted_next_close": 177.25,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 13.6004,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:42.965533",
+    "ticker": "MTB",
+    "result": {
+      "predicted_next_close": 185.32,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 19.0561,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:46.390570",
+    "ticker": "WBA",
+    "result": {
+      "predicted_next_close": 11.36,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 0.0163,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:49.885863",
+    "ticker": "TRV",
+    "result": {
+      "predicted_next_close": 262.33,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 71.8413,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:53.739013",
+    "ticker": "CL",
+    "result": {
+      "predicted_next_close": 92.45,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 2.5842,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:09:57.191478",
+    "ticker": "PSA",
+    "result": {
+      "predicted_next_close": 300.96,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 28.4575,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:10:00.786246",
+    "ticker": "NEE",
+    "result": {
+      "predicted_next_close": 72.98,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 4.2594,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:10:04.345384",
+    "ticker": "AFL",
+    "result": {
+      "predicted_next_close": 103.98,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 4.5145,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:10:07.665193",
+    "ticker": "HD",
+    "result": {
+      "predicted_next_close": 365.5,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 35.673,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-15T05:10:11.092094",
+    "ticker": "ACN",
+    "result": {
+      "predicted_next_close": 317.09,
+      "used_models": [
+        "base",
+        "sentiment",
+        "pelosi",
+        "weather",
+        "earnings",
+        "social",
+        "sector",
+        "insider",
+        "options",
+        "technical",
+        "etf_sector",
+        "volume",
+        "patterns"
+      ],
+      "model_mse": 51.6063,
+      "weights_used": {
+        "base": 0.4,
+        "sentiment": 0.1,
+        "pelosi": 0.1,
+        "weather": 0.05,
+        "earnings": 0.1,
+        "social": 0.05,
+        "sector": 0.05,
+        "insider": 0.075,
+        "options": 0.075,
+        "technical": 0.05,
+        "etf_sector": 0.05,
+        "volume": 0.05,
+        "patterns": 0.05,
+        "volatility": 0.05
+      }
+    }
   }
 ]
