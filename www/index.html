@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/img/favicon.png" sizes="16x16">
   <title>PredIQT</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -14,29 +15,33 @@
       </h1>
       <nav class="nav">
         <a href="index.html" class="active">Home</a>
-        <a href="top-movers.html">Top Movers</a>
-        <a href="top-losers.html">Top Losers</a>
-        <a href="predict.html">Predict</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </header>
 
     <main class="glass">
       <h2>Enter a Stock Ticker</h2>
       <input type="text" id="tickerInput" placeholder="e.g. AAPL">
-      <button type="button" onclick="predict()">Predict</button>
+      <button id="predictBtn" type="button">Predict</button>
 
-
-      <div id="predictionsContainer">
-        <div><strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span></div>
-        <div><strong>Next Day Prediction:</strong> <span id="predictionDay">-</span></div>
-        <div><strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span></div>
-        <div><strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span></div>
+      <div id="predictionsContainer" class="predictionsContainer">
+        <div class="prediction">
+          <strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span>
+        </div>
+        <div class="prediction">
+          <strong>Next Day Prediction:</strong> <span id="predictionDay">-</span>
+        </div>
+        <div class="prediction">
+          <strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span>
+        </div>
+        <div class="prediction">
+          <strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- Load your script as a module -->
   <script src="/js/script.js"></script>
-  <script src="/js/api.js"></script>
 </body>
 </html>

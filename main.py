@@ -9,7 +9,6 @@ import asyncio
 import os
 
 from train_predictor import train_and_predict
-from predictor import get_top_movers_and_losers
 from enum import Enum
 
 # Enum for prediction horizon
@@ -43,9 +42,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# In-memory data
-top_movers = []
-top_losers = []
 
 # --- ROUTES ---
 
@@ -63,14 +59,6 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-
-@app.get("/top-movers")
-async def top_movers_api():
-    return {"top_movers": top_movers}
-
-@app.get("/top-losers")
-async def top_losers_api():
-    return {"top_losers": top_losers}
 
 @app.get("/ticker/{ticker}")
 async def get_ticker_data(ticker: str):
@@ -92,36 +80,27 @@ async def get_ticker_data(ticker: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-# --- BACKGROUND TASK ---
-
-def update_top_movers_job():
-    global top_movers, top_losers
-    print(f"[{datetime.now()}] Updating top movers and losers...")
-    try:
-        movers, losers = get_top_movers_and_losers()
-        top_movers = movers
-        top_losers = losers
-        print(f"[{datetime.now()}] Top movers and losers updated successfully.")
-    except Exception as e:
-        print(f"[{datetime.now()}] Failed to update top movers: {e}")
-
-scheduler = AsyncIOScheduler(timezone=pytz.timezone("US/Eastern"))
-scheduler.add_job(update_top_movers_job, 'cron', hour=4, minute=0)
-
-@app.on_event("startup")
-async def startup_event():
-    scheduler.start()
-    loop = asyncio.get_event_loop()
-    await loop.run_in_executor(None, update_top_movers_job)
-
 # --- FRONTEND SETUP ---
 
 frontend_path = os.path.join(os.path.dirname(__file__), "www")
 
-# Serve index.html on root `/`
+# Serve html on root `/`
 @app.get("/")
 def serve_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
+
+@app.get("/index.html")
+def serve_index():
+    return FileResponse(os.path.join(frontend_path, "index.html"))
+
+@app.get("/about.html")
+def serve_about():
+    return FileResponse(os.path.join(frontend_path, "about.html"))
+
+@app.get("/contact.html")
+def serve_contact():
+    return FileResponse(os.path.join(frontend_path, "contact.html"))
+
 
 # Serve static files like JS/CSS/images
 from fastapi.staticfiles import StaticFiles

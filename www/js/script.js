@@ -6,49 +6,50 @@ const API_BASE =
     ? 'http://127.0.0.1:8000'
     : 'https://prediqt.onrender.com';
 
+// Predict function with spinner inline in each prediction span
 async function predict() {
   const tickerInput = document.getElementById('tickerInput');
   const ticker = tickerInput.value.trim().toUpperCase();
-
-  console.log("🏁 predict() started for ticker:", ticker);
 
   if (!ticker) {
     alert('Please enter a ticker symbol.');
     return;
   }
 
-  // Show loading messages
-  ['Hour', 'Day', 'Week', 'Month'].forEach(horizon => {
-    document.getElementById(`prediction${horizon}`).textContent = 'Loading...';
-  });
-
   const horizons = ['hour', 'day', 'week', 'month'];
 
+  // Show spinner in each prediction spot while loading
+  horizons.forEach(horizon => {
+    const outputId = `prediction${horizon.charAt(0).toUpperCase() + horizon.slice(1)}`;
+    const elem = document.getElementById(outputId);
+    elem.innerHTML = `<span class="spinner" aria-label="loading"></span>`;
+  });
+
+  // Fetch predictions sequentially (can be parallelized if needed)
   for (const horizon of horizons) {
+    const outputId = `prediction${horizon.charAt(0).toUpperCase() + horizon.slice(1)}`;
+    const elem = document.getElementById(outputId);
+
     try {
       const response = await fetch(`${API_BASE}/predict/${ticker}?horizon=${horizon}`);
+
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
 
       const data = await response.json();
-      const outputId = `prediction${horizon.charAt(0).toUpperCase() + horizon.slice(1)}`;
-      document.getElementById(outputId).textContent =
-        `$${data.predicted_next_close.toFixed(2)} (MSE: ${data.model_mse.toFixed(4)})`;
+
+      elem.textContent = `$${data.predicted_next_close.toFixed(2)} (MSE: ${data.model_mse.toFixed(4)})`;
     } catch (err) {
-      const outputId = `prediction${horizon.charAt(0).toUpperCase() + horizon.slice(1)}`;
-      document.getElementById(outputId).textContent = `Error: ${err.message}`;
+      elem.textContent = `Error: ${err.message}`;
     }
   }
 }
 
-// Attach event listener once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   console.log("✅ DOM fully loaded");
 
   const predictBtn = document.getElementById('predictBtn');
-  console.log("🔍 Button element:", predictBtn);
-
   if (predictBtn) {
     predictBtn.addEventListener('click', () => {
       console.log("🔘 Predict button clicked");
