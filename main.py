@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -21,8 +21,6 @@ class HorizonEnum(str, Enum):
 
 # Initialize FastAPI app
 app = FastAPI()
-
-import os
 
 # Environment-based origin config
 is_dev = os.environ.get("ENV", "dev") == "dev"
@@ -48,8 +46,7 @@ app.add_middleware(
 async def startup_event():
     start_scheduler()
 
-# --- ROUTES ---
-
+# --- PREDICTION ROUTE ---
 @app.get("/predict/{ticker}")
 async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
     try:
@@ -65,6 +62,7 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+# --- TICKER ROUTE (LAST MARKET CLOSE) ---
 @app.get("/ticker/{ticker}")
 async def get_ticker_data(ticker: str):
     import yfinance as yf
@@ -85,11 +83,29 @@ async def get_ticker_data(ticker: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-# --- FRONTEND SETUP ---
+# --- NEW REAL-TIME QUOTE ROUTE ---
+@app.get("/api/quote")
+async def get_realtime_quote(ticker: str = Query(...)):
+    import yfinance as yf
+    try:
+        ticker_obj = yf.Ticker(ticker)
+        info = ticker_obj.info
+        return {
+            "ticker": ticker.upper(),
+            "price": info.get("regularMarketPrice"),
+            "change": info.get("regularMarketChange"),
+            "percent_change": info.get("regularMarketChangePercent"),
+            "volume": info.get("volume"),
+            "market_cap": info.get("marketCap"),
+            "sector": info.get("sector")
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
+
+# --- FRONTEND SETUP ---
 frontend_path = os.path.join(os.path.dirname(__file__), "www")
 
-# Serve html on root `/`
 @app.get("/")
 def serve_index():
     return FileResponse(os.path.join(frontend_path, "index.html"))
@@ -106,20 +122,14 @@ def serve_about():
 def serve_contact():
     return FileResponse(os.path.join(frontend_path, "contact.html"))
 
-
 # Serve static files like JS/CSS/images
-from fastapi.staticfiles import StaticFiles
-
-# Serve all /www subfolders
 app.mount("/css", StaticFiles(directory=os.path.join(frontend_path, "css")), name="css")
 app.mount("/js", StaticFiles(directory=os.path.join(frontend_path, "js")), name="js")
 app.mount("/img", StaticFiles(directory=os.path.join(frontend_path, "img")), name="img")
 app.mount("/fonts", StaticFiles(directory=os.path.join(frontend_path, "fonts")), name="fonts")
-
 
 # --- LOCAL DEV ENTRY POINT ---
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
-

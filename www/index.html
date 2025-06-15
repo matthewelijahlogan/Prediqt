@@ -39,9 +39,62 @@
           <strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span>
         </div>
       </div>
+
+      <hr>
+
+      <h2>Real-Time Stock Data</h2>
+      <div id="quoteContainer" class="quoteContainer">
+        <div><strong>Price:</strong> <span id="quotePrice">-</span></div>
+        <div><strong>Change:</strong> <span id="quoteChange">-</span></div>
+        <div><strong>% Change:</strong> <span id="quotePercent">-</span></div>
+        <div><strong>Volume:</strong> <span id="quoteVolume">-</span></div>
+        <div><strong>Market Cap:</strong> <span id="quoteMarketCap">-</span></div>
+        <div><strong>Sector:</strong> <span id="quoteSector">-</span></div>
+      </div>
     </main>
   </div>
 
-  <script src="/js/script.js"></script>
+  <script>
+    async function fetchPrediction(ticker, horizon, targetId) {
+      const url = `/predict/${ticker}?horizon=${horizon}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        document.getElementById(targetId).textContent = data.predicted_next_close?.toFixed(2) ?? "N/A";
+      } catch (err) {
+        document.getElementById(targetId).textContent = "Error";
+        console.error(err);
+      }
+    }
+
+    async function fetchQuote(ticker) {
+      const url = `/api/quote?ticker=${ticker}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        document.getElementById("quotePrice").textContent = data.price ?? "-";
+        document.getElementById("quoteChange").textContent = data.change ?? "-";
+        document.getElementById("quotePercent").textContent = data.percent_change?.toFixed(2) + "%" ?? "-";
+        document.getElementById("quoteVolume").textContent = data.volume?.toLocaleString() ?? "-";
+        document.getElementById("quoteMarketCap").textContent = data.market_cap?.toLocaleString() ?? "-";
+        document.getElementById("quoteSector").textContent = data.sector ?? "-";
+      } catch (err) {
+        document.getElementById("quotePrice").textContent = "Error";
+        console.error(err);
+      }
+    }
+
+    document.getElementById("predictBtn").addEventListener("click", () => {
+      const ticker = document.getElementById("tickerInput").value.trim().toUpperCase();
+      if (!ticker) return;
+
+      fetchPrediction(ticker, "hour", "predictionHour");
+      fetchPrediction(ticker, "day", "predictionDay");
+      fetchPrediction(ticker, "week", "predictionWeek");
+      fetchPrediction(ticker, "month", "predictionMonth");
+
+      fetchQuote(ticker);
+    });
+  </script>
 </body>
 </html>

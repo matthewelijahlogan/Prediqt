@@ -2,23 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Accuracy Report</title>
+  <title>PredIQT Accuracy Report</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafc;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .report-container {
+      background: #ffffffcc;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .data-block {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .value {
+      color: #1a73e8;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 0.25rem 0;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
+
   <div id="accuracy-report" class="report-container">
     <!-- Content dynamically inserted here -->
   </div>
 
-  <!-- Load the generated JSON data as JS -->
   <script src="js/accuracy_report.js"></script>
   <script>
-    // Now run the display function after the data script is loaded
-    window.onload = function() {
+    // Display function will be triggered if accuracyData is defined
+    window.onload = function () {
       if (typeof displayAccuracyReport === 'function') {
         displayAccuracyReport();
+      } else {
+        document.getElementById('accuracy-report').innerHTML = "<p>Error: Accuracy report function not found.</p>";
       }
     };
   </script>
+
 </body>
 </html>
