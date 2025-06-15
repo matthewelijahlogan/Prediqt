@@ -8,6 +8,7 @@ from datetime import datetime
 import asyncio
 import os
 
+from auto_trainer import start_scheduler
 from train_predictor import train_and_predict
 from enum import Enum
 
@@ -42,6 +43,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+async def startup_event():
+    start_scheduler()
 
 # --- ROUTES ---
 

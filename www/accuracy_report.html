@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accuracy Report</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="accuracy-report" class="report-container">
+    <!-- Content dynamically inserted here -->
+  </div>
+
+  <!-- Load the generated JSON data as JS -->
+  <script src="js/accuracy_report.js"></script>
+  <script>
+    // Now run the display function after the data script is loaded
+    window.onload = function() {
+      if (typeof displayAccuracyReport === 'function') {
+        displayAccuracyReport();
+      }
+    };
+  </script>
+</body>
+</html>

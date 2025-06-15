@@ -16,10 +16,17 @@ def predict(ticker: str):
                 "reasoning": "No insider trades"
             }
 
-        # Normalize columns (sometimes unnamed)
+        # Normalize columns (strip whitespace)
         insider_trades.columns = [col.strip() for col in insider_trades.columns]
 
-        # Validate required columns exist
+        # Handle alternative column names by renaming
+        if 'Date' not in insider_trades.columns and 'Start Date' in insider_trades.columns:
+            insider_trades.rename(columns={'Start Date': 'Date'}, inplace=True)
+
+        if 'Transaction Type' not in insider_trades.columns and 'Transaction' in insider_trades.columns:
+            insider_trades.rename(columns={'Transaction': 'Transaction Type'}, inplace=True)
+
+        # Re-check required columns
         if 'Date' not in insider_trades.columns or 'Transaction Type' not in insider_trades.columns:
             print(f"[insider_model] Required columns missing. Columns found: {insider_trades.columns}")
             return {
