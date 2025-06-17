@@ -30,6 +30,10 @@ def load_tickers():
         tickers = [line.strip().upper() for line in f if line.strip()]
     return tickers
 
+def update_from_log_kingmaker(log_file_path):
+    print(f"[trainer_fusion2] 🧭 Attempting to open log: {log_file_path}")
+
+
 async def run_predictions_kingmaker():
     tickers = load_tickers()
     selected = random.sample(tickers, min(BATCH_SIZE, len(tickers)))

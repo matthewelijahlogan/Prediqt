@@ -1,9 +1,9 @@
 const accuracyData = {
-  "last_updated": "2025-06-16T15:16:04.673126",
-  "total_predictions": 400,
-  "overall_accuracy": 0.9632108314322961,
+  "last_updated": "2025-06-17T14:50:04.464385",
+  "total_predictions": 900,
+  "overall_accuracy": 0.9656736145556868,
   "model_accuracies": {
-    "average": 0.9662910787945536
+    "average": 0.9719475776678453
   }
 };
 displayAccuracyReport();

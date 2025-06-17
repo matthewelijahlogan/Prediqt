@@ -20,9 +20,12 @@ def generate_js():
         print("⚠️ No accuracy logs found.")
         return
 
+    # Filter only valid numeric accuracies
+    accuracies = [e["average_accuracy"] for e in logs if isinstance(e.get("average_accuracy"), (int, float))]
+    total_predictions = len(accuracies)
+    average_accuracy = sum(accuracies) / total_predictions if total_predictions else 0
+
     latest_log = logs[-1]
-    total_predictions = len(logs)
-    average_accuracy = sum(1 - (abs(e["predicted"] - e["actual"]) / e["actual"]) for e in logs if e["actual"]) / total_predictions
 
     js_object = {
         "last_updated": latest_log.get("timestamp", str(datetime.utcnow())),
@@ -41,6 +44,7 @@ def generate_js():
         out.write(js_content)
 
     print(f"✅ JS file generated at: {OUTPUT_JS}")
+
 
 if __name__ == "__main__":
     generate_js()

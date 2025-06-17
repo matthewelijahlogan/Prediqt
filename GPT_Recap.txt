@@ -1,0 +1,224 @@
+Here’s a complete annotated synopsis of your prediqt-app project based on everything you’ve shared — file structure, purpose, trainer system, frontend, backend, and overall flow — written for a future you or any collaborator who needs to quickly understand how it all works:
+
+📊 Prediqt-App Project Overview
+Prediqt is a stock prediction web app designed to take in stock tickers and return predictions powered by multiple AI-driven trainer models, combined into a single ensemble forecast. It includes a web-based frontend, a Python backend (FastAPI), a library of machine learning models, and reporting visualizations.
+
+🧠 Core Idea
+Users input a stock ticker
+
+A fleet of trainer models run to analyze different types of market data
+
+Trainers generate predictions stored in logs
+
+A fusion script combines all trainer outputs into one final prediction
+
+Accuracy reports are generated from historical results
+
+A frontend dashboard displays all this in a clean interface
+
+🧩 Important Folders & Files (with Purpose)
+🔌 backend/
+Python FastAPI backend. It handles API endpoints and data fetching.
+
+routers/
+
+movers.py: Likely returns biggest stock movers
+
+quote.py: Probably fetches current quotes or ticker data
+
+yfinance_client.py: Pulls stock data using yfinance
+
+🤖 kingmaker/
+Your core machine learning pipeline with advanced trainer models.
+
+Each trainer is a standalone strategy analyzing a specific market angle:
+
+Core Trainers (1–14):
+
+trainer_1_transformer_embeddings.py: NLP embeddings from news
+
+trainer_2_lstm_price_trend.py: Price trend prediction via LSTM
+
+trainer_3_news_ner_sentiment.py: NER + sentiment from news
+
+trainer_4_local_llm_sentiment.py: Local LLM for deeper sentiment
+
+trainer_5_options_pressure.py: Pressure from options flow
+
+trainer_6_dark_pool_volume.py: Hidden volume analytics
+
+trainer_7_ai_sentiment_synthesis.py: Merges all AI sentiment
+
+trainer_8_fund_flow_inference.py: Inferred money flows
+
+trainer_9_intraday_price_action.py: Intraday scalping logic
+
+trainer_10_insider_algo_clusters.py: Insider trading clusters
+
+trainer_11_rsi.py: RSI indicator logic
+
+trainer_12_macd.py: MACD trend logic
+
+trainer_13_bollinger_bands.py: BB-based logic
+
+trainer_14_sma_crossover.py: Simple MA crossovers
+
+trainer_fusion2.py: Combines all trainer outputs for final prediction
+
+📊 trainers/
+Your traditional trainer logic & scrapers (used in earlier versions or as supplements):
+
+trainer_1_yfinance.py → stock data
+
+trainer_2_sentiment.py → Reddit/FinTwit sentiment
+
+trainer_3_pelosi.py → Government trading (Pelosi trades)
+
+trainer_4_weather.py → Weather impact (experimental?)
+
+trainer_5_macro.py → Macroeconomic indicators
+
+trainer_6_earnings.py → Earnings sentiment
+
+trainer_7_social.py → More social scraping
+
+trainer_8_sector.py → Sector-level analysis
+
+trainer_9_insider_trading.py → Insider trades
+
+trainer_10_options_flow.py → Option flows
+
+trainer_11_technical_indicators.py → Composite indicator suite
+
+trainer_12_etf_sector_model.py → ETF insights
+
+trainer_13_volume.py → Volume trends
+
+trainer_14_patterns.py → Pattern recognition
+
+trainer_15_volatility.py → Volatility indicators
+
+trainer_16_predictivelog.py → Log maintenance or audit
+
+auto_trainer.py: Schedules or runs these trainer scripts together
+
+fusion_fuser.py: Alternative fusion logic (older or fallback?)
+
+📂 predictive_logs/
+Generated results, prediction records, and accuracy data.
+
+predictions_log.json / predictions_log2.json: Raw predictions per trainer
+
+accuracy_log.json / accuracy_log2.json: Trainer accuracy metrics
+
+fused_accuracy_log.json: Accuracy of fusion model
+
+📄 HTML Frontend (www/)
+The static frontend dashboard. Served locally or via Cordova.
+
+index.html: Main dashboard page (user inputs ticker)
+
+merged_accuracy.html: Shows fused accuracy results
+
+split_accuracy.html: Shows trainer-by-trainer accuracy
+
+about.html, contact.html: Supportive static pages
+
+🧠 JavaScript Frontend Logic (www/js/)
+Handles frontend data requests and dynamic DOM updates.
+
+script.js: Likely core JS logic (interactions, form handling)
+
+api.js: Handles communication with the backend API
+
+accuracy_data.js, accuracy_data2.js: Visual or tabular accuracy info (split by version)
+
+accuracy_report.js, accuracy_report2.js: Used for accuracy reporting pages
+
+merged_report.js: Fused accuracy visual logic
+
+widgets.js: Chart elements or reusable frontend widgets
+
+🎨 Styles & Fonts (www/css/ and www/fonts/)
+style.css: Main CSS for the site
+
+BebasNeue-Regular.ttf, RacingSansOne-Regular.ttf: Display fonts for a stylized look
+
+🔧 App Entrypoints / Utilities
+main.py: Often the main FastAPI app runner
+
+app.py: Possibly the Cordova app entry or combined server
+
+run_all.py: Runs all trainers in sequence
+
+train_predictor.py / train_predictor2.py: Likely fusion runner for model training
+
+generate_accuracy_report.py / generate_accuracy_report2.py: Generate accuracy pages
+
+generate_accuracy_merged.py: Generates fused_accuracy_log.json
+
+predictor.py: Backend logic to combine trainer results
+
+auto_trainer.py / auto_trainer2.py: Auto-scheduling script
+
+.env: Environment variables
+
+tickers.txt: List of stock tickers to loop through
+
+🔁 Typical Workflow (Full Stack)
+User Input (Frontend):
+From index.html, a user enters a stock ticker.
+→ script.js sends request to backend (api.js)
+
+Backend API (FastAPI):
+main.py receives the request and runs trainers (or loads logs)
+→ Calls predictor.py and fusion_fuser.py or trainer_fusion2.py
+
+Model Execution:
+Each trainer (1–14) runs and logs to predictive_logs/
+→ trainer_fusion2.py fuses their results
+
+Results Rendered (Frontend):
+Fused prediction sent back to frontend
+→ script.js updates charts, scores, accuracy panels
+
+Accuracy Reports:
+generate_accuracy_report.py and others generate .json logs
+→ accuracy_report.js and merged_report.js render them into charts in merged_accuracy.html
+
+🧼 Unimportant / Maintenance Files
+__pycache__/: Python bytecode, safe to ignore
+
+.vscode/: Editor configs
+
+typings/, node_modules/, plugins/, platforms/: Cordova/JS deps
+
+TrainingWorkFlow.txt: Likely a dev notes file
+
+🧠 Tips for Future You
+If predictions aren’t updating, check the logs in /predictive_logs/ and make sure the auto trainers are running
+
+To manually run all trainers:
+python run_all.py
+
+To regenerate accuracy pages:
+python generate_accuracy_report.py && python generate_accuracy_merged.py
+
+Use train_predictor2.py if train_predictor.py isn’t behaving (or vice versa)
+
+If frontend JS seems outdated, check if you're reading from old .json files
+
+🔁 Want to Keep Trainers Running?
+Use auto_trainer.py with APScheduler to loop through all trainers every hour
+
+Or create a FastAPI route that runs them on demand
+
+Or run run_all.py as a cron job every N minutes
+
+🔍 To Debug
+Log not updating? → Check auto_trainer.py and file permissions
+
+Frontend stale? → Clear browser cache or rebuild Cordova wrapper
+
+Backend down? → Run uvicorn main:app --reload to relaunch API
+

@@ -12,11 +12,15 @@ def load_logs(log_file):
         return []
     with open(log_file, 'r') as f:
         return json.load(f)
-
+    
 def average_accuracy(logs):
-    if not logs:
+    valid_entries = [
+        e for e in logs 
+        if isinstance(e.get("actual"), (int, float)) and isinstance(e.get("predicted"), (int, float))
+    ]
+    if not valid_entries:
         return 0
-    return sum(1 - (abs(e["predicted"] - e["actual"]) / e["actual"]) for e in logs if e["actual"]) / len(logs)
+    return sum(1 - (abs(e["predicted"] - e["actual"]) / e["actual"]) for e in valid_entries) / len(valid_entries)
 
 def generate_merged():
     logs1 = load_logs(LOG_1)

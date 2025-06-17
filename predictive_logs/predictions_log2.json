@@ -1,0 +1,3562 @@
+[
+  {
+    "timestamp": "2025-06-17T18:30:00Z",
+    "ticker": "AAPL",
+    "fused_score": 0.0872,
+    "individual_scores": {
+      "trainer_1": 0.09,
+      "trainer_2": 0.08,
+      "trainer_3": 0.1,
+      "trainer_4": 0.07,
+      "trainer_5": 0.08,
+      "trainer_6": 0.09,
+      "trainer_7": 0.08,
+      "trainer_8": 0.07,
+      "trainer_9": 0.09,
+      "trainer_11": 0.06,
+      "trainer_12": 0.07,
+      "trainer_13": 0.08,
+      "trainer_14": 0.06
+    },
+    "errors": {},
+    "weights_used": {
+      "trainer_1": 0.08,
+      "trainer_2": 0.08,
+      "trainer_3": 0.08,
+      "trainer_4": 0.08,
+      "trainer_5": 0.08,
+      "trainer_6": 0.08,
+      "trainer_7": 0.08,
+      "trainer_8": 0.08,
+      "trainer_9": 0.08,
+      "trainer_11": 0.07,
+      "trainer_12": 0.07,
+      "trainer_13": 0.07,
+      "trainer_14": 0.07
+    },
+    "model": "trainer_fusion2"
+  },
+  {
+    "timestamp": "2025-06-17T15:26:21.805812",
+    "ticker": "SJM",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 92.4,
+        "predicted_return": -0.0338106638292372,
+        "heuristic_signal": -0.338106638292372
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.9228,
+        "trainer_2": -0.0127,
+        "trainer_3": 0.0341,
+        "trainer_4": 0.0341,
+        "trainer_5": 0.7905,
+        "trainer_6": 0.0319,
+        "trainer_7": 0.8449,
+        "trainer_8": 0.5,
+        "trainer_9": 94.67
+      },
+      "other_trainers_avg": 10.663333333333334,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:27.248640",
+    "ticker": "SPGI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 497.2,
+        "predicted_return": -0.00834524176501731,
+        "heuristic_signal": -0.0834524176501731
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.4528,
+        "trainer_2": 0.0021,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.2782,
+        "trainer_6": 0.1494,
+        "trainer_7": 0.697,
+        "trainer_8": 0.5,
+        "trainer_9": 496.26
+      },
+      "other_trainers_avg": 55.37105555555556,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:31.951907",
+    "ticker": "PNR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 95.45,
+        "predicted_return": -0.013533481211186884,
+        "heuristic_signal": -0.13533481211186885
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.4789,
+        "trainer_2": 0.0842,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.4,
+        "trainer_6": 0.0724,
+        "trainer_7": 0.7706,
+        "trainer_8": 0.5,
+        "trainer_9": 95.77
+      },
+      "other_trainers_avg": 10.790922222222221,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:32.540937",
+    "ticker": "WLTW",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:38.603618",
+    "ticker": "PG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 157.84,
+        "predicted_return": -0.010843234680445612,
+        "heuristic_signal": -0.10843234680445611
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8367,
+        "trainer_2": -0.0185,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.9942,
+        "trainer_6": 0.2287,
+        "trainer_7": 0.7171,
+        "trainer_8": 0.5,
+        "trainer_9": 157.95
+      },
+      "other_trainers_avg": 17.72608888888889,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:45.160469",
+    "ticker": "CSCO",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 65.43,
+        "predicted_return": -0.004343717721738539,
+        "heuristic_signal": -0.043437177217385395
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5589,
+        "trainer_2": 0.0052,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.7797,
+        "trainer_6": 0.1011,
+        "trainer_7": 0.8049,
+        "trainer_8": 0.5,
+        "trainer_9": 65.06
+      },
+      "other_trainers_avg": 7.410222222222223,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:50.269365",
+    "ticker": "ORLY",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 87.95,
+        "predicted_return": -0.012054871205723317,
+        "heuristic_signal": -0.12054871205723316
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8084,
+        "trainer_2": 0.0797,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.599,
+        "trainer_6": 0.1242,
+        "trainer_7": 0.607,
+        "trainer_8": 0.5,
+        "trainer_9": 88.12
+      },
+      "other_trainers_avg": 9.9135,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:55.218513",
+    "ticker": "ZBRA",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 290.9,
+        "predicted_return": -0.012046066338089632,
+        "heuristic_signal": -0.12046066338089632
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.1628,
+        "trainer_2": 0.0275,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.8117,
+        "trainer_6": 0.0872,
+        "trainer_7": 0.7531,
+        "trainer_8": 0.5,
+        "trainer_9": 291.42
+      },
+      "other_trainers_avg": 32.64025555555556,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:26:59.892517",
+    "ticker": "VTRS",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 8.73,
+        "predicted_return": -0.011484746417243832,
+        "heuristic_signal": -0.11484746417243832
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8804,
+        "trainer_2": -0.0157,
+        "trainer_3": 0.0222,
+        "trainer_4": 0.0222,
+        "trainer_5": 0.4689,
+        "trainer_6": 0.0874,
+        "trainer_7": 0.5723,
+        "trainer_8": 0.5,
+        "trainer_9": 8.74
+      },
+      "other_trainers_avg": 1.0574333333333332,
+      "fused_score": 0.2713,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:05.315294",
+    "ticker": "AMP",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 504.46,
+        "predicted_return": -0.009027435978190695,
+        "heuristic_signal": -0.09027435978190695
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.9045,
+        "trainer_2": -0.1087,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.4174,
+        "trainer_6": 0.0654,
+        "trainer_7": 0.6747,
+        "trainer_8": 0.5,
+        "trainer_9": 503.9
+      },
+      "other_trainers_avg": 56.06047777777778,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:13.038290",
+    "ticker": "GILD",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 107.1,
+        "predicted_return": -0.013946815267282227,
+        "heuristic_signal": -0.13946815267282228
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.9122,
+        "trainer_2": -0.1284,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.6267,
+        "trainer_6": 0.1004,
+        "trainer_7": 0.7212,
+        "trainer_8": 0.5,
+        "trainer_9": 107.52
+      },
+      "other_trainers_avg": 12.047522222222222,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:18.948238",
+    "ticker": "F",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 10.47,
+        "predicted_return": -0.0029659725187315034,
+        "heuristic_signal": -0.029659725187315033
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8882,
+        "trainer_2": 0.0286,
+        "trainer_3": -0.1167,
+        "trainer_4": -0.1167,
+        "trainer_5": 0.1417,
+        "trainer_6": 0.1102,
+        "trainer_7": 0.5204,
+        "trainer_8": 0.5,
+        "trainer_9": 10.4
+      },
+      "other_trainers_avg": 1.1754777777777778,
+      "fused_score": 0.3408,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:27.545583",
+    "ticker": "TSN",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 54.91,
+        "predicted_return": -0.006322850846277231,
+        "heuristic_signal": -0.06322850846277231
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.1545,
+        "trainer_2": -0.0346,
+        "trainer_3": -0.15,
+        "trainer_4": -0.15,
+        "trainer_5": 0.7442,
+        "trainer_6": 0.0709,
+        "trainer_7": 0.6757,
+        "trainer_8": 0.5,
+        "trainer_9": 54.71
+      },
+      "other_trainers_avg": 6.245744444444444,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:31.962786",
+    "ticker": "PFG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 75.48,
+        "predicted_return": -0.008180830132058578,
+        "heuristic_signal": -0.08180830132058578
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5842,
+        "trainer_2": 0.0025,
+        "trainer_3": 0.0682,
+        "trainer_4": 0.0682,
+        "trainer_5": 0.9301,
+        "trainer_6": 0.0681,
+        "trainer_7": 0.833,
+        "trainer_8": 0.5,
+        "trainer_9": 75.32
+      },
+      "other_trainers_avg": 8.578433333333333,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:37.421077",
+    "ticker": "ALL",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 195.96,
+        "predicted_return": -0.01094310774423989,
+        "heuristic_signal": -0.10943107744239891
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5345,
+        "trainer_2": 0.0681,
+        "trainer_3": 0.5,
+        "trainer_4": 0.5,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0531,
+        "trainer_7": 0.6646,
+        "trainer_8": 0.5,
+        "trainer_9": 196.17
+      },
+      "other_trainers_avg": 22.102366666666665,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:43.023686",
+    "ticker": "ZBRA",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 291.13,
+        "predicted_return": -0.011896555718646031,
+        "heuristic_signal": -0.11896555718646032
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.1628,
+        "trainer_2": 0.0273,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.8117,
+        "trainer_6": 0.0895,
+        "trainer_7": 0.7531,
+        "trainer_8": 0.5,
+        "trainer_9": 291.61
+      },
+      "other_trainers_avg": 32.6616,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:48.681364",
+    "ticker": "BKR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 39.92,
+        "predicted_return": 0.005157944475374064,
+        "heuristic_signal": 0.05157944475374064
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.6044,
+        "trainer_2": -0.1242,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.6386,
+        "trainer_6": 0.1294,
+        "trainer_7": 0.6783,
+        "trainer_8": 0.5,
+        "trainer_9": 39.32
+      },
+      "other_trainers_avg": 4.504188888888889,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:27:53.781757",
+    "ticker": "MSFT",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 476.07,
+        "predicted_return": -0.0018065951759373999,
+        "heuristic_signal": -0.018065951759373998
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.6085,
+        "trainer_2": -0.0767,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.3807,
+        "trainer_6": 0.0726,
+        "trainer_7": 0.6415,
+        "trainer_8": 0.5,
+        "trainer_9": 472.22
+      },
+      "other_trainers_avg": 52.56995555555556,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:00.265738",
+    "ticker": "MO",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 58.92,
+        "predicted_return": -0.0026890855180079893,
+        "heuristic_signal": -0.026890855180079894
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.467,
+        "trainer_2": 0.0134,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.6228,
+        "trainer_6": 0.0742,
+        "trainer_7": 0.6626,
+        "trainer_8": 0.5,
+        "trainer_9": 58.49
+      },
+      "other_trainers_avg": 6.655111111111111,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:06.286301",
+    "ticker": "TMUS",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 217.64,
+        "predicted_return": -0.019828890825642653,
+        "heuristic_signal": -0.19828890825642653
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8582,
+        "trainer_2": -0.055,
+        "trainer_3": 0.0682,
+        "trainer_4": 0.0682,
+        "trainer_5": 0.4955,
+        "trainer_6": 0.4255,
+        "trainer_7": 0.797,
+        "trainer_8": 0.5,
+        "trainer_9": 219.78
+      },
+      "other_trainers_avg": 24.580133333333336,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:12.810166",
+    "ticker": "CINF",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 143.13,
+        "predicted_return": -0.012039372812474532,
+        "heuristic_signal": -0.12039372812474532
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.617,
+        "trainer_2": -0.0796,
+        "trainer_3": 0.0125,
+        "trainer_4": 0.0125,
+        "trainer_5": 0.7185,
+        "trainer_6": 0.087,
+        "trainer_7": 0.7794,
+        "trainer_8": 0.5,
+        "trainer_9": 143.4
+      },
+      "other_trainers_avg": 16.090366666666668,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:19.131042",
+    "ticker": "EMR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 128.38,
+        "predicted_return": 0.00010253436458192936,
+        "heuristic_signal": 0.0010253436458192936
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8444,
+        "trainer_2": 0.013,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.2135,
+        "trainer_6": 0.0425,
+        "trainer_7": 0.6836,
+        "trainer_8": 0.5,
+        "trainer_9": 127.1
+      },
+      "other_trainers_avg": 14.189799999999998,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:25.585837",
+    "ticker": "T",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 27.72,
+        "predicted_return": -0.006845104147236062,
+        "heuristic_signal": -0.06845104147236063
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8713,
+        "trainer_2": 0.0183,
+        "trainer_3": -0.02,
+        "trainer_4": -0.02,
+        "trainer_5": 0.1762,
+        "trainer_6": 0.0779,
+        "trainer_7": 0.6434,
+        "trainer_8": 0.5,
+        "trainer_9": 27.63
+      },
+      "other_trainers_avg": 3.1260555555555554,
+      "fused_score": 0.9104,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:32.534969",
+    "ticker": "LH",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 261.53,
+        "predicted_return": -0.0013100270715671368,
+        "heuristic_signal": -0.013100270715671368
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8326,
+        "trainer_2": 0.008,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.1134,
+        "trainer_6": 0.0986,
+        "trainer_7": 0.5957,
+        "trainer_8": 0.5,
+        "trainer_9": 259.28
+      },
+      "other_trainers_avg": 28.862566666666662,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:33.133750",
+    "ticker": "WRK",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:38.441902",
+    "ticker": "UNH",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 302.06,
+        "predicted_return": -0.01853307493586242,
+        "heuristic_signal": -0.1853307493586242
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5673,
+        "trainer_2": 0.1885,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.3066,
+        "trainer_6": 0.0735,
+        "trainer_7": 0.6738,
+        "trainer_8": 0.5,
+        "trainer_9": 304.71
+      },
+      "other_trainers_avg": 33.98723333333333,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:45.469935",
+    "ticker": "ROK",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 318.7,
+        "predicted_return": -0.011252063703043458,
+        "heuristic_signal": -0.11252063703043458
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.193,
+        "trainer_2": -0.0566,
+        "trainer_3": 0.0341,
+        "trainer_4": 0.0341,
+        "trainer_5": 0.6933,
+        "trainer_6": 0.0501,
+        "trainer_7": 0.7565,
+        "trainer_8": 0.5,
+        "trainer_9": 319.09
+      },
+      "other_trainers_avg": 35.69938888888888,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:28:51.201111",
+    "ticker": "EFX",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 265.1,
+        "predicted_return": -0.008788062034299467,
+        "heuristic_signal": -0.08788062034299467
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5888,
+        "trainer_2": 0.0933,
+        "trainer_3": 0.0227,
+        "trainer_4": 0.0227,
+        "trainer_5": 0.0,
+        "trainer_6": 0.263,
+        "trainer_7": 0.7015,
+        "trainer_8": 0.5,
+        "trainer_9": 253.43
+      },
+      "other_trainers_avg": 28.2716,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:00.398508",
+    "ticker": "FRT",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 95.31,
+        "predicted_return": -0.007624848547139378,
+        "heuristic_signal": -0.07624848547139378
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.7226,
+        "trainer_2": 0.0219,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0689,
+        "trainer_7": 0.6469,
+        "trainer_8": 0.5,
+        "trainer_9": 95.07
+      },
+      "other_trainers_avg": 10.731677777777778,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:08.586894",
+    "ticker": "DHI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 121.2,
+        "predicted_return": -0.012522188947329555,
+        "heuristic_signal": -0.12522188947329554
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.1387,
+        "trainer_2": 0.0207,
+        "trainer_3": 0.1566,
+        "trainer_4": 0.1566,
+        "trainer_5": 0.1016,
+        "trainer_6": 0.0983,
+        "trainer_7": 0.8,
+        "trainer_8": 0.5,
+        "trainer_9": 121.53
+      },
+      "other_trainers_avg": 13.691677777777777,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:14.470891",
+    "ticker": "BRK-B",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 483.23,
+        "predicted_return": -0.005842013667448344,
+        "heuristic_signal": -0.05842013667448344
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8698,
+        "trainer_2": 0.0158,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.514,
+        "trainer_6": 0.0832,
+        "trainer_7": 0.7259,
+        "trainer_8": 0.5,
+        "trainer_9": 480.97
+      },
+      "other_trainers_avg": 53.54878888888889,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:22.461156",
+    "ticker": "KMB",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 127.99,
+        "predicted_return": -0.014000204844115873,
+        "heuristic_signal": -0.14000204844115874
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.5361,
+        "trainer_2": -0.0526,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0836,
+        "trainer_7": 0.9023,
+        "trainer_8": 0.5,
+        "trainer_9": 128.49
+      },
+      "other_trainers_avg": 14.606600000000002,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:27.518115",
+    "ticker": "SYK",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 370.55,
+        "predicted_return": -0.00938023411021797,
+        "heuristic_signal": -0.09380234110217969
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.1344,
+        "trainer_2": -0.0482,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.423,
+        "trainer_6": 0.0912,
+        "trainer_7": 0.7515,
+        "trainer_8": 0.5,
+        "trainer_9": 370.24
+      },
+      "other_trainers_avg": 41.31367777777778,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:34.612821",
+    "ticker": "CME",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 264.5,
+        "predicted_return": -0.01001996114044654,
+        "heuristic_signal": -0.1001996114044654
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.4922,
+        "trainer_2": 0.0831,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.7977,
+        "trainer_6": 0.0408,
+        "trainer_7": 0.7679,
+        "trainer_8": 0.5,
+        "trainer_9": 264.62
+      },
+      "other_trainers_avg": 29.59081111111111,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:40.353348",
+    "ticker": "NWL",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 5.47,
+        "predicted_return": -0.01255184730090738,
+        "heuristic_signal": -0.12551847300907382
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.0001,
+        "trainer_2": -0.056,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.4452,
+        "trainer_6": 0.1899,
+        "trainer_7": 0.7407,
+        "trainer_8": 0.5,
+        "trainer_9": 5.48
+      },
+      "other_trainers_avg": 0.8111000000000002,
+      "fused_score": 0.1931,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:46.313717",
+    "ticker": "PG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 157.67,
+        "predicted_return": -0.01106117347350548,
+        "heuristic_signal": -0.1106117347350548
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8367,
+        "trainer_2": -0.0177,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.9942,
+        "trainer_6": 0.0801,
+        "trainer_7": 0.7171,
+        "trainer_8": 0.5,
+        "trainer_9": 157.83
+      },
+      "other_trainers_avg": 17.696333333333335,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:51.210448",
+    "ticker": "META",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 700.07,
+        "predicted_return": -0.004621035532766489,
+        "heuristic_signal": -0.04621035532766489
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5846,
+        "trainer_2": 0.0457,
+        "trainer_3": 0.0172,
+        "trainer_4": 0.0172,
+        "trainer_5": 0.7738,
+        "trainer_6": 0.0783,
+        "trainer_7": 0.5765,
+        "trainer_8": 0.5,
+        "trainer_9": 696.27
+      },
+      "other_trainers_avg": 77.52156666666666,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:51.727480",
+    "ticker": "FB",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:29:57.965755",
+    "ticker": "HPE",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 17.94,
+        "predicted_return": -0.00735977364522587,
+        "heuristic_signal": -0.0735977364522587
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5154,
+        "trainer_2": -0.1071,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.4853,
+        "trainer_6": 0.072,
+        "trainer_7": 0.7246,
+        "trainer_8": 0.5,
+        "trainer_9": 17.89
+      },
+      "other_trainers_avg": 2.1166,
+      "fused_score": 0.6055,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:07.079452",
+    "ticker": "GD",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 279.55,
+        "predicted_return": -0.0022414685058339103,
+        "heuristic_signal": -0.0224146850583391
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.1348,
+        "trainer_2": 0.0101,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.6226,
+        "trainer_6": 0.0802,
+        "trainer_7": 0.6441,
+        "trainer_8": 0.5,
+        "trainer_9": 277.41
+      },
+      "other_trainers_avg": 31.01468888888889,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:11.803948",
+    "ticker": "HOLX",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 63.86,
+        "predicted_return": -0.012282774980580492,
+        "heuristic_signal": -0.12282774980580491
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.0871,
+        "trainer_2": -0.1152,
+        "trainer_3": 0.0487,
+        "trainer_4": 0.0487,
+        "trainer_5": 0.3936,
+        "trainer_6": 0.1006,
+        "trainer_7": 0.7865,
+        "trainer_8": 0.5,
+        "trainer_9": 64.0
+      },
+      "other_trainers_avg": 7.29731111111111,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:17.392010",
+    "ticker": "MCO",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 467.61,
+        "predicted_return": -0.011198313422419916,
+        "heuristic_signal": -0.11198313422419917
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.919,
+        "trainer_2": 0.062,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.6601,
+        "trainer_6": 0.0716,
+        "trainer_7": 0.7165,
+        "trainer_8": 0.5,
+        "trainer_9": 468.07
+      },
+      "other_trainers_avg": 52.129022222222225,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:23.665888",
+    "ticker": "MSCI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 539.99,
+        "predicted_return": -0.011162936909685063,
+        "heuristic_signal": -0.11162936909685063
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.1873,
+        "trainer_2": 0.1434,
+        "trainer_3": 0.0341,
+        "trainer_4": 0.0341,
+        "trainer_5": 0.0497,
+        "trainer_6": 0.0583,
+        "trainer_7": 0.7633,
+        "trainer_8": 0.5,
+        "trainer_9": 540.5
+      },
+      "other_trainers_avg": 60.25224444444445,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:23.960407",
+    "ticker": "WRK",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:24.489361",
+    "ticker": "KSU",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:31.200570",
+    "ticker": "CSCO",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 65.37,
+        "predicted_return": -0.004520178923819393,
+        "heuristic_signal": -0.04520178923819393
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5589,
+        "trainer_2": 0.0057,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.7797,
+        "trainer_6": 0.1008,
+        "trainer_7": 0.8049,
+        "trainer_8": 0.5,
+        "trainer_9": 65.03
+      },
+      "other_trainers_avg": 7.406911111111111,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:37.935841",
+    "ticker": "TRV",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 261.63,
+        "predicted_return": -0.008592585475149926,
+        "heuristic_signal": -0.08592585475149926
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.0838,
+        "trainer_2": 0.0428,
+        "trainer_3": -0.0633,
+        "trainer_4": -0.0633,
+        "trainer_5": 0.406,
+        "trainer_6": 0.0607,
+        "trainer_7": 0.8223,
+        "trainer_8": 0.5,
+        "trainer_9": 261.26
+      },
+      "other_trainers_avg": 29.227666666666664,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:43.510751",
+    "ticker": "CPRT",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 47.3,
+        "predicted_return": -0.01954728297511649,
+        "heuristic_signal": -0.1954728297511649
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8802,
+        "trainer_2": 0.0363,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.4159,
+        "trainer_6": 0.1224,
+        "trainer_7": 0.8434,
+        "trainer_8": 0.5,
+        "trainer_9": 47.75
+      },
+      "other_trainers_avg": 5.420866666666666,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:51.948567",
+    "ticker": "KMB",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 127.97,
+        "predicted_return": -0.014025600170133181,
+        "heuristic_signal": -0.14025600170133182
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.5361,
+        "trainer_2": -0.0527,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0845,
+        "trainer_7": 0.9023,
+        "trainer_8": 0.5,
+        "trainer_9": 128.47
+      },
+      "other_trainers_avg": 14.604466666666667,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:30:58.099567",
+    "ticker": "BEN",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 22.45,
+        "predicted_return": -0.002114288129436522,
+        "heuristic_signal": -0.021142881294365222
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.2457,
+        "trainer_2": 0.0127,
+        "trainer_3": 0.375,
+        "trainer_4": 0.375,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0725,
+        "trainer_7": 0.6522,
+        "trainer_8": 0.5,
+        "trainer_9": 22.27
+      },
+      "other_trainers_avg": 2.7790777777777773,
+      "fused_score": 0.8253,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:04.305743",
+    "ticker": "DHR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 196.53,
+        "predicted_return": -0.011048745913474212,
+        "heuristic_signal": -0.11048745913474212
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5611,
+        "trainer_2": -0.0001,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.4,
+        "trainer_6": 0.0887,
+        "trainer_7": 0.7746,
+        "trainer_8": 0.5,
+        "trainer_9": 196.65
+      },
+      "other_trainers_avg": 21.98356666666667,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:04.873986",
+    "ticker": "XLNX",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:05.070887",
+    "ticker": "KSU",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:12.178895",
+    "ticker": "DIS",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 118.13,
+        "predicted_return": -0.004180006439600743,
+        "heuristic_signal": -0.04180006439600743
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5257,
+        "trainer_2": -0.2801,
+        "trainer_3": -0.1,
+        "trainer_4": -0.1,
+        "trainer_5": 0.4559,
+        "trainer_6": 0.1233,
+        "trainer_7": 0.4991,
+        "trainer_8": 0.5,
+        "trainer_9": 117.43
+      },
+      "other_trainers_avg": 13.11138888888889,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:21.696336",
+    "ticker": "SYY",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 74.31,
+        "predicted_return": -0.005274294243041959,
+        "heuristic_signal": -0.05274294243041959
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.2452,
+        "trainer_2": -0.0503,
+        "trainer_3": -0.025,
+        "trainer_4": -0.025,
+        "trainer_5": 0.8428,
+        "trainer_6": 0.0444,
+        "trainer_7": 0.7586,
+        "trainer_8": 0.5,
+        "trainer_9": 73.95
+      },
+      "other_trainers_avg": 8.4167,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:29.990396",
+    "ticker": "CI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 311.91,
+        "predicted_return": -0.0066510801240800554,
+        "heuristic_signal": -0.06651080124080055
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5341,
+        "trainer_2": -0.078,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.2022,
+        "trainer_6": 0.0362,
+        "trainer_7": 0.592,
+        "trainer_8": 0.5,
+        "trainer_9": 310.85
+      },
+      "other_trainers_avg": 34.618700000000004,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:36.183943",
+    "ticker": "PSA",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 293.17,
+        "predicted_return": -0.007549960119147051,
+        "heuristic_signal": -0.0754996011914705
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.168,
+        "trainer_2": 0.0149,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.5872,
+        "trainer_6": 0.0508,
+        "trainer_7": 0.6792,
+        "trainer_8": 0.5,
+        "trainer_9": 292.37
+      },
+      "other_trainers_avg": 32.707788888888885,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:42.765086",
+    "ticker": "ADP",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 305.88,
+        "predicted_return": -0.0090122650573513,
+        "heuristic_signal": -0.09012265057351299
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.8075,
+        "trainer_2": -0.1078,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.6976,
+        "trainer_6": 0.1224,
+        "trainer_7": 0.7694,
+        "trainer_8": 0.5,
+        "trainer_9": 305.44
+      },
+      "other_trainers_avg": 34.06823333333333,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:48.834598",
+    "ticker": "CMI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 312.72,
+        "predicted_return": -0.014066373613293836,
+        "heuristic_signal": -0.14066373613293837
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.1088,
+        "trainer_2": 0.1377,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.2616,
+        "trainer_6": 0.095,
+        "trainer_7": 0.7769,
+        "trainer_8": 0.5,
+        "trainer_9": 313.93
+      },
+      "other_trainers_avg": 35.065822222222224,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:54.658237",
+    "ticker": "NKE",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 59.62,
+        "predicted_return": -0.018489667780264167,
+        "heuristic_signal": -0.18489667780264168
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.18,
+        "trainer_2": 0.1327,
+        "trainer_3": 0.0833,
+        "trainer_4": 0.0833,
+        "trainer_5": 0.4,
+        "trainer_6": 0.1455,
+        "trainer_7": 0.7283,
+        "trainer_8": 0.5,
+        "trainer_9": 60.12
+      },
+      "other_trainers_avg": 6.930344444444444,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:31:59.644690",
+    "ticker": "NVDA",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 143.25,
+        "predicted_return": -0.007632484895507585,
+        "heuristic_signal": -0.07632484895507585
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0349,
+        "trainer_5": 0.3294,
+        "trainer_6": 0.0803,
+        "trainer_7": 0.6029,
+        "trainer_8": 0.5,
+        "trainer_9": 142.92
+      },
+      "other_trainers_avg": 20.638214285714287,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:04.645229",
+    "ticker": "DLR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 176.37,
+        "predicted_return": -0.0015358814851420303,
+        "heuristic_signal": -0.015358814851420302
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.016,
+        "trainer_5": 0.606,
+        "trainer_6": 0.0468,
+        "trainer_7": 0.5379,
+        "trainer_8": 0.5,
+        "trainer_9": 174.87
+      },
+      "other_trainers_avg": 25.22524285714286,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:10.368131",
+    "ticker": "SHW",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 324.93,
+        "predicted_return": -0.02542591789409268,
+        "heuristic_signal": -0.2542591789409268
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0211,
+        "trainer_5": 0.4,
+        "trainer_6": 0.079,
+        "trainer_7": 0.7268,
+        "trainer_8": 0.5,
+        "trainer_9": 333.76
+      },
+      "other_trainers_avg": 47.9267,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:14.612186",
+    "ticker": "RSG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 247.27,
+        "predicted_return": -0.007518508766678527,
+        "heuristic_signal": -0.07518508766678528
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0358,
+        "trainer_5": 0.0,
+        "trainer_6": 0.0705,
+        "trainer_7": 0.6079,
+        "trainer_8": 0.5,
+        "trainer_9": 246.66
+      },
+      "other_trainers_avg": 35.4106,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:19.937309",
+    "ticker": "MMC",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 213.78,
+        "predicted_return": -0.013163962469972496,
+        "heuristic_signal": -0.13163962469972496
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0414,
+        "trainer_5": 0.6908,
+        "trainer_6": 0.1072,
+        "trainer_7": 0.7592,
+        "trainer_8": 0.5,
+        "trainer_9": 213.8
+      },
+      "other_trainers_avg": 30.830828571428576,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:26.897870",
+    "ticker": "KMI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 27.49,
+        "predicted_return": -0.005860775327246797,
+        "heuristic_signal": -0.05860775327246797
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0094,
+        "trainer_5": 0.1715,
+        "trainer_6": 0.0597,
+        "trainer_7": 0.662,
+        "trainer_8": 0.5,
+        "trainer_9": 27.37
+      },
+      "other_trainers_avg": 4.110371428571429,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:32.612318",
+    "ticker": "PSA",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 293.17,
+        "predicted_return": -0.007549960119147051,
+        "heuristic_signal": -0.0754996011914705
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0.168,
+        "trainer_2": 0.0149,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.5872,
+        "trainer_6": 0.051,
+        "trainer_7": 0.6792,
+        "trainer_8": 0.5,
+        "trainer_9": 292.37
+      },
+      "other_trainers_avg": 32.70781111111111,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:41.299339",
+    "ticker": "PFG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 75.29,
+        "predicted_return": -0.008649639345257688,
+        "heuristic_signal": -0.08649639345257687
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0013,
+        "trainer_5": 0.9301,
+        "trainer_6": 0.0781,
+        "trainer_7": 0.6785,
+        "trainer_8": 0.5,
+        "trainer_9": 75.14
+      },
+      "other_trainers_avg": 11.046857142857144,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:47.915685",
+    "ticker": "BEN",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 22.41,
+        "predicted_return": -0.0024374007377005198,
+        "heuristic_signal": -0.024374007377005198
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.2457,
+        "trainer_2": 0.014,
+        "trainer_3": 0.375,
+        "trainer_4": 0.375,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0772,
+        "trainer_7": 0.6522,
+        "trainer_8": 0.5,
+        "trainer_9": 22.24
+      },
+      "other_trainers_avg": 2.776411111111111,
+      "fused_score": 0.8232,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:53.472997",
+    "ticker": "LHX",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 248.39,
+        "predicted_return": -0.0028804162739550147,
+        "heuristic_signal": -0.028804162739550148
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0288,
+        "trainer_5": 0.7402,
+        "trainer_6": 0.0743,
+        "trainer_7": 0.6578,
+        "trainer_8": 0.5,
+        "trainer_9": 246.66
+      },
+      "other_trainers_avg": 35.52301428571429,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:32:59.112005",
+    "ticker": "GM",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 48.44,
+        "predicted_return": -0.005564641269297966,
+        "heuristic_signal": -0.055646412692979666
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0038,
+        "trainer_5": 0.379,
+        "trainer_6": 0.2049,
+        "trainer_7": 0.5657,
+        "trainer_8": 0.5,
+        "trainer_9": 48.21
+      },
+      "other_trainers_avg": 7.123342857142857,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:04.772737",
+    "ticker": "WAB",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 199.36,
+        "predicted_return": -0.0088118982416451,
+        "heuristic_signal": -0.088118982416451
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0376,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0941,
+        "trainer_7": 0.6992,
+        "trainer_8": 0.5,
+        "trainer_9": 199.09
+      },
+      "other_trainers_avg": 28.77441428571429,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:11.016248",
+    "ticker": "JPM",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 268.78,
+        "predicted_return": -0.0017282322270539081,
+        "heuristic_signal": -0.01728232227053908
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.1635,
+        "trainer_5": 0.3393,
+        "trainer_6": 0.0945,
+        "trainer_7": 0.6134,
+        "trainer_8": 0.5,
+        "trainer_9": 266.53
+      },
+      "other_trainers_avg": 38.27338571428571,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:16.731150",
+    "ticker": "NTRS",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 109.77,
+        "predicted_return": -0.0020955589998858225,
+        "heuristic_signal": -0.020955589998858225
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0193,
+        "trainer_5": 0.5366,
+        "trainer_6": 0.1075,
+        "trainer_7": 0.6805,
+        "trainer_8": 0.5,
+        "trainer_9": 108.91
+      },
+      "other_trainers_avg": 15.821985714285715,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:25.169587",
+    "ticker": "CPB",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 31.75,
+        "predicted_return": -0.018175230882745558,
+        "heuristic_signal": -0.18175230882745558
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0025,
+        "trainer_5": 0.5489,
+        "trainer_6": 0.0577,
+        "trainer_7": 0.7459,
+        "trainer_8": 0.5,
+        "trainer_9": 32.01
+      },
+      "other_trainers_avg": 4.837142857142857,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:31.463398",
+    "ticker": "BLK",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 962.14,
+        "predicted_return": -0.009041068211976089,
+        "heuristic_signal": -0.09041068211976089
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0446,
+        "trainer_5": 0.6136,
+        "trainer_6": 0.095,
+        "trainer_7": 0.6494,
+        "trainer_8": 0.5,
+        "trainer_9": 961.03
+      },
+      "other_trainers_avg": 137.54905714285715,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:35.595619",
+    "ticker": "AEE",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 93.34,
+        "predicted_return": -0.01008950096783557,
+        "heuristic_signal": -0.1008950096783557
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0565,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0505,
+        "trainer_7": 0.698,
+        "trainer_8": 0.5,
+        "trainer_9": 93.34
+      },
+      "other_trainers_avg": 13.66357142857143,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:40.240050",
+    "ticker": "ETR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 81.28,
+        "predicted_return": -0.005538978201105333,
+        "heuristic_signal": -0.05538978201105333
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.011,
+        "trainer_5": 0.6786,
+        "trainer_6": 0.0637,
+        "trainer_7": 0.6108,
+        "trainer_8": 0.5,
+        "trainer_9": 80.15
+      },
+      "other_trainers_avg": 11.7163,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:45.095771",
+    "ticker": "ORCL",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 216.41,
+        "predicted_return": 0.02293963970081247,
+        "heuristic_signal": 0.2293963970081247
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0391,
+        "trainer_5": 0.7413,
+        "trainer_6": 0.09,
+        "trainer_7": 0.5438,
+        "trainer_8": 0.5,
+        "trainer_9": 209.73
+      },
+      "other_trainers_avg": 30.223714285714287,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:51.974243",
+    "ticker": "CMS",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 68.69,
+        "predicted_return": -0.008849062001917055,
+        "heuristic_signal": -0.08849062001917055
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.05,
+        "trainer_5": 0.4,
+        "trainer_6": 0.0694,
+        "trainer_7": 0.593,
+        "trainer_8": 0.5,
+        "trainer_9": 68.6
+      },
+      "other_trainers_avg": 10.016057142857141,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:52.500056",
+    "ticker": "CTXS",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:53.048347",
+    "ticker": "ANTM",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:33:57.273203",
+    "ticker": "AMD",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 128.89,
+        "predicted_return": 0.008274953854061694,
+        "heuristic_signal": 0.08274953854061695
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0133,
+        "trainer_5": 0.8376,
+        "trainer_6": 0.2899,
+        "trainer_7": 0.638,
+        "trainer_8": 0.5,
+        "trainer_9": 126.6
+      },
+      "other_trainers_avg": 18.411257142857142,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:05.588974",
+    "ticker": "CI",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 312.0,
+        "predicted_return": -0.006596303665148304,
+        "heuristic_signal": -0.06596303665148304
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.5341,
+        "trainer_2": -0.0778,
+        "trainer_3": 0,
+        "trainer_4": 0,
+        "trainer_5": 0.2022,
+        "trainer_6": 0.0362,
+        "trainer_7": 0.592,
+        "trainer_8": 0.5,
+        "trainer_9": 310.93
+      },
+      "other_trainers_avg": 34.627611111111115,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:11.927769",
+    "ticker": "AES",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 11.43,
+        "predicted_return": -0.002550480248450048,
+        "heuristic_signal": -0.025504802484500478
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0745,
+        "trainer_5": 0.5276,
+        "trainer_6": 0.4028,
+        "trainer_7": 0.644,
+        "trainer_8": 0.5,
+        "trainer_9": 10.52
+      },
+      "other_trainers_avg": 1.7885571428571427,
+      "fused_score": 0.5264,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:16.695237",
+    "ticker": "MCO",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 467.75,
+        "predicted_return": -0.01114031892673663,
+        "heuristic_signal": -0.1114031892673663
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": -0.919,
+        "trainer_2": 0.0622,
+        "trainer_3": 0.0,
+        "trainer_4": 0.0,
+        "trainer_5": 0.6601,
+        "trainer_6": 0.0722,
+        "trainer_7": 0.7165,
+        "trainer_8": 0.5,
+        "trainer_9": 468.19
+      },
+      "other_trainers_avg": 52.14244444444444,
+      "fused_score": 1,
+      "errors": {}
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:21.273591",
+    "ticker": "ROP",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 559.64,
+        "predicted_return": -0.007606306989938487,
+        "heuristic_signal": -0.07606306989938487
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0526,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0864,
+        "trainer_7": 0.6297,
+        "trainer_8": 0.5,
+        "trainer_9": 558.26
+      },
+      "other_trainers_avg": 80.0605,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:28.614285",
+    "ticker": "AIG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 83.31,
+        "predicted_return": -0.008642626206205695,
+        "heuristic_signal": -0.08642626206205695
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0211,
+        "trainer_5": 0.6,
+        "trainer_6": 0.0953,
+        "trainer_7": 0.6049,
+        "trainer_8": 0.5,
+        "trainer_9": 83.2
+      },
+      "other_trainers_avg": 12.139871428571428,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:33.831281",
+    "ticker": "RSG",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 247.16,
+        "predicted_return": -0.007600499991899172,
+        "heuristic_signal": -0.07600499991899172
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0362,
+        "trainer_5": 0.0,
+        "trainer_6": 0.07,
+        "trainer_7": 0.6079,
+        "trainer_8": 0.5,
+        "trainer_9": 246.57
+      },
+      "other_trainers_avg": 35.39772857142857,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:38.515127",
+    "ticker": "ADBE",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 379.61,
+        "predicted_return": -0.02405971508437709,
+        "heuristic_signal": -0.24059715084377092
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0381,
+        "trainer_5": 0.3787,
+        "trainer_6": 0.2335,
+        "trainer_7": 0.6562,
+        "trainer_8": 0.5,
+        "trainer_9": 384.94
+      },
+      "other_trainers_avg": 55.238614285714284,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:45.810844",
+    "ticker": "GLW",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 50.53,
+        "predicted_return": -0.004899367505338181,
+        "heuristic_signal": -0.04899367505338181
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0123,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0611,
+        "trainer_7": 0.653,
+        "trainer_8": 0.5,
+        "trainer_9": 50.17
+      },
+      "other_trainers_avg": 7.481685714285715,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:51.864546",
+    "ticker": "SBUX",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 92.32,
+        "predicted_return": -0.004418627738926608,
+        "heuristic_signal": -0.04418627738926608
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.034,
+        "trainer_5": 0.2443,
+        "trainer_6": 0.0588,
+        "trainer_7": 0.6363,
+        "trainer_8": 0.5,
+        "trainer_9": 91.82
+      },
+      "other_trainers_avg": 13.327628571428571,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:52.490840",
+    "ticker": "MRO",
+    "result": {
+      "error": "Not enough data for prediction"
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:34:57.175650",
+    "ticker": "PPL",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 33.1,
+        "predicted_return": -0.010036426909849369,
+        "heuristic_signal": -0.10036426909849369
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0703,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0596,
+        "trainer_7": 0.6001,
+        "trainer_8": 0.5,
+        "trainer_9": 33.1
+      },
+      "other_trainers_avg": 5.027057142857143,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:11.414258",
+    "ticker": "PWR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 357.21,
+        "predicted_return": -0.004825922618643272,
+        "heuristic_signal": -0.04825922618643272
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0079,
+        "trainer_5": 1.0,
+        "trainer_6": 0.0871,
+        "trainer_7": 0.6772,
+        "trainer_8": 0.5,
+        "trainer_9": 355.45
+      },
+      "other_trainers_avg": 51.10317142857143,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:17.123527",
+    "ticker": "LMT",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 472.78,
+        "predicted_return": -0.007098276475053858,
+        "heuristic_signal": -0.07098276475053858
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0282,
+        "trainer_5": 0.8341,
+        "trainer_6": 0.1438,
+        "trainer_7": 0.6194,
+        "trainer_8": 0.5,
+        "trainer_9": 471.49
+      },
+      "other_trainers_avg": 67.6513,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:22.163167",
+    "ticker": "HST",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 15.57,
+        "predicted_return": -0.008527942954756557,
+        "heuristic_signal": -0.08527942954756557
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0671,
+        "trainer_5": 0.0,
+        "trainer_6": 0.0504,
+        "trainer_7": 0.625,
+        "trainer_8": 0.5,
+        "trainer_9": 15.55
+      },
+      "other_trainers_avg": 2.3989285714285713,
+      "fused_score": 0.6856,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:30.032374",
+    "ticker": "GM",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 48.41,
+        "predicted_return": -0.00568682807267667,
+        "heuristic_signal": -0.056868280726766696
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0032,
+        "trainer_5": 0.2762,
+        "trainer_6": 0.0899,
+        "trainer_7": 0.5657,
+        "trainer_8": 0.5,
+        "trainer_9": 48.21
+      },
+      "other_trainers_avg": 7.092142857142858,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:34.377629",
+    "ticker": "PNR",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 95.41,
+        "predicted_return": -0.013607475306566044,
+        "heuristic_signal": -0.13607475306566044
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": 0.0846,
+        "trainer_5": 0.4,
+        "trainer_6": 0.0757,
+        "trainer_7": 0.6595,
+        "trainer_8": 0.5,
+        "trainer_9": 95.74
+      },
+      "other_trainers_avg": 13.922828571428571,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  },
+  {
+    "timestamp": "2025-06-17T15:35:39.134097",
+    "ticker": "DTE",
+    "result": {
+      "heuristic": {
+        "predicted_next_close": 130.52,
+        "predicted_return": -0.008431644069841707,
+        "heuristic_signal": -0.08431644069841707
+      },
+      "indicator_scores": {
+        "rsi": 0,
+        "macd": 0,
+        "bollinger": 0,
+        "sma": 0
+      },
+      "indicator_values": {
+        "bb_lower": null,
+        "bb_upper": null,
+        "sma_short": null,
+        "sma_long": null
+      },
+      "indicator_avg": 0.0,
+      "trainer_scores": {
+        "trainer_1": 0,
+        "trainer_2": -0.0977,
+        "trainer_5": 1.0,
+        "trainer_6": 0.1205,
+        "trainer_7": 0.631,
+        "trainer_8": 0.5,
+        "trainer_9": 130.29
+      },
+      "other_trainers_avg": 18.920542857142856,
+      "fused_score": 1,
+      "errors": {
+        "trainer_3": "No news articles found",
+        "trainer_4": "No news articles found"
+      }
+    }
+  }
+]
