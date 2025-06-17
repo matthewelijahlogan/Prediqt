@@ -8,5 +8,28 @@
     "timestamp": "2025-06-15T05:10:22.069145",
     "average_accuracy": 0.9628540827204474,
     "num_predictions": 100
+  },
+  {
+    "timestamp": "2025-06-16T15:02:59.014921",
+    "average_accuracy": 0.9658918479643498,
+    "num_predictions": 100
+  },
+  {
+    "timestamp": "2025-06-16T15:16:04.673126",
+    "average_accuracy": 0.9662910787945536,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.27956989247311825
+  },
+  {
+    "timestamp": "2025-06-17T01:47:27.139524",
+    "average_accuracy": 0.971831222832475,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.25
+  },
+  {
+    "timestamp": "2025-06-17T03:47:12.871049",
+    "average_accuracy": 0.9621916977050521,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.3157894736842105
   }
 ]

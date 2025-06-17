@@ -1,10 +1,12 @@
+# generate_accuracy_report2.py
+
 import json
 import os
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOG_FILE = os.path.join(BASE_DIR, 'predictive_logs', 'accuracy_log.json')
-OUTPUT_JS = os.path.join(BASE_DIR, 'www', 'js', 'accuracy_data.js')
+LOG_FILE = os.path.join(BASE_DIR, 'predictive_logs', 'accuracy_log2.json')
+OUTPUT_JS = os.path.join(BASE_DIR, 'www', 'js', 'accuracy_data2.js')  
 
 def generate_js():
     if not os.path.exists(LOG_FILE):
@@ -19,20 +21,20 @@ def generate_js():
         return
 
     latest_log = logs[-1]
-    total_predictions = sum(e["num_predictions"] for e in logs if "num_predictions" in e)
-    weighted_accuracy = sum(e["average_accuracy"] * e["num_predictions"] for e in logs if "average_accuracy" in e) / total_predictions
+    total_predictions = len(logs)
+    average_accuracy = sum(1 - (abs(e["predicted"] - e["actual"]) / e["actual"]) for e in logs if e["actual"]) / total_predictions
 
     js_object = {
         "last_updated": latest_log.get("timestamp", str(datetime.utcnow())),
         "total_predictions": total_predictions,
-        "overall_accuracy": weighted_accuracy,
+        "overall_accuracy": average_accuracy,
         "model_accuracies": {
-            "average": latest_log.get("average_accuracy", 0)
+            "average": average_accuracy
         }
     }
 
-    js_content = f"const accuracyData = {json.dumps(js_object, indent=2)};\n" \
-                 f"displayAccuracyReport();\n"
+    js_content = f"const accuracyData2 = {json.dumps(js_object, indent=2)};\n" \
+                 f"displayAccuracyReport2();\n"
 
     os.makedirs(os.path.dirname(OUTPUT_JS), exist_ok=True)
     with open(OUTPUT_JS, 'w', encoding='utf-8') as out:

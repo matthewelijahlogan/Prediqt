@@ -22,6 +22,12 @@ function displayAccuracyReport() {
   overallAcc.textContent = 'Overall Accuracy: ' + (accuracyData.overall_accuracy * 100).toFixed(2) + '%';
   container.appendChild(overallAcc);
 
+  if (typeof accuracyData.within_1_percent === 'number') {
+    const withinOnePercent = document.createElement('p');
+    withinOnePercent.textContent = 'Predictions within 1% error: ' + (accuracyData.within_1_percent * 100).toFixed(2) + '%';
+    container.appendChild(withinOnePercent);
+  }
+
   if (accuracyData.model_accuracies && Object.keys(accuracyData.model_accuracies).length > 0) {
     const modelHeader = document.createElement('h3');
     modelHeader.textContent = 'Model Accuracies';
