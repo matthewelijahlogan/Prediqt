@@ -49,5 +49,29 @@
     "average_accuracy": 0.9719475776678453,
     "num_predictions": 100,
     "within_threshold_pct": 0.4444444444444444
+  },
+  {
+    "timestamp": "2025-06-17T17:02:44.431921",
+    "average_accuracy": 0.9800268783329801,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.3793103448275862
+  },
+  {
+    "timestamp": "2025-06-17T17:11:30.921815",
+    "average_accuracy": 0.9647118905627274,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.4148936170212766
+  },
+  {
+    "timestamp": "2025-06-17T17:28:26.697874",
+    "average_accuracy": 0.9706270869570122,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.3655913978494624
+  },
+  {
+    "timestamp": "2025-06-17T20:03:56.434911",
+    "average_accuracy": 0.9555377114594042,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.22105263157894736
   }
 ]

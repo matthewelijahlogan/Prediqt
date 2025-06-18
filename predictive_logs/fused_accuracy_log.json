@@ -1,0 +1,8 @@
+[
+  {
+    "timestamp": "2025-06-17T16:24:57.694927",
+    "average_accuracy": 0.48597378883392267,
+    "within_threshold_pct": 0.2222222222222222,
+    "num_predictions": 200
+  }
+]

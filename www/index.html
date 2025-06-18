@@ -3,13 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="/img/favicon.png" sizes="16x16">
   <title>PredIQT</title>
-  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/img/favicon.png" type="image/png" sizes="16x16">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Fonts fallback (optional Google Font if local fails) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <header class="glass">
+    <!-- Header -->
+    <header class="glass header-bar">
       <h1 class="app-title">
         <span class="pred">Pred</span><span class="iq">IQ</span><span class="t">t</span>
       </h1>
@@ -20,81 +28,41 @@
       </nav>
     </header>
 
-    <main class="glass">
-      <h2>Enter a Stock Ticker</h2>
-      <input type="text" id="tickerInput" placeholder="e.g. AAPL">
-      <button id="predictBtn" type="button">Predict</button>
+    <!-- Main Content -->
+    <main class="glass content-box">
+      <section>
+        <h2>🔍 Enter a Stock Ticker</h2>
+        <input type="text" id="tickerInput" placeholder="e.g. AAPL">
+        <button id="predictBtn" type="button">Predict</button>
+      </section>
 
-      <div id="predictionsContainer" class="predictionsContainer">
-        <div class="prediction">
-          <strong>Next Hour Prediction:</strong> <span id="predictionHour">-</span>
-        </div>
-        <div class="prediction">
-          <strong>Next Day Prediction:</strong> <span id="predictionDay">-</span>
-        </div>
-        <div class="prediction">
-          <strong>Next Week Prediction:</strong> <span id="predictionWeek">-</span>
-        </div>
-        <div class="prediction">
-          <strong>Next Month Prediction:</strong> <span id="predictionMonth">-</span>
-        </div>
-      </div>
+      <section class="predictionsContainer">
+        <h3>📈 Predictions</h3>
+        <div class="prediction"><strong>Next Hour:</strong> <span id="predictionHour">-</span></div>
+        <div class="prediction"><strong>Next Day:</strong> <span id="predictionDay">-</span></div>
+        <div class="prediction"><strong>Next Week:</strong> <span id="predictionWeek">-</span></div>
+        <div class="prediction"><strong>Next Month:</strong> <span id="predictionMonth">-</span></div>
+      </section>
 
       <hr>
 
-      <h2>Real-Time Stock Data</h2>
-      <div id="quoteContainer" class="quoteContainer">
+      <section class="quoteContainer">
+        <h3>🧾 Real-Time Stock Data</h3>
         <div><strong>Price:</strong> <span id="quotePrice">-</span></div>
         <div><strong>Change:</strong> <span id="quoteChange">-</span></div>
         <div><strong>% Change:</strong> <span id="quotePercent">-</span></div>
         <div><strong>Volume:</strong> <span id="quoteVolume">-</span></div>
         <div><strong>Market Cap:</strong> <span id="quoteMarketCap">-</span></div>
         <div><strong>Sector:</strong> <span id="quoteSector">-</span></div>
-      </div>
+      </section>
     </main>
   </div>
 
-  <script>
-    async function fetchPrediction(ticker, horizon, targetId) {
-      const url = `/predict/${ticker}?horizon=${horizon}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        document.getElementById(targetId).textContent = data.predicted_next_close?.toFixed(2) ?? "N/A";
-      } catch (err) {
-        document.getElementById(targetId).textContent = "Error";
-        console.error(err);
-      }
-    }
+  <!-- Ticker Bar -->
+  <div class="ticker-bar"><span id="newsTicker">Your text here</span></div>
 
-    async function fetchQuote(ticker) {
-      const url = `/api/quote?ticker=${ticker}`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        document.getElementById("quotePrice").textContent = data.price ?? "-";
-        document.getElementById("quoteChange").textContent = data.change ?? "-";
-        document.getElementById("quotePercent").textContent = data.percent_change?.toFixed(2) + "%" ?? "-";
-        document.getElementById("quoteVolume").textContent = data.volume?.toLocaleString() ?? "-";
-        document.getElementById("quoteMarketCap").textContent = data.market_cap?.toLocaleString() ?? "-";
-        document.getElementById("quoteSector").textContent = data.sector ?? "-";
-      } catch (err) {
-        document.getElementById("quotePrice").textContent = "Error";
-        console.error(err);
-      }
-    }
-
-    document.getElementById("predictBtn").addEventListener("click", () => {
-      const ticker = document.getElementById("tickerInput").value.trim().toUpperCase();
-      if (!ticker) return;
-
-      fetchPrediction(ticker, "hour", "predictionHour");
-      fetchPrediction(ticker, "day", "predictionDay");
-      fetchPrediction(ticker, "week", "predictionWeek");
-      fetchPrediction(ticker, "month", "predictionMonth");
-
-      fetchQuote(ticker);
-    });
-  </script>
+  <!-- JS Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/ticker.js"></script>
 </body>
 </html>

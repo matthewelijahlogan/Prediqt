@@ -7,6 +7,9 @@ import pytz
 from datetime import datetime
 import asyncio
 import os
+from dotenv import load_dotenv
+load_dotenv()
+from backend.routers import ticker_tape, news, quote
 
 from auto_trainer import start_scheduler
 from train_predictor import train_and_predict
@@ -21,6 +24,9 @@ class HorizonEnum(str, Enum):
 
 # Initialize FastAPI app
 app = FastAPI()
+app.include_router(ticker_tape.router)
+app.include_router(news.router)
+app.include_router(quote.router)
 
 # Environment-based origin config
 is_dev = os.environ.get("ENV", "dev") == "dev"
