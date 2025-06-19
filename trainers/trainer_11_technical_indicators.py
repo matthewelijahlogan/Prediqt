@@ -46,23 +46,52 @@ def predict(ticker: str):
         upper = upper_band.iloc[-1]
         lower = lower_band.iloc[-1]
 
-        ### Scoring
-        rsi_score = 1 if current_rsi < 30 else -1 if current_rsi > 70 else 0
-        macd_score = 1 if current_macd > current_signal else -1 if current_macd < current_signal else 0
-        bb_score = 1 if price < lower else -1 if price > upper else 0
+        ### Scoring with explicit float casts for safety
+        rsi_score = 0
+        try:
+            rsi_val = float(current_rsi)
+            if rsi_val < 30:
+                rsi_score = 1
+            elif rsi_val > 70:
+                rsi_score = -1
+        except Exception as e:
+            print(f"[trainer_11] RSI score error: {e}")
+
+        macd_score = 0
+        try:
+            macd_val = float(current_macd)
+            signal_val = float(current_signal)
+            if macd_val > signal_val:
+                macd_score = 1
+            elif macd_val < signal_val:
+                macd_score = -1
+        except Exception as e:
+            print(f"[trainer_11] MACD score error: {e}")
+
+        bb_score = 0
+        try:
+            price_val = float(price)
+            lower_val = float(lower)
+            upper_val = float(upper)
+            if price_val < lower_val:
+                bb_score = 1
+            elif price_val > upper_val:
+                bb_score = -1
+        except Exception as e:
+            print(f"[trainer_11] Bollinger Bands score error: {e}")
 
         total_score = rsi_score + macd_score + bb_score
         adjustment = 1.0 + (total_score * 0.02)  # Max swing of ±6%
 
         output = {
             "adjustment": round(adjustment, 3),
-            "rsi": round(current_rsi, 2),
-            "macd": round(current_macd, 4),
-            "macd_signal": round(current_signal, 4),
-            "macd_histogram": round(current_hist, 4),
-            "bollinger_upper": round(upper, 2),
-            "bollinger_lower": round(lower, 2),
-            "price": round(price, 2),
+            "rsi": round(float(current_rsi), 2),
+            "macd": round(float(current_macd), 4),
+            "macd_signal": round(float(current_signal), 4),
+            "macd_histogram": round(float(current_hist), 4),
+            "bollinger_upper": round(float(upper), 2),
+            "bollinger_lower": round(float(lower), 2),
+            "price": round(float(price), 2),
             "rsi_score": rsi_score,
             "macd_score": macd_score,
             "bollinger_score": bb_score,
