@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function scrollStep() {
       if (!tickerPaused && !inputFocused) {
-        offset -= 0.3; // Lower is slower (0.1 = very slow)
+        offset -= 0.6; // Lower is slower (0.1 = very slow)
         if (offset < -tickerEl.scrollWidth) {
           offset = window.innerWidth;
         }
