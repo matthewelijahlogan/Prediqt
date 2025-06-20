@@ -1,0 +1,14 @@
+{
+    "total_predictions": 2,
+    "valid_predictions": 2,
+    "skipped_entries": 0,
+    "overall_accuracy": 0.9898,
+    "model_accuracies": {
+        "base": 0.9938,
+        "sentiment": 0.986,
+        "pelosi": 0.9664,
+        "options": 0.9664,
+        "volume": 0.973
+    },
+    "last_updated": "2025-06-20T03:42:10.628718Z"
+}

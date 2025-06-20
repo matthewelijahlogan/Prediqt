@@ -1,106 +1,109 @@
 import yfinance as yf
-import pandas as pd
 import numpy as np
 
-def predict(ticker: str):
+def rsi(prices, period=14):
+    if len(prices) < period + 1:
+        return 50.0  # Neutral RSI fallback
+    deltas = np.diff(prices)
+    seed = deltas[:period]
+    up = seed[seed >= 0].sum() / period
+    down = -seed[seed < 0].sum() / period
+    rs = up / (down + 1e-6)
+    rsi_series = [100 - 100 / (1 + rs)]
+
+    for i in range(period, len(prices) - 1):
+        delta = deltas[i]
+        upval = max(delta, 0)
+        downval = max(-delta, 0)
+        up = (up * (period - 1) + upval) / period
+        down = (down * (period - 1) + downval) / period
+        rs = up / (down + 1e-6)
+        rsi_series.append(100 - 100 / (1 + rs))
+    return rsi_series[-1]
+
+def ema(prices, span):
+    alpha = 2 / (span + 1)
+    ema_values = [prices[0]]
+    for price in prices[1:]:
+        ema_values.append(alpha * price + (1 - alpha) * ema_values[-1])
+    return ema_values[-1]
+
+def macd(prices):
+    if len(prices) < 26:
+        return 0.0  # Not enough data
+    ema_fast = ema(prices, 12)
+    ema_slow = ema(prices, 26)
+    return ema_fast - ema_slow
+
+def bollinger_bands(prices, window=20):
+    if len(prices) < window:
+        return None, None
+    slice_ = prices[-window:]
+    mid = np.mean(slice_)
+    std = np.std(slice_)
+    upper = mid + 2 * std
+    lower = mid - 2 * std
+    return upper, lower
+
+def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_11_technical_indicators] Evaluating technical indicators for {ticker}...")
 
     try:
-        df = yf.download(ticker, period="1mo", interval="1h", progress=False)
+        stock = yf.Ticker(ticker)
+        hist = stock.history(period="1mo", interval="1h", auto_adjust=True)
+        closes = hist['Close'].to_list()
 
-        if df.empty or len(df) < 30:
-            print("[trainer_11] Not enough data.")
-            return {"adjustment": 1.0, "reason": "insufficient_data"}
+        if len(closes) < 30:
+            return {
+                "trainer": "technical_indicators",
+                "prediction": 0.0,
+                "confidence": 0.0,
+                "meta": {"reasoning": "insufficient_data"}
+            }
 
-        # Close price reference
-        close = df["Close"]
-        price = close.iloc[-1]
+        price = closes[-1]
+        current_rsi = rsi(closes)
+        current_macd = macd(closes)
+        upper, lower = bollinger_bands(closes)
 
-        ### RSI
-        delta = close.diff()
-        gain = delta.clip(lower=0)
-        loss = -delta.clip(upper=0)
-        avg_gain = gain.ewm(com=13, adjust=False).mean()
-        avg_loss = loss.ewm(com=13, adjust=False).mean()
-        rs = avg_gain / (avg_loss + 1e-6)
-        rsi = 100 - (100 / (1 + rs))
-        current_rsi = rsi.iloc[-1]
-
-        ### MACD
-        ema_fast = close.ewm(span=12, adjust=False).mean()
-        ema_slow = close.ewm(span=26, adjust=False).mean()
-        macd = ema_fast - ema_slow
-        signal = macd.ewm(span=9, adjust=False).mean()
-        macd_hist = macd - signal
-
-        current_macd = macd.iloc[-1]
-        current_signal = signal.iloc[-1]
-        current_hist = macd_hist.iloc[-1]
-
-        ### Bollinger Bands
-        bb_mid = close.rolling(window=20).mean()
-        bb_std = close.rolling(window=20).std()
-        upper_band = bb_mid + 2 * bb_std
-        lower_band = bb_mid - 2 * bb_std
-
-        upper = upper_band.iloc[-1]
-        lower = lower_band.iloc[-1]
-
-        ### Scoring with explicit float casts for safety
-        rsi_score = 0
-        try:
-            rsi_val = float(current_rsi)
-            if rsi_val < 30:
-                rsi_score = 1
-            elif rsi_val > 70:
-                rsi_score = -1
-        except Exception as e:
-            print(f"[trainer_11] RSI score error: {e}")
-
-        macd_score = 0
-        try:
-            macd_val = float(current_macd)
-            signal_val = float(current_signal)
-            if macd_val > signal_val:
-                macd_score = 1
-            elif macd_val < signal_val:
-                macd_score = -1
-        except Exception as e:
-            print(f"[trainer_11] MACD score error: {e}")
-
+        rsi_score = 1 if current_rsi < 30 else -1 if current_rsi > 70 else 0
+        macd_score = 1 if current_macd > 0 else -1 if current_macd < 0 else 0
         bb_score = 0
-        try:
-            price_val = float(price)
-            lower_val = float(lower)
-            upper_val = float(upper)
-            if price_val < lower_val:
-                bb_score = 1
-            elif price_val > upper_val:
-                bb_score = -1
-        except Exception as e:
-            print(f"[trainer_11] Bollinger Bands score error: {e}")
+        if upper is not None and lower is not None:
+            bb_score = 1 if price < lower else -1 if price > upper else 0
 
         total_score = rsi_score + macd_score + bb_score
-        adjustment = 1.0 + (total_score * 0.02)  # Max swing of ±6%
+        delta = total_score * 0.02  # ±6% max impact
+        confidence = min(1.0, abs(total_score) / 3.0)  # Max confidence if all 3 agree
 
-        output = {
-            "adjustment": round(adjustment, 3),
-            "rsi": round(float(current_rsi), 2),
-            "macd": round(float(current_macd), 4),
-            "macd_signal": round(float(current_signal), 4),
-            "macd_histogram": round(float(current_hist), 4),
-            "bollinger_upper": round(float(upper), 2),
-            "bollinger_lower": round(float(lower), 2),
-            "price": round(float(price), 2),
-            "rsi_score": rsi_score,
-            "macd_score": macd_score,
-            "bollinger_score": bb_score,
-            "total_score": total_score
+        result = {
+            "trainer": "technical_indicators",
+            "prediction": round(delta, 5),
+            "confidence": round(confidence, 3),
+            "meta": {
+                "price": round(price, 2),
+                "rsi": round(current_rsi, 2),
+                "macd": round(current_macd, 4),
+                "bollinger_upper": round(upper, 2) if upper is not None else None,
+                "bollinger_lower": round(lower, 2) if lower is not None else None,
+                "rsi_score": rsi_score,
+                "macd_score": macd_score,
+                "bollinger_score": bb_score,
+                "total_score": total_score,
+            }
         }
 
-        print(f"[trainer_11] Output: {output}")
-        return output
+        print(f"[technical_indicators] Output: {result}")
+        return result
 
     except Exception as e:
-        print(f"[trainer_11] Error: {e}")
-        return {"adjustment": 1.0, "error": str(e)}
+        print(f"[technical_indicators] Error: {e}")
+        return {
+            "trainer": "technical_indicators",
+            "prediction": 0.0,
+            "confidence": 0.0,
+            "meta": {"reasoning": str(e)}
+        }
+
+if __name__ == "__main__":
+    print(predict("AAPL"))

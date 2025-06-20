@@ -1,6 +1,8 @@
 {
-    "total_predictions": 1400,
-    "overall_accuracy": 1.0,
+    "total_predictions": 1500,
+    "valid_predictions": 0,
+    "skipped_entries": 1500,
+    "overall_accuracy": null,
     "model_accuracies": {},
-    "last_updated": "2025-06-18T17:14:04.613594Z"
+    "last_updated": "2025-06-20T04:13:00.702028Z"
 }

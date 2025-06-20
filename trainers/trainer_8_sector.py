@@ -1,12 +1,10 @@
-# trainer_8_sector.py
-
 import yfinance as yf
-from datetime import datetime, timedelta
 
-# Map sectors to sector ETFs (examples)
+# Mapping of sectors to representative ETFs, including "Consumer Cyclical"
 SECTOR_ETFS = {
     "Technology": "XLK",
     "Consumer Discretionary": "XLY",
+    "Consumer Cyclical": "XLY",           # Added this alias for TSLA etc.
     "Health Care": "XLV",
     "Financial Services": "XLF",
     "Energy": "XLE",
@@ -16,49 +14,75 @@ SECTOR_ETFS = {
     "Utilities": "XLU",
     "Communication Services": "XLC",
     "Consumer Staples": "XLP",
-    # Add more if you want
 }
 
-def predict(ticker: str):
+def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_8_sector] Checking sector trends for {ticker}...")
 
     try:
         stock = yf.Ticker(ticker)
         info = stock.info
 
-        sector = info.get("sector")
+        # Try sector first, then fallback to industry if sector is missing
+        sector = info.get("sector") or info.get("industry") or None
+
         if not sector:
-            print("[sector_model] No sector info found, returning neutral adjustment.")
-            return {"adjustment": 1.0, "sector": None, "reasoning": "No sector info"}
+            return {
+                "trainer": "sector",
+                "prediction": 0.0,
+                "confidence": 0.0,
+                "meta": {
+                    "sector": None,
+                    "reasoning": "No sector or industry info found"
+                }
+            }
 
         sector_etf = SECTOR_ETFS.get(sector)
         if not sector_etf:
-            print(f"[sector_model] No ETF mapped for sector '{sector}', returning neutral adjustment.")
-            return {"adjustment": 1.0, "sector": sector, "reasoning": "No ETF mapping for sector"}
+            return {
+                "trainer": "sector",
+                "prediction": 0.0,
+                "confidence": 0.0,
+                "meta": {
+                    "sector": sector,
+                    "reasoning": f"No ETF mapping for sector '{sector}'"
+                }
+            }
 
         etf = yf.Ticker(sector_etf)
-        # Get recent history - last 2 days to calculate change (today and previous trading day)
         hist = etf.history(period="2d")
         if len(hist) < 2:
-            print("[sector_model] Not enough ETF history data, returning neutral adjustment.")
-            return {"adjustment": 1.0, "sector": sector, "reasoning": "Insufficient ETF data"}
+            return {
+                "trainer": "sector",
+                "prediction": 0.0,
+                "confidence": 0.5,
+                "meta": {
+                    "sector": sector,
+                    "sector_etf": sector_etf,
+                    "reasoning": "Insufficient ETF history data"
+                }
+            }
 
-        # Calculate percent change between last two closes
-        last_close = hist['Close'][-1]
-        prev_close = hist['Close'][-2]
+        # Use iloc to avoid pandas future warning on positional indexing
+        last_close = hist['Close'].iloc[-1]
+        prev_close = hist['Close'].iloc[-2]
         pct_change = (last_close - prev_close) / prev_close
 
-        # Simple adjustment: 1 + pct_change, clamp between 0.9 and 1.1 to avoid extreme swings
-        adjustment = max(0.9, min(1.1, 1 + pct_change))
-
-        reasoning = f"Sector '{sector}' ETF ({sector_etf}) changed {pct_change*100:.2f}% recently"
+        # Clamp delta between -10% and +10%
+        prediction = max(-0.1, min(0.1, pct_change))
+        # Confidence scaled by absolute % move times 50, capped at 1.0
+        confidence = min(1.0, abs(pct_change) * 50)
 
         result = {
-            "adjustment": round(adjustment, 4),
-            "sector": sector,
-            "sector_etf": sector_etf,
-            "percent_change": round(pct_change * 100, 2),
-            "reasoning": reasoning,
+            "trainer": "sector",
+            "prediction": round(prediction, 5),
+            "confidence": round(confidence, 3),
+            "meta": {
+                "sector": sector,
+                "sector_etf": sector_etf,
+                "percent_change": round(pct_change * 100, 2),
+                "reasoning": f"{sector_etf} ETF changed {pct_change * 100:.2f}% over last 2 days"
+            }
         }
 
         print(f"[sector_model] Output: {result}")
@@ -66,4 +90,16 @@ def predict(ticker: str):
 
     except Exception as e:
         print(f"[sector_model] Error: {e}")
-        return {"adjustment": 1.0, "sector": None, "reasoning": "Error fetching sector data"}
+        return {
+            "trainer": "sector",
+            "prediction": 0.0,
+            "confidence": 0.0,
+            "meta": {
+                "sector": None,
+                "error": str(e),
+                "reasoning": "Exception during sector ETF fetch"
+            }
+        }
+
+if __name__ == "__main__":
+    print(predict("AAPL"))

@@ -1,7 +1,7 @@
 import yfinance as yf
 import pandas as pd
 
-def predict(ticker: str):
+def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_9_insider_trading] Checking insider trading activity for {ticker}...")
 
     try:
@@ -9,33 +9,35 @@ def predict(ticker: str):
         insider_trades = getattr(stock, 'insider_transactions', None)
 
         if insider_trades is None or insider_trades.empty:
-            print("[insider_model] No insider transactions found, returning neutral adjustment.")
             return {
-                "adjustment": 1.0,
-                "insider_activity": "none",
-                "reasoning": "No insider trades"
+                "trainer": "insider_trading",
+                "prediction": 0.0,
+                "confidence": 0.5,
+                "meta": {
+                    "insider_activity": "none",
+                    "reasoning": "No insider trades data available, defaulting to neutral"
+                }
             }
 
-        # Normalize columns (strip whitespace)
+        # Normalize and rename columns if necessary
         insider_trades.columns = [col.strip() for col in insider_trades.columns]
-
-        # Handle alternative column names by renaming
         if 'Date' not in insider_trades.columns and 'Start Date' in insider_trades.columns:
             insider_trades.rename(columns={'Start Date': 'Date'}, inplace=True)
-
         if 'Transaction Type' not in insider_trades.columns and 'Transaction' in insider_trades.columns:
             insider_trades.rename(columns={'Transaction': 'Transaction Type'}, inplace=True)
 
-        # Re-check required columns
         if 'Date' not in insider_trades.columns or 'Transaction Type' not in insider_trades.columns:
-            print(f"[insider_model] Required columns missing. Columns found: {insider_trades.columns}")
             return {
-                "adjustment": 1.0,
-                "insider_activity": "error",
-                "reasoning": "Required columns ('Date', 'Transaction Type') missing"
+                "trainer": "insider_trading",
+                "prediction": 0.0,
+                "confidence": 0.5,
+                "meta": {
+                    "insider_activity": "error",
+                    "reasoning": "Missing required columns, defaulting to neutral"
+                }
             }
 
-        # Convert date
+        # Convert and filter by date
         insider_trades['Date'] = pd.to_datetime(insider_trades['Date'], errors='coerce')
         recent_trades = insider_trades[
             insider_trades['Date'] >= (pd.Timestamp.today() - pd.Timedelta(days=30))
@@ -52,22 +54,34 @@ def predict(ticker: str):
         sell_count = len(sells)
 
         if buy_count > sell_count:
-            adjustment = 1.05
+            delta = 0.05
             activity = "buy"
-            reasoning = f"More insider buys ({buy_count}) than sells ({sell_count}) in last 30 days"
+            reasoning = f"{buy_count} insider buys vs {sell_count} sells (last 30 days)"
         elif sell_count > buy_count:
-            adjustment = 0.95
+            delta = -0.05
             activity = "sell"
-            reasoning = f"More insider sells ({sell_count}) than buys ({buy_count}) in last 30 days"
+            reasoning = f"{sell_count} insider sells vs {buy_count} buys (last 30 days)"
         else:
-            adjustment = 1.0
+            delta = 0.0
             activity = "neutral"
-            reasoning = f"Insider buys and sells balanced ({buy_count} each) in last 30 days"
+            reasoning = f"{buy_count} buys and {sell_count} sells — balanced activity"
+
+        total_trades = buy_count + sell_count
+        if total_trades == 0:
+            confidence = 0.5
+        else:
+            confidence = min(1.0, total_trades / 10.0)
 
         result = {
-            "adjustment": adjustment,
-            "insider_activity": activity,
-            "reasoning": reasoning,
+            "trainer": "insider_trading",
+            "prediction": round(delta, 5),
+            "confidence": round(confidence, 3),
+            "meta": {
+                "insider_activity": activity,
+                "buy_count": buy_count,
+                "sell_count": sell_count,
+                "reasoning": reasoning
+            }
         }
 
         print(f"[insider_model] Output: {result}")
@@ -76,7 +90,14 @@ def predict(ticker: str):
     except Exception as e:
         print(f"[insider_model] Error: {e}")
         return {
-            "adjustment": 1.0,
-            "insider_activity": "error",
-            "reasoning": str(e)
+            "trainer": "insider_trading",
+            "prediction": 0.0,
+            "confidence": 0.5,
+            "meta": {
+                "insider_activity": "error",
+                "reasoning": str(e)
+            }
         }
+
+if __name__ == "__main__":
+    print(predict("AAPL"))

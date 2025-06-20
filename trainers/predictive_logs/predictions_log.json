@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2025-06-20T12:00:00Z",
+        "ticker": "AAPL",
+        "actual_close": 150.0,
+        "result": {
+            "predicted_next_close": 152.0,
+            "base": {"predicted_next_close": 151.0},
+            "sentiment": {"sentiment_score": 0.1},
+            "pelosi": {"adjustment": 1.02},
+            "options": {"options_signal_strength": 0.5, "options_prediction_confidence": 0.8}
+        }
+    },
+    {
+        "timestamp": "2025-06-20T12:00:00Z",
+        "ticker": "TSLA",
+        "actual_close": 700.0,
+        "result": {
+            "predicted_next_close": 695.0,
+            "base": {"predicted_next_close": 696.0},
+            "sentiment": {"sentiment_score": -0.05},
+            "volume": {"adjustment": 0.98}
+        }
+    }
+]

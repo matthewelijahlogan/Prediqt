@@ -16,7 +16,6 @@ sys.path.append(os.path.join(BASE_DIR, "trainers"))
 from train_predictor import train_and_predict
 from trainer_16_predictivelog import update_from_log
 
-
 # Constants and paths
 TICKER_LIST_FILE = os.path.join(BASE_DIR, "tickers.txt")  # one ticker per line
 LOG_DIR = os.path.join(BASE_DIR, "predictive_logs")
@@ -26,17 +25,26 @@ BATCH_SIZE = 100
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
+
 def load_tickers():
+    if not os.path.exists(TICKER_LIST_FILE):
+        print(f"[auto_trainer] ❌ Ticker list file not found: {TICKER_LIST_FILE}")
+        return ["AAPL", "TSLA", "MSFT", "GOOGL", "AMZN"]  # fallback tickers
+
     with open(TICKER_LIST_FILE, "r") as f:
         tickers = [line.strip().upper() for line in f if line.strip()]
+    if not tickers:
+        print("[auto_trainer] ❌ No tickers found in file. Using fallback list.")
+        return ["AAPL", "TSLA", "MSFT", "GOOGL", "AMZN"]
     return tickers
+
 
 async def run_predictions():
     tickers = load_tickers()
     selected = random.sample(tickers, min(BATCH_SIZE, len(tickers)))
 
     batch_results = []
-    print(f"[auto_trainer] Starting prediction batch at {datetime.utcnow().isoformat()}")
+    print(f"[auto_trainer] 🚀 Starting prediction batch at {datetime.utcnow().isoformat()}")
 
     loop = asyncio.get_running_loop()
     for ticker in selected:
@@ -60,6 +68,7 @@ async def run_predictions():
     except Exception as e:
         print(f"[auto_trainer] ⚠️ Error updating fusion model: {e}")
 
+
 def append_to_json_log(filepath, new_data):
     data = []
     if os.path.exists(filepath):
@@ -67,12 +76,14 @@ def append_to_json_log(filepath, new_data):
             try:
                 data = json.load(f)
             except json.JSONDecodeError:
+                print(f"[auto_trainer] ⚠️ JSON decode error in {filepath}. Starting fresh.")
                 data = []
 
     data.extend(new_data)
 
     with open(filepath, "w") as f:
         json.dump(data, f, indent=2)
+
 
 def update_metrics_and_fusion(batch_results, threshold=0.01):
     """
@@ -94,6 +105,8 @@ def update_metrics_and_fusion(batch_results, threshold=0.01):
             accuracies.append(acc)
             if relative_error <= threshold:
                 within_threshold_count += 1
+        else:
+            print(f"[auto_trainer] ⚠️ Missing prediction or actual for {entry['ticker']}")
 
     average_accuracy = sum(accuracies) / len(accuracies) if accuracies else None
     within_threshold_pct = (within_threshold_count / total_count) if total_count else None
@@ -102,14 +115,15 @@ def update_metrics_and_fusion(batch_results, threshold=0.01):
         "timestamp": datetime.utcnow().isoformat(),
         "average_accuracy": average_accuracy,
         "num_predictions": len(batch_results),
-        "within_threshold_pct": within_threshold_pct  # new metric added
+        "within_threshold_pct": within_threshold_pct
     }
     append_to_json_log(ACCURACY_LOG_FILE, [accuracy_entry])
 
-    print(f"[auto_trainer] Average accuracy for batch: {average_accuracy}")
-    print(f"[auto_trainer] Predictions within {threshold*100:.2f}% of actual: {within_threshold_pct}")
+    print(f"[auto_trainer] 📊 Avg accuracy: {average_accuracy:.4f}" if average_accuracy else "[auto_trainer] No accuracy stats.")
+    print(f"[auto_trainer] ✅ {within_threshold_pct:.2%} within ±{threshold*100:.2f}%") if within_threshold_pct else None
 
-    update_from_log(LOG_FILE)  # Update fusion model weights
+    update_from_log(LOG_FILE)
+
 
 def get_actual_price(ticker: str):
     import yfinance as yf
@@ -121,17 +135,25 @@ def get_actual_price(ticker: str):
         print(f"[auto_trainer] ⚠️ Failed to get actual price for {ticker}: {e}")
     return None
 
+
 def start_scheduler():
     scheduler = AsyncIOScheduler()
     scheduler.add_job(run_predictions, "interval", hours=2, next_run_time=datetime.utcnow())
     scheduler.start()
-    print("[auto_trainer] 🕒 Scheduler started, running every 2 hours.")
+    print("[auto_trainer] 🕒 Scheduler started (every 2 hours).")
+
 
 async def main():
     start_scheduler()
     await asyncio.Event().wait()  # keep running
 
+
 if __name__ == "__main__":
-    asyncio.run(run_predictions())
-    start_scheduler()
-    asyncio.get_event_loop().run_forever()
+    try:
+        asyncio.run(run_predictions())  # Run one batch immediately
+        start_scheduler()
+
+        loop = asyncio.get_event_loop()
+        loop.run_forever()
+    except (KeyboardInterrupt, SystemExit):
+        print("[auto_trainer] 🛑 Shutting down gracefully.")

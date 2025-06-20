@@ -79,5 +79,11 @@
     "average_accuracy": 0.9663093359170172,
     "num_predictions": 100,
     "within_threshold_pct": 0.44086021505376344
+  },
+  {
+    "timestamp": "2025-06-20T04:13:00.676387",
+    "average_accuracy": 0.8863774799978247,
+    "num_predictions": 100,
+    "within_threshold_pct": 0.0
   }
 ]

@@ -1,53 +1,55 @@
-# trainer_6_earnings.py
-
 import yfinance as yf
 
-def predict(ticker: str):
+def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_6_earnings] Evaluating earnings report impact for {ticker}...")
 
     try:
         stock = yf.Ticker(ticker)
-        cal = stock.calendar
-
-        print(f"[earnings_model] Calendar type: {type(cal)}")
-
-        if hasattr(cal, "empty") and cal.empty:
-            print("[earnings_model] No earnings calendar available.")
-            return {"adjustment": 1.0, "earnings_result": "unknown"}
-
-        # If calendar is dict (sometimes returned as dict?), handle gracefully
-        if isinstance(cal, dict):
-            print("[earnings_model] Calendar is a dict, unable to process earnings date properly.")
-            return {"adjustment": 1.0, "earnings_result": "unknown"}
-
+        
+        # Attempt to retrieve earnings info
         eps_actual = stock.info.get("epsActual")
         eps_estimate = stock.info.get("epsEstimate")
 
         if eps_actual is None or eps_estimate is None:
-            print("[earnings_model] EPS data unavailable.")
-            return {"adjustment": 1.0, "earnings_result": "unknown"}
+            return {
+                "trainer": "earnings",
+                "prediction": 0.0,
+                "adjustment": 1.0,
+                "confidence": 0.2,
+                "meta": {"earnings_result": "eps_data_missing"}
+            }
 
-        # Determine the result
+        # Compute prediction with bounded adjustment
         if eps_actual > eps_estimate:
+            prediction = +0.05
             result = "beat"
-            adjustment = 1.05
         elif eps_actual < eps_estimate:
+            prediction = -0.05
             result = "miss"
-            adjustment = 0.95
         else:
+            prediction = 0.0
             result = "meet"
-            adjustment = 1.0
 
-        output = {
-            "adjustment": round(adjustment, 3),
-            "earnings_result": result,
-            "eps_actual": eps_actual,
-            "eps_estimate": eps_estimate,
+        return {
+            "trainer": "earnings",
+            "prediction": round(prediction, 5),
+            "adjustment": round(1 + prediction, 5),  # Adjustment for fusion
+            "confidence": 0.9,
+            "meta": {
+                "earnings_result": result,
+                "eps_actual": eps_actual,
+                "eps_estimate": eps_estimate,
+            }
         }
 
-        print(f"[earnings_model] Output: {output}")
-        return output
-
     except Exception as e:
-        print(f"[earnings_model] Error: {e}")
-        return {"adjustment": 1.0, "earnings_result": "error"}
+        return {
+            "trainer": "earnings",
+            "prediction": 0.0,
+            "adjustment": 1.0,
+            "confidence": 0.0,
+            "meta": {
+                "error": str(e),
+                "earnings_result": "error"
+            }
+        }

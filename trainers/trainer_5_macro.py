@@ -1,5 +1,3 @@
-# trainer_5_macro.py
-
 import os
 from dotenv import load_dotenv
 from fredapi import Fred
@@ -8,60 +6,74 @@ load_dotenv()
 
 FRED_API_KEY = os.getenv("FRED_API_KEY")
 fred = Fred(api_key=FRED_API_KEY)
-print("FRED key loaded?", FRED_API_KEY)
 
-
-def predict(ticker: str):
+def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_5_macro] Checking macroeconomic indicators for {ticker}...")
 
     try:
-        # Most recent values
-        cpi = fred.get_series_latest_release('CPIAUCSL')  # Consumer Price Index
-        fed_rate = fred.get_series_latest_release('FEDFUNDS')  # Federal Funds Rate
-        unemployment = fred.get_series_latest_release('UNRATE')  # Unemployment Rate
+        # Fetch most recent data
+        cpi_data = fred.get_series_latest_release("CPIAUCSL")       # Consumer Price Index
+        fed_data = fred.get_series_latest_release("FEDFUNDS")       # Federal Funds Rate
+        unemp_data = fred.get_series_latest_release("UNRATE")       # Unemployment Rate
 
-        # Normalize values to make an adjustment score
-        cpi_val = float(cpi[-1])
-        fed_val = float(fed_rate[-1])
-        unemp_val = float(unemployment[-1])
+        cpi = float(cpi_data.iloc[-1])
+        fed_rate = float(fed_data.iloc[-1])
+        unemp = float(unemp_data.iloc[-1])
 
-        # Simple weighting logic
-        # Lower CPI & Unemployment = bullish; Higher Fed rate = bearish
-        adjustment = 1.0
-        reasoning = []
 
-        if cpi_val < 300:
-            adjustment += 0.01
-            reasoning.append("CPI moderate")
+        # Score calculation
+        prediction = 0.0
+        confidence = 0.3
+        reasons = []
+
+        # CPI logic
+        if cpi < 300:
+            prediction += 0.01
+            reasons.append("Moderate inflation (CPI)")
         else:
-            adjustment -= 0.01
-            reasoning.append("CPI high")
+            prediction -= 0.01
+            reasons.append("High inflation (CPI)")
 
-        if fed_val < 3.0:
-            adjustment += 0.02
-            reasoning.append("Low interest rates")
-        elif fed_val > 5.0:
-            adjustment -= 0.02
-            reasoning.append("High interest rates")
+        # Interest rate logic
+        if fed_rate < 3.0:
+            prediction += 0.02
+            reasons.append("Low Fed interest rate")
+        elif fed_rate > 5.0:
+            prediction -= 0.02
+            reasons.append("High Fed interest rate")
 
-        if unemp_val < 4.0:
-            adjustment += 0.01
-            reasoning.append("Strong job market")
+        # Unemployment logic
+        if unemp < 4.0:
+            prediction += 0.01
+            reasons.append("Strong job market")
         else:
-            adjustment -= 0.01
-            reasoning.append("Weaker job market")
+            prediction -= 0.01
+            reasons.append("Elevated unemployment")
 
-        result = {
-            "adjustment": round(adjustment, 3),
-            "cpi": cpi_val,
-            "fed_rate": fed_val,
-            "unemployment_rate": unemp_val,
-            "reasoning": ", ".join(reasoning)
+        # Set confidence higher if all metrics were successfully pulled
+        confidence = 0.9
+
+        return {
+            "trainer": "macro",
+            "prediction": round(prediction, 5),
+            "adjustment": 1.0 + round(prediction, 5),
+            "confidence": confidence,
+            "meta": {
+                "cpi": cpi,
+                "fed_rate": fed_rate,
+                "unemployment_rate": unemp,
+                "reason": ", ".join(reasons)
+            }
         }
 
-        print(f"[macro_model] Output: {result}")
-        return result
-
     except Exception as e:
-        print(f"[macro_model] Error: {e}")
-        return {"adjustment": 1.0, "reasoning": "error"}
+        return {
+            "trainer": "macro",
+            "prediction": 0.0,
+            "adjustment": 1.0,
+            "confidence": 0.0,
+            "meta": {
+                "error": str(e),
+                "reason": "Failed to retrieve macroeconomic indicators"
+            }
+        }

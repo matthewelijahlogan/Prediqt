@@ -1,68 +1,74 @@
-# trainer_2_sentiment.py
-
 import requests
+import pandas as pd
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from datetime import datetime, timedelta
 
-def get_news_headlines(ticker):
-    # Use Finviz for fast access to public financial news
-    url = f"https://finviz.com/quote.ashx?t={ticker}"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+NEWS_API_ENDPOINT = "https://newsapi.org/v2/everything"
+API_KEY = "0de95c014fa249419f4c8a7b839ae2a9" 
+DEFAULT_ARTICLE_LIMIT = 20
+DAYS_LOOKBACK = 3
 
+analyzer = SentimentIntensityAnalyzer()
+
+def fetch_news_headlines(ticker: str, limit: int = DEFAULT_ARTICLE_LIMIT) -> list:
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-    except requests.RequestException as e:
+        query_date = (datetime.utcnow() - timedelta(days=DAYS_LOOKBACK)).strftime("%Y-%m-%d")
+        params = {
+            "q": ticker,
+            "from": query_date,
+            "sortBy": "publishedAt",
+            "language": "en",
+            "pageSize": limit,
+            "apiKey": API_KEY
+        }
+        response = requests.get(NEWS_API_ENDPOINT, params=params)
+        data = response.json()
+        if data.get("status") != "ok" or not data.get("articles"):
+            return []
+        return [article["title"] for article in data["articles"]]
+    except Exception as e:
         print(f"[trainer_2_sentiment] Error fetching news: {e}")
         return []
 
-    from bs4 import BeautifulSoup
-    soup = BeautifulSoup(response.content, 'html.parser')
-
-    # Finviz stores headlines in a table with class "fullview-news-outer"
-    news_table = soup.find('table', class_='fullview-news-outer')
-    if not news_table:
-        return []
-
-    rows = news_table.find_all('tr')
-    headlines = [row.a.text for row in rows if row.a]
-
-    return headlines[:10]  # limit to last 10 headlines
-
-
-def analyze_sentiment(headlines):
-    analyzer = SentimentIntensityAnalyzer()
-    scores = []
-
-    for headline in headlines:
-        vs = analyzer.polarity_scores(headline)
-        scores.append(vs['compound'])  # compound score is between -1 and 1
-
-    if not scores:
-        return 0.0, 0.0
-
-    sentiment_score = sum(scores) / len(scores)
-    confidence = min(1.0, len(scores) / 10.0 + 0.5)  # more headlines = more confidence
-
-    return round(sentiment_score, 3), round(confidence, 3)
-
-
-def predict(ticker: str) -> dict:
-    print(f"[trainer_2_sentiment] Running sentiment analysis for {ticker}...")
-
-    headlines = get_news_headlines(ticker)
+def analyze_sentiment(headlines: list) -> dict:
     if not headlines:
-        print("[trainer_2_sentiment] No headlines found. Defaulting to neutral sentiment.")
         return {
-            "sentiment_score": 0.0,
-            "confidence": 0.0
+            "score": 0.0,
+            "confidence": 0.0,
+            "headline_count": 0,
+            "avg_score": 0.0
         }
 
-    sentiment_score, confidence = analyze_sentiment(headlines)
+    scores = []
+    for title in headlines:
+        vs = analyzer.polarity_scores(title)
+        scores.append(vs["compound"])
 
-    result = {
-        "sentiment_score": sentiment_score,
-        "confidence": confidence
+    avg_score = sum(scores) / len(scores)
+
+    # Normalize to range [-0.05, +0.05] for fusion scaling
+    scaled_score = max(-0.05, min(0.05, avg_score))
+
+    # Confidence: based on # of headlines (up to 1.0)
+    confidence = min(1.0, len(headlines) / 20)
+
+    return {
+        "score": round(scaled_score, 5),
+        "confidence": round(confidence, 3),
+        "headline_count": len(headlines),
+        "avg_score": round(avg_score, 4)
     }
 
-    print(f"[trainer_2_sentiment] Result: {result}")
-    return result
+def predict(ticker: str, horizon: str = "day") -> dict:
+    headlines = fetch_news_headlines(ticker)
+    sentiment = analyze_sentiment(headlines)
+
+    return {
+        "trainer": "sentiment",
+        "prediction": sentiment["score"],        # Normalized sentiment score
+        "confidence": sentiment["confidence"],   # Confidence for fusion
+        "meta": {
+            "headline_count": sentiment["headline_count"],
+            "avg_score": sentiment["avg_score"]
+        }
+    }
