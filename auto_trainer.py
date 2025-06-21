@@ -86,43 +86,53 @@ def append_to_json_log(filepath, new_data):
 
 
 def update_metrics_and_fusion(batch_results, threshold=0.01):
-    """
-    Evaluate prediction accuracy on batch_results,
-    append accuracy and 'within threshold' metric to accuracy log,
-    and update fusion model weights.
-    """
+    from collections import defaultdict
+
     accuracies = []
     within_threshold_count = 0
     total_count = 0
+    model_scores = defaultdict(list)
 
     for entry in batch_results:
-        pred = entry["result"].get("predicted_next_close")
+        result = entry.get("result", {})
         actual = get_actual_price(entry["ticker"])
-        if actual and pred:
-            total_count += 1
-            relative_error = abs(pred - actual) / actual
-            acc = 1 - relative_error
-            accuracies.append(acc)
-            if relative_error <= threshold:
-                within_threshold_count += 1
-        else:
-            print(f"[auto_trainer] ⚠️ Missing prediction or actual for {entry['ticker']}")
+        if not actual:
+            continue
 
+        # Check fusion model accuracy
+        fusion_pred = result.get("predicted_next_close")
+        if fusion_pred:
+            total_count += 1
+            error = abs(fusion_pred - actual) / actual
+            accuracies.append(1 - error)
+            if error <= threshold:
+                within_threshold_count += 1
+
+        # Score each model
+        for model, model_result in result.items():
+            if isinstance(model_result, dict) and "predicted_close" in model_result:
+                pred = model_result["predicted_close"]
+                error = abs(pred - actual) / actual
+                model_scores[model].append(1 - error)
+
+    # Averages
     average_accuracy = sum(accuracies) / len(accuracies) if accuracies else None
     within_threshold_pct = (within_threshold_count / total_count) if total_count else None
+
+    # Per-model average
+    model_averages = {k: sum(v) / len(v) for k, v in model_scores.items() if v}
 
     accuracy_entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "average_accuracy": average_accuracy,
-        "num_predictions": len(batch_results),
-        "within_threshold_pct": within_threshold_pct
+        "num_predictions": total_count,
+        "within_threshold_pct": within_threshold_pct,
+        "model_accuracies": model_averages
     }
+
     append_to_json_log(ACCURACY_LOG_FILE, [accuracy_entry])
-
-    print(f"[auto_trainer] 📊 Avg accuracy: {average_accuracy:.4f}" if average_accuracy else "[auto_trainer] No accuracy stats.")
-    print(f"[auto_trainer] ✅ {within_threshold_pct:.2%} within ±{threshold*100:.2f}%") if within_threshold_pct else None
-
-    update_from_log(LOG_FILE)
+    print(f"[auto_trainer] Avg: {average_accuracy:.4f}, Within {threshold*100:.1f}%: {within_threshold_pct:.2%}")
+    update_from_log(LOG_FILE)  # update fusion weights from the log
 
 
 def get_actual_price(ticker: str):

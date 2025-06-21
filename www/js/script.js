@@ -60,3 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+window.addEventListener("load", () => {
+  const splash = document.getElementById("splashScreen");
+  if (!splash) return;
+
+  // Step 1: Fade in
+  splash.style.opacity = 1;
+
+  // Step 2: Wait, then fade out
+  setTimeout(() => {
+    splash.style.transition = "opacity 1.5s ease";
+    splash.style.opacity = 0;
+
+    // Step 3: Remove from DOM after fade-out completes
+    setTimeout(() => splash.remove(), 1500);
+  }, 2000); // 2 second delay before fading out
+});
+

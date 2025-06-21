@@ -1,3 +1,5 @@
+# generate_accuracy_report.py
+
 import json
 import os
 from datetime import datetime
@@ -26,9 +28,9 @@ def generate_js():
         "last_updated": latest_log.get("timestamp", str(datetime.utcnow())),
         "total_predictions": total_predictions,
         "overall_accuracy": weighted_accuracy,
-        "model_accuracies": {
-            "average": latest_log.get("average_accuracy", 0)
-        }
+        "model_accuracies": latest_log.get("model_accuracies", {
+        "average": latest_log.get("average_accuracy", 0)
+        })
     }
 
     js_content = f"const accuracyData = {json.dumps(js_object, indent=2)};\n" \

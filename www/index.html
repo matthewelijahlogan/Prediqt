@@ -15,6 +15,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Splash Screen -->
+  <div id="splashScreen">
+    <img src="img/splash.png" alt="Splash" id="splashImage">
+  </div>
+
   <div class="container">
     <!-- Header -->
     <header class="glass header-bar">
@@ -30,12 +36,14 @@
 
     <!-- Main Content -->
     <main class="glass content-box">
+      <!-- Ticker Prediction -->
       <section>
         <h2>🔍 Enter a Stock Ticker</h2>
         <input type="text" id="tickerInput" placeholder="e.g. AAPL">
         <button id="predictBtn" type="button">Predict</button>
       </section>
 
+      <!-- Predictions -->
       <section class="predictionsContainer">
         <h3>📈 Predictions</h3>
         <div class="prediction"><strong>Next Hour:</strong> <span id="predictionHour">-</span></div>
@@ -46,6 +54,7 @@
 
       <hr>
 
+      <!-- Real-Time Stock Quote -->
       <section class="quoteContainer">
         <h3>🧾 Real-Time Stock Data</h3>
         <div><strong>Price:</strong> <span id="quotePrice">-</span></div>
@@ -55,17 +64,27 @@
         <div><strong>Market Cap:</strong> <span id="quoteMarketCap">-</span></div>
         <div><strong>Sector:</strong> <span id="quoteSector">-</span></div>
       </section>
+
+      <hr>
+
+      <!-- Accuracy Report -->
+      <section class="accuracyContainer">
+        <div id="accuracy-report"></div>
+      </section>
     </main>
   </div>
 
+  <!-- Ticker Bar -->
   <div class="ticker-bar">
     <div id="newsTicker">
       <!-- your ticker spans here -->
     </div>
   </div>
 
-  <!-- JS Scripts -->
+  <!-- JS Scripts (Load Accuracy JS after core logic) -->
   <script src="js/script.js"></script>
   <script src="js/ticker.js"></script>
+  <script src="js/accuracy_data.js"></script>
+  <script src="js/accuracy_report.js"></script>
 </body>
 </html>
