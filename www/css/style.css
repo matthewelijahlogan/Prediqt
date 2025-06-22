@@ -233,6 +233,25 @@ button:hover {
   }
 }
 
+.flash-up {
+  animation: flashGreen 0.5s ease-in-out;
+}
+
+.flash-down {
+  animation: flashRed 0.5s ease-in-out;
+}
+
+@keyframes flashGreen {
+  0%   { background-color: #d4edda; }
+  100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+  0%   { background-color: #f8d7da; }
+  100% { background-color: transparent; }
+}
+
+
 /* --- Ticker styles --- */
 .ticker-bar {
   position: fixed;
@@ -266,15 +285,34 @@ button:hover {
 
 /* Highlighted ticker symbol */
 .ticker-symbol {
-  color: #0f0;
-  font-weight: bold;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  margin-right: 15px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .ticker-symbol.highlighted {
-  color: gold;
-  text-shadow: 0 0 10px gold;
+  font-weight: bold;
+  color: #00e5ff;
 }
+
+.flash-up {
+  animation: flashGreen 0.5s ease-in-out;
+}
+
+.flash-down {
+  animation: flashRed 0.5s ease-in-out;
+}
+
+@keyframes flashGreen {
+  0%   { background-color: #d4edda; }
+  100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+  0%   { background-color: #f8d7da; }
+  100% { background-color: transparent; }
+}
+
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 600px) {
