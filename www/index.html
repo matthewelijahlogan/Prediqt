@@ -16,10 +16,19 @@
 </head>
 <body>
 
-  <!-- Splash Screen -->
-  <div id="splashScreen">
-    <img src="img/splash.png" alt="Splash" id="splashImage">
+<!-- Splash Screen -->
+<div id="splashScreen">
+  <div id="blackScreen"></div>
+  <img src="img/splash.png" alt="Splash" id="splashImage">
+</div>
+
+<!-- Main App (hidden initially) -->
+<div id="mainApp" style="display: none;">
+  <div class="container">
+    <!-- Your header, nav, content here (unchanged) -->
+    ...
   </div>
+</div>
 
   <div class="container">
     <!-- Header -->
@@ -67,13 +76,6 @@
 
       <hr>
 
-      <!-- Accuracy Report -->
-      <section class="accuracyContainer">
-        <div id="accuracy-report"></div>
-      </section>
-    </main>
-  </div>
-
   <!-- Ticker Bar -->
   <div class="ticker-bar">
     <div id="newsTicker">
@@ -81,10 +83,12 @@
     </div>
   </div>
 
+  </main>
+  </div> <!-- Close .container from line 34 -->
+
   <!-- JS Scripts (Load Accuracy JS after core logic) -->
   <script src="js/script.js"></script>
   <script src="js/ticker.js"></script>
   <script src="js/accuracy_data.js"></script>
-  <script src="js/accuracy_report.js"></script>
 </body>
 </html>

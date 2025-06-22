@@ -6,4 +6,3 @@ const accuracyData = {
     "average": 0.9719475776678453
   }
 };
-displayAccuracyReport();

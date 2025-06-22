@@ -17,11 +17,11 @@ from trainers import trainer_14_patterns as patterns_model
 from trainers import trainer_15_volatility as volatility_model
 from trainers import trainer_16_predictivelog as predictivelog_model
 from trainers import trainer_17_news as news_model
-
 from trainers import trainer_fusion as fusion_model
 
 from datetime import datetime
-
+import yfinance as yf
+from fastapi import HTTPException
 
 print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting prediction")
 
@@ -29,6 +29,19 @@ print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting prediction")
 def train_and_predict(ticker: str, horizon: str = "hour"):
     print(f"[orchestrator] Training for {ticker} with horizon '{horizon}'\n")
     results = {}
+
+    # --- 1) Delisted check ---
+    try:
+        info = yf.Ticker(ticker).info
+        if not info or info.get("regularMarketPrice") is None:
+            # no price => assume delisted or invalid
+            raise HTTPException(status_code=404, detail="Ticker not found or delisted")
+    except HTTPException:
+        # bubble up our 404
+        raise
+    except Exception as e:
+        # other yfinance error
+        raise HTTPException(status_code=503, detail="Error fetching ticker info")
 
     # Base model always runs with ticker and horizon
     try:
@@ -129,5 +142,7 @@ if __name__ == "__main__":
         result = train_and_predict(ticker, horizon)
         print(f"\nPrediction Result for {ticker.upper()} ({horizon}):")
         print(result)
+    except HTTPException as http_e:
+        print(f"HTTP {http_e.status_code}: {http_e.detail}")
     except Exception as e:
         print(f"Error: {e}")

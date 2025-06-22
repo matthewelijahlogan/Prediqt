@@ -35,12 +35,55 @@
 }
 
 /* Splash image */
-#splashImage {
-  max-width: 80vw;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 50%;
+/* Full black screen overlay */
+#blackScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
 }
+
+/* Splash screen image appears above black screen */
+#splashScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000; /* solid black */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+
+
+/* Fade in splash image */
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fade out splash screen */
+.fade-out {
+  opacity: 0 !important;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+}
+
 
 
 body {
