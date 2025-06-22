@@ -148,7 +148,14 @@ def get_actual_price(ticker: str):
 
 def start_scheduler():
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(run_predictions, "interval", hours=2, next_run_time=datetime.utcnow())
+    # delay the very first run by 2 hours
+    first_run = datetime.utcnow() + timedelta(hours=2)
+    scheduler.add_job(
+    run_predictions,
+    "interval",
+    hours=2,
+    next_run_time=first_run
+)
     scheduler.start()
     print("[auto_trainer] 🕒 Scheduler started (every 2 hours).")
 
