@@ -2,7 +2,7 @@
 
 PredIQT is now structured as:
 - `main.py` + `backend/` + `trainers/`: FastAPI backend and prediction pipeline.
-- `mobile-native/`: Bare React Native CLI app (vanilla JavaScript, no Expo).
+- `mobile-native-app/`: Bare React Native CLI app (vanilla JavaScript, no Expo).
 
 ## 1) Backend (local)
 
@@ -45,7 +45,7 @@ Start command is:
 uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
 
-## 3) React Native app (mobile-native, no Expo)
+## 3) React Native app (mobile-native-app, no Expo)
 
 Prereqs:
 - Node.js 20+
@@ -54,7 +54,7 @@ Prereqs:
 
 Setup:
 ```bash
-cd mobile-native
+cd mobile-native-app
 npm install
 ```
 
@@ -70,5 +70,5 @@ npm run android
 
 ## Notes
 
-- Legacy Cordova and Expo artifacts remain in the repository, but active mobile frontend is `mobile-native/`.
+- Legacy Cordova and Expo artifacts remain in the repository, but active mobile frontend is `mobile-native-app/`.
 - Prediction quality depends on external APIs and available market/news data.

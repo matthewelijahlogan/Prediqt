@@ -4,8 +4,8 @@
   "private": true,
   "description": "PredIQT monorepo (FastAPI backend + React Native mobile app)",
   "scripts": {
-    "mobile:start": "npm --prefix mobile-native run start",
-    "mobile:android": "npm --prefix mobile-native run android",
-    "mobile:ios": "npm --prefix mobile-native run ios"
+    "mobile:start": "npm --prefix mobile-native-app run start",
+    "mobile:android": "npm --prefix mobile-native-app run android",
+    "mobile:ios": "npm --prefix mobile-native-app run ios"
   }
 }
