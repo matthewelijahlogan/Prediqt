@@ -5,17 +5,27 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f3f7fc"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
-      "package": "com.matthewelijahlogan.prediqt"
+      "package": "com.matthewelijahlogan.prediqt",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#f3f7fc"
+      }
     },
     "ios": {
       "bundleIdentifier": "com.matthewelijahlogan.prediqt"
     },
     "extra": {
-      "apiBaseUrl": "https://prediqt.onrender.com"
+      "apiBaseUrl": "https://prediqt-ws34.onrender.com"
     }
   }
 }

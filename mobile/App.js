@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -75,8 +76,13 @@ export default function App() {
     <SafeAreaView style={styles.root}>
       <StatusBar style="dark" />
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>PredIQT</Text>
-        <Text style={styles.subtitle}>AI Market Forecast + Live Quote</Text>
+        <View style={styles.brandRow}>
+          <Image source={require('./assets/icon.png')} style={styles.logo} />
+          <View>
+            <Text style={styles.title}>PredIQT</Text>
+            <Text style={styles.subtitle}>AI Market Forecast + Live Quote</Text>
+          </View>
+        </View>
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Ticker</Text>
@@ -148,7 +154,7 @@ export default function App() {
           <Text style={styles.sectionTitle}>Business Headlines</Text>
           {topNews.length === 0 ? <Text style={styles.muted}>No headlines available.</Text> : null}
           {topNews.map((headline) => (
-            <Text key={headline} style={styles.newsItem}>• {headline}</Text>
+            <Text key={headline} style={styles.newsItem}>* {headline}</Text>
           ))}
         </View>
       </ScrollView>
@@ -194,6 +200,17 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     gap: 12,
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 4,
+  },
+  logo: {
+    width: 48,
+    height: 48,
+    borderRadius: 10,
   },
   title: {
     fontSize: 32,
