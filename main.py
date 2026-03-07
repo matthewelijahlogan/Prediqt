@@ -2,17 +2,18 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-import pytz
-from datetime import datetime
 import asyncio
 import os
-from dotenv import load_dotenv
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+if load_dotenv is not None:
+    load_dotenv()
 
 from backend.routers import ticker_tape, news, quote
 from auto_trainer import start_scheduler
-from train_predictor import train_and_predict
 from enum import Enum
 
 
@@ -29,6 +30,11 @@ app = FastAPI()
 app.include_router(ticker_tape.router)
 app.include_router(news.router)
 app.include_router(quote.router)
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 # Environment-based CORS origin config
@@ -54,6 +60,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
+    # Keep API booting even if the optional scheduler stack is unavailable.
     start_scheduler()
 
 
@@ -61,6 +68,8 @@ async def startup_event():
 @app.get("/predict/{ticker}")
 async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
     try:
+        # Lazy import avoids loading all trainer dependencies during app startup.
+        from train_predictor import train_and_predict
         loop = asyncio.get_event_loop()
         # Run blocking train_and_predict in a thread pool to not block event loop
         result = await loop.run_in_executor(None, train_and_predict, ticker, horizon.value)

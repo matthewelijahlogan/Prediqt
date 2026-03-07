@@ -1,24 +1,12 @@
 {
-  "name": "com.yourdomain.prediqt",
-  "displayName": "PredIQT",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
+  "name": "prediqt",
+  "version": "2.0.0",
+  "private": true,
+  "description": "PredIQT monorepo (FastAPI backend + React Native mobile app)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "ecosystem:cordova"
-  ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "cordova-android": "^14.0.1"
-  },
-  "cordova": {
-    "platforms": [
-      "android"
-    ],
-    "plugins": {}
+    "mobile:start": "npm --prefix mobile run start",
+    "mobile:android": "npm --prefix mobile run android",
+    "mobile:ios": "npm --prefix mobile run ios",
+    "mobile:web": "npm --prefix mobile run web"
   }
 }

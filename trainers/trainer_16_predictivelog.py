@@ -137,6 +137,53 @@ def save_summary(summary: Dict, path: str):
         json.dump(summary, f, indent=4)
     print(f"[trainer_16_predictivelog] Summary saved to {path}")
 
+def predict(ticker: str, horizon: str = "day") -> Dict:
+    """
+    Build a small adjustment signal from historical predictive accuracy.
+    """
+    try:
+        if not os.path.exists(SUMMARY_OUTPUT_PATH):
+            return {
+                "trainer": "predictivelog",
+                "adjustment": 1.0,
+                "confidence": 0.2,
+                "meta": {"reason": "summary_missing", "horizon": horizon}
+            }
+
+        with open(SUMMARY_OUTPUT_PATH, "r", encoding="utf-8") as f:
+            summary = json.load(f)
+
+        overall_accuracy = summary.get("overall_accuracy")
+        if overall_accuracy is None:
+            return {
+                "trainer": "predictivelog",
+                "adjustment": 1.0,
+                "confidence": 0.2,
+                "meta": {"reason": "overall_accuracy_missing", "horizon": horizon}
+            }
+
+        adjustment = max(0.95, min(1.05, 1 + ((overall_accuracy - 0.5) * 0.1)))
+        confidence = max(0.2, min(0.9, float(overall_accuracy)))
+
+        return {
+            "trainer": "predictivelog",
+            "adjustment": round(adjustment, 4),
+            "confidence": round(confidence, 4),
+            "meta": {
+                "overall_accuracy": overall_accuracy,
+                "valid_predictions": summary.get("valid_predictions"),
+                "last_updated": summary.get("last_updated"),
+                "horizon": horizon
+            }
+        }
+    except Exception as e:
+        return {
+            "trainer": "predictivelog",
+            "adjustment": 1.0,
+            "confidence": 0.2,
+            "meta": {"reason": f"predictive_log_error:{e}", "horizon": horizon}
+        }
+
 def update_from_log(log_path: str = LOG_FILE_PATH, summary_path: str = SUMMARY_OUTPUT_PATH):
     """Load logs, summarize, and save summary."""
     try:

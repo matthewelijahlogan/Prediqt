@@ -2,7 +2,6 @@
 
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
-import yfinance as yf
 import os
 import time
 
@@ -14,9 +13,9 @@ TICKER_CACHE = {
     "last_updated": 0
 }
 
-# Path to tickers.txt (three levels up from this file)
+# Path to tickers.txt at the project root (two levels up from this file)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TICKER_FILE = os.path.join(BASE_DIR, "..", "..", "..", "tickers.txt")
+TICKER_FILE = os.path.join(BASE_DIR, "..", "..", "tickers.txt")
 
 @router.get("/api/ticker-tape")
 def get_ticker_tape():
@@ -25,6 +24,14 @@ def get_ticker_tape():
     Cached for one hour to avoid hammering yfinance.
     """
     try:
+        try:
+            import yfinance as yf
+        except ImportError:
+            return JSONResponse(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                content={"error": "yfinance is not installed on the server."}
+            )
+
         current_time = time.time()
         # If cache is stale (>1h), refresh
         if current_time - TICKER_CACHE["last_updated"] > 3600:

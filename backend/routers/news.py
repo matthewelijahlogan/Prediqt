@@ -1,7 +1,6 @@
 # backend/routers/news.py
 
 import os
-import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -9,6 +8,11 @@ router = APIRouter()
 
 @router.get("/api/news")
 def get_news():
+    try:
+        import requests
+    except ImportError:
+        return JSONResponse(content={"error": "requests is not installed"}, status_code=503)
+
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return JSONResponse(content={"error": "Missing API key"}, status_code=500)

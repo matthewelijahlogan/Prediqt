@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "PredIQT",
+    "slug": "prediqt-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.matthewelijahlogan.prediqt"
+    },
+    "ios": {
+      "bundleIdentifier": "com.matthewelijahlogan.prediqt"
+    },
+    "extra": {
+      "apiBaseUrl": "https://prediqt.onrender.com"
+    }
+  }
+}

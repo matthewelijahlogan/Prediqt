@@ -1,6 +1,6 @@
-import yfinance as yf
-
 def get_quote(ticker):
+    import yfinance as yf
+
     stock = yf.Ticker(ticker)
     info = stock.info
     return {
