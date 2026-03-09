@@ -60,8 +60,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    # Keep API booting even if the optional scheduler stack is unavailable.
-    start_scheduler()
+    # Run trainer scheduler only when explicitly enabled.
+    if os.environ.get("RUN_TRAINER_SCHEDULER", "0") == "1":
+        start_scheduler()
 
 
 # --- PREDICTION ROUTE ---

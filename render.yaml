@@ -8,6 +8,23 @@ services:
     envVars:
       - key: ENV
         value: prod
+      - key: RUN_TRAINER_SCHEDULER
+        value: "0"
+      - key: NEWS_API_KEY
+        sync: false
+      - key: FRED_API_KEY
+        sync: false
+  - type: worker
+    name: prediqt-trainer
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python auto_trainer.py
+    envVars:
+      - key: ENV
+        value: prod
+      - key: RUN_TRAINER_SCHEDULER
+        value: "1"
       - key: NEWS_API_KEY
         sync: false
       - key: FRED_API_KEY

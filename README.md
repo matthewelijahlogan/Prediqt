@@ -3,6 +3,7 @@
 PredIQT is now structured as:
 - `main.py` + `backend/` + `trainers/`: FastAPI backend and prediction pipeline.
 - `mobile-native-app/`: Bare React Native CLI app (vanilla JavaScript, no Expo).
+- `auto_trainer.py`: background trainer loop for ongoing model signal updates.
 
 ## 1) Backend (local)
 
@@ -36,13 +37,21 @@ This repo includes `render.yaml`.
 Steps:
 1. Create a Render Web Service from this GitHub repo.
 2. Ensure Render detects `render.yaml`.
-3. Set secret env vars in Render dashboard:
+3. `render.yaml` defines two services:
+   - `prediqt-api` (web API)
+   - `prediqt-trainer` (background trainer worker)
+4. Set secret env vars in Render dashboard:
    - `NEWS_API_KEY`
    - `FRED_API_KEY`
 
 Start command is:
 ```bash
 uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+Trainer worker command is:
+```bash
+python auto_trainer.py
 ```
 
 ## 3) React Native app (mobile-native-app, no Expo)
