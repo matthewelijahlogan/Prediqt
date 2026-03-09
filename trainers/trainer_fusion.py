@@ -1,8 +1,9 @@
-import numpy as np
-import json
+﻿import json
 import os
-import pandas as pd
+
 import joblib
+import numpy as np
+import pandas as pd
 
 # --- Constants & defaults ---
 
@@ -21,19 +22,25 @@ DEFAULT_WEIGHTS = {
     "volume": 0.05,
     "patterns": 0.05,
     "volatility": 0.03,
-    "macro": 0.07,          # Added macro
-    "predictivelog": 0.05,  # Added predictivelog
-    "news": 0.05            # Added news
+    "macro": 0.07,
+    "predictivelog": 0.05,
+    "news": 0.05,
 }
 
 HORIZON_SCALING = {
     "hour": 0.75,
     "day": 1.0,
     "week": 1.05,
-    "month": 1.1
+    "month": 1.1,
 }
 
-MAX_SHORT_TERM_MOVE = 0.03  # 3% cap for hour-based predictions
+MAX_SHORT_TERM_MOVE = 0.03
+MAX_MOVE_BY_HORIZON = {
+    "hour": 0.03,
+    "day": 0.08,
+    "week": 0.18,
+    "month": 0.30,
+}
 
 WEIGHTS_SUMMARY_PATH = "predictive_summary.json"
 META_MODEL_PATH = "meta_model.pkl"
@@ -47,8 +54,9 @@ def load_weights_from_summary(path=WEIGHTS_SUMMARY_PATH):
         return DEFAULT_WEIGHTS
 
     try:
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             summary = json.load(f)
+
         model_accuracies = summary.get("model_accuracies", {})
         if not model_accuracies:
             print("[fusion_model] No model_accuracies found in summary. Using default weights.")
@@ -65,7 +73,6 @@ def load_weights_from_summary(path=WEIGHTS_SUMMARY_PATH):
 
         print(f"[fusion_model] Loaded dynamic weights: {weights}")
         return weights
-
     except Exception as e:
         print(f"[fusion_model] Error loading weights from summary: {e}. Using default weights.")
         return DEFAULT_WEIGHTS
@@ -101,19 +108,25 @@ def extract_features_from_trainer_results(trainer_results):
             if "total_score" in sub:
                 features[prefix + "total_score"] = float(sub["total_score"])
             if "prediction" in sub:
-                # For macro, predictivelog, news etc. use generic 'prediction' field
                 features[prefix + "prediction"] = float(sub["prediction"])
         else:
             if model == "base" and "predicted_next_close" in trainer_results:
                 features[prefix + "predicted_next_close"] = float(trainer_results["predicted_next_close"])
 
-    # Fill missing keys with zeros for consistent feature vector
     for model in models:
         prefix = f"{model}_"
         expected_keys = [
-            "adjustment", "signal_strength", "prediction_confidence", "sentiment_score",
-            "pattern_score", "rsi_score", "macd_score", "bollinger_score", "total_score",
-            "predicted_next_close", "prediction"
+            "adjustment",
+            "signal_strength",
+            "prediction_confidence",
+            "sentiment_score",
+            "pattern_score",
+            "rsi_score",
+            "macd_score",
+            "bollinger_score",
+            "total_score",
+            "predicted_next_close",
+            "prediction",
         ]
         for key in expected_keys:
             features.setdefault(prefix + key, 0.0)
@@ -147,11 +160,11 @@ def heuristic_predict(
     volume=None,
     patterns=None,
     volatility=None,
-    macro=None,           # Added macro param
-    predictivelog=None,   # Added predictivelog param
-    news=None,            # Added news param
+    macro=None,
+    predictivelog=None,
+    news=None,
     weights=None,
-    horizon="day"
+    horizon="day",
 ):
     if weights is None:
         weights = load_weights_from_summary()
@@ -161,20 +174,30 @@ def heuristic_predict(
             return None
         if name == "base":
             return result.get("predicted_next_close")
-        elif name == "sentiment":
-            return 1 + (result.get("sentiment_score", 0) * 0.05)
-        elif name in [
-            "pelosi", "weather", "earnings", "social", "sector",
-            "insider", "technical", "etf_sector", "volume",
-            "patterns", "volatility"
-        ]:
-            return result.get("adjustment")
-        elif name == "options":
-            strength = result.get("options_signal_strength", 1)
-            confidence = result.get("options_prediction_confidence", 1)
-            return 1 + (strength * 0.05 * confidence)
-        elif name in ["macro", "predictivelog", "news"]:
-            return result.get("prediction")  # assuming macro, predictivelog, news use 'prediction' key
+
+        adjustment = result.get("adjustment")
+        if isinstance(adjustment, (int, float)):
+            return float(adjustment)
+
+        prediction = result.get("prediction")
+        if isinstance(prediction, (int, float)):
+            prediction = float(prediction)
+            if -1.0 <= prediction <= 1.0:
+                return 1.0 + prediction
+            if 0.5 <= prediction <= 1.5:
+                return prediction
+
+        if name == "sentiment":
+            sentiment_score = result.get("sentiment_score")
+            if isinstance(sentiment_score, (int, float)):
+                return 1 + (float(sentiment_score) * 0.05)
+
+        if name == "options":
+            strength = result.get("options_signal_strength")
+            confidence = result.get("options_prediction_confidence")
+            if isinstance(strength, (int, float)) and isinstance(confidence, (int, float)):
+                return 1 + (float(strength) * 0.05 * float(confidence))
+
         return None
 
     inputs = {
@@ -192,9 +215,9 @@ def heuristic_predict(
         "volume": volume,
         "patterns": patterns,
         "volatility": volatility,
-        "macro": macro,               # added
-        "predictivelog": predictivelog, # added
-        "news": news                  # added
+        "macro": macro,
+        "predictivelog": predictivelog,
+        "news": news,
     }
 
     base_price = base.get("predicted_next_close") if base and "predicted_next_close" in base else 100
@@ -221,12 +244,11 @@ def heuristic_predict(
         return {
             "predicted_next_close": base_price,
             "used_models": used_models,
-            "model_mse": base.get("model_mse") if base else None
+            "model_mse": base.get("model_mse") if base else None,
         }
 
     fused_prediction = sum(weighted_values) / total_weight
 
-    # Voting system adjustment (directional consensus)
     direction_votes = 0
     for model_name, res in inputs.items():
         val = extract_value(model_name, res)
@@ -240,29 +262,29 @@ def heuristic_predict(
     if abs(direction_votes) >= 4:
         fused_prediction *= 1.01 if direction_votes > 0 else 0.99
 
-    # Volatility smoothing using past prices
     if base and "recent_prices" in base:
         recent_prices = base["recent_prices"]
         if len(recent_prices) >= 10:
-            volatility = np.std(recent_prices[-10:])
-            volatility_adjustment = 1 / (1 + volatility / base_price)
+            recent_volatility = np.std(recent_prices[-10:])
+            volatility_adjustment = 1 / (1 + recent_volatility / base_price)
             fused_prediction *= volatility_adjustment
 
-    # Apply horizon scaling
     fused_prediction *= HORIZON_SCALING.get(horizon, 1.0)
 
-    # Clamp short-term overreactions
-    if horizon == "hour":
-        delta = fused_prediction / base_price - 1
-        if abs(delta) > MAX_SHORT_TERM_MOVE:
-            print(f"[fusion_model] Clamping short-term prediction from {round(delta * 100, 2)}% to ±{MAX_SHORT_TERM_MOVE*100}%")
-            fused_prediction = base_price * (1 + np.clip(delta, -MAX_SHORT_TERM_MOVE, MAX_SHORT_TERM_MOVE))
+    max_move = MAX_MOVE_BY_HORIZON.get(horizon, MAX_SHORT_TERM_MOVE)
+    delta = fused_prediction / base_price - 1
+    if abs(delta) > max_move:
+        print(
+            f"[fusion_model] Clamping {horizon} prediction from {round(delta * 100, 2)}% "
+            f"to +/-{max_move * 100}%"
+        )
+        fused_prediction = base_price * (1 + np.clip(delta, -max_move, max_move))
 
     return {
         "predicted_next_close": round(fused_prediction, 2),
         "used_models": used_models,
         "model_mse": base.get("model_mse") if base else None,
-        "weights_used": weights
+        "weights_used": weights,
     }
 
 
@@ -285,24 +307,12 @@ def meta_model_predict(trainer_results):
 # --- Public predict interface ---
 
 def predict(trainer_results, mode="heuristic", **kwargs):
-    """
-    Predict using fusion.
-
-    :param trainer_results: dict with keys for each trainer result dict (e.g. base=..., sentiment=..., etc)
-    :param mode: 'heuristic' or 'meta_model'
-    :param kwargs: passed to heuristic_predict for extra params like horizon
-    """
     if mode == "meta_model":
         return meta_model_predict(trainer_results)
-    else:
-        # Expect kwargs like horizon, weights
-        return heuristic_predict(**trainer_results, **kwargs)
+    return heuristic_predict(**trainer_results, **kwargs)
 
-
-# --- CLI test ---
 
 if __name__ == "__main__":
-    # Dummy example data for manual testing
     dummy_base = {"predicted_next_close": 100}
     dummy_sentiment = {"sentiment_score": 0.2}
     dummy_pelosi = {"adjustment": 1.01}
@@ -338,7 +348,7 @@ if __name__ == "__main__":
         "volatility": dummy_volatility,
         "macro": dummy_macro,
         "predictivelog": dummy_predictivelog,
-        "news": dummy_news
+        "news": dummy_news,
     }
 
     print("Heuristic fusion prediction:")
