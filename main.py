@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException, Query
+import json
+
+from fastapi import FastAPI, Header, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -31,9 +33,26 @@ app.include_router(ticker_tape.router)
 app.include_router(news.router)
 app.include_router(quote.router)
 
+SUMMARY_PATH = os.path.join(os.path.dirname(__file__), "predictive_summary.json")
+INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
+
 
 @app.get("/health")
 def health():
+    return {"status": "ok"}
+
+
+@app.post("/internal/predictive-summary")
+def update_predictive_summary(payload: dict, x_internal_token: str | None = Header(default=None)):
+    if not INTERNAL_SYNC_TOKEN or x_internal_token != INTERNAL_SYNC_TOKEN:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    if not isinstance(payload, dict):
+        raise HTTPException(status_code=400, detail="Invalid payload")
+
+    with open(SUMMARY_PATH, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+
     return {"status": "ok"}
 
 

@@ -43,6 +43,8 @@ Steps:
 4. Set secret env vars in Render dashboard:
    - `NEWS_API_KEY`
    - `FRED_API_KEY`
+   - `INTERNAL_SYNC_TOKEN` (same value on both services)
+   - `PREDIQT_API_URL` on worker (set to your API URL, e.g. `https://prediqt-ws34.onrender.com`)
 
 Start command is:
 ```bash
@@ -53,6 +55,9 @@ Trainer worker command is:
 ```bash
 python auto_trainer.py
 ```
+
+Worker publishes `predictive_summary.json` back to API via:
+- `POST /internal/predictive-summary` (token-protected)
 
 ## 3) React Native app (mobile-native-app, no Expo)
 

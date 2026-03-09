@@ -25,6 +25,7 @@ LOG_DIR = os.path.join(BASE_DIR, "predictive_logs")
 LOG_FILE = os.path.join(LOG_DIR, "predictions_log.json")
 ACCURACY_LOG_FILE = os.path.join(LOG_DIR, "accuracy_log.json")
 BATCH_SIZE = 100
+SUMMARY_FILE = os.path.join(BASE_DIR, "predictive_summary.json")
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
@@ -141,6 +142,37 @@ def update_metrics_and_fusion(batch_results, threshold=0.01):
         print("[auto_trainer] No valid accuracy points yet.")
 
     update_from_log(LOG_FILE)
+    publish_summary_to_api()
+
+
+def publish_summary_to_api():
+    api_url = os.environ.get("PREDIQT_API_URL", "").rstrip("/")
+    token = os.environ.get("INTERNAL_SYNC_TOKEN", "")
+    if not api_url or not token:
+        print("[auto_trainer] PREDIQT_API_URL or INTERNAL_SYNC_TOKEN missing; summary sync skipped.")
+        return
+
+    if not os.path.exists(SUMMARY_FILE):
+        print("[auto_trainer] predictive_summary.json missing; summary sync skipped.")
+        return
+
+    try:
+        import requests
+
+        with open(SUMMARY_FILE, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+
+        endpoint = f"{api_url}/internal/predictive-summary"
+        response = requests.post(
+            endpoint,
+            json=payload,
+            headers={"X-Internal-Token": token},
+            timeout=15,
+        )
+        response.raise_for_status()
+        print("[auto_trainer] Summary synced to API.")
+    except Exception as e:
+        print(f"[auto_trainer] Summary sync failed: {e}")
 
 
 def get_actual_price(ticker: str):
@@ -175,16 +207,13 @@ def start_scheduler():
 
 
 async def main():
+    await run_predictions()
     start_scheduler()
     await asyncio.Event().wait()
 
 
 if __name__ == "__main__":
     try:
-        asyncio.run(run_predictions())
-        start_scheduler()
-
-        loop = asyncio.get_event_loop()
-        loop.run_forever()
+        asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         print("[auto_trainer] Shutting down gracefully.")
