@@ -8,7 +8,7 @@ PredIQT is now structured as:
 ## 1) Backend (local)
 
 Prereqs:
-- Python 3.11+
+- Python 3.11
 
 Run:
 ```bash
@@ -32,32 +32,25 @@ Optional env vars:
 
 ## 2) Render deployment
 
-This repo includes `render.yaml`.
+This repo includes `render.yaml` for a single free Render web service.
 
 Steps:
-1. Create a Render Web Service from this GitHub repo.
-2. Ensure Render detects `render.yaml`.
-3. `render.yaml` defines two services:
-   - `prediqt-api` (web API)
-   - `prediqt-trainer` (background trainer worker)
-4. Set secret env vars in Render dashboard:
+1. In Render, create a new Blueprint and select this GitHub repo.
+2. Render detects the root `render.yaml` and creates `prediqt-api`.
+3. Set secret env vars when prompted:
    - `NEWS_API_KEY`
    - `FRED_API_KEY`
-   - `INTERNAL_SYNC_TOKEN` (same value on both services)
-   - `PREDIQT_API_URL` on worker (set to your API URL, e.g. `https://prediqt-ws34.onrender.com`)
+4. Deploy and verify `GET /health` returns `{"status":"ok"}`.
 
 Start command is:
 ```bash
 uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
 
-Trainer worker command is:
-```bash
-python auto_trainer.py
-```
-
-Worker publishes `predictive_summary.json` back to API via:
-- `POST /internal/predictive-summary` (token-protected)
+Render does not offer free background workers. The Blueprint therefore keeps
+the optional trainer scheduler disabled. To run `auto_trainer.py` continuously,
+add a paid background worker and configure `INTERNAL_SYNC_TOKEN` and
+`PREDIQT_API_URL` on that worker.
 
 ## 3) React Native app (mobile-native-app, no Expo)
 
