@@ -1,15 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   // Elements references
   const tickerEl = document.getElementById("newsTicker");
-  const tickerBar = document.querySelector(".ticker-bar");
   const inputEl = document.getElementById("tickerInput");
   const predictBtn = document.getElementById("predictBtn");
-
-  // UI elements for predictions & quotes
-  const predictionHourEl = document.getElementById("predictionHour");
-  const predictionDayEl = document.getElementById("predictionDay");
-  const predictionWeekEl = document.getElementById("predictionWeek");
-  const predictionMonthEl = document.getElementById("predictionMonth");
+  const panelStatus = document.querySelector(".panel-status");
 
   const quotePriceEl = document.getElementById("quotePrice");
   const quoteChangeEl = document.getElementById("quoteChange");
@@ -24,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let lastHighlighted = null;
   let pauseTimer = null;
   let inputPauseTimer = null;
+  let predictionInProgress = false;
 
   tickerEl.innerHTML = "Loading...";
 
@@ -47,10 +42,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const span = document.createElement("span");
         span.classList.add("ticker-symbol");
         span.textContent = `${t.symbol} $${t.price}`;
-        // Add clickable behavior to ticker symbols
+        // Selecting a ticker only populates the input. Predictions are made
+        // exclusively by clicking the Predict button.
         span.addEventListener("click", () => {
           inputEl.value = t.symbol;
-          triggerPredictionAndQuote(t.symbol);
         });
         tickerEl.appendChild(span);
       });
@@ -108,15 +103,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         sym.classList.add("highlighted");
         lastHighlighted = sym;
 
-        // Extract ticker symbol text (before space)
-        const ticker = sym.textContent.split(" ")[0];
-        // Dispatch custom event for active ticker symbol
-        window.dispatchEvent(
-          new CustomEvent("tickerSymbolActive", {
-            detail: ticker
-          })
-        );
-
         // Pause ticker for 15 seconds then resume
         pauseTicker();
         clearTimeout(pauseTimer);
@@ -135,7 +121,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`/predict/${ticker}?horizon=${horizon}`);
       const data = await res.json();
-      const result = data.predicted_next_close?.toFixed(2) ?? "N/A";
+      if (!res.ok) {
+        throw new Error(data.detail || `Prediction request failed (${res.status})`);
+      }
+
+      const predictedClose = Number(data.predicted_next_close);
+      const result = data.predicted_next_close != null && Number.isFinite(predictedClose)
+        ? predictedClose.toFixed(2)
+        : "N/A";
 
       // Animate value change with color flash if numeric
       if (result !== "N/A" && result !== "Error") {
@@ -146,7 +139,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         targetEl.textContent = result;
       }
     } catch (err) {
-      targetEl.textContent = "Error";
+      console.error(`Prediction failed for ${ticker} (${horizon}):`, err);
+      targetEl.textContent = "N/A";
     }
   }
 
@@ -155,23 +149,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(`/api/quote?ticker=${ticker}`);
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.detail || data.error || `Quote request failed (${res.status})`);
+      }
 
-      if (data.price != null) {
+      if (data.price != null && Number.isFinite(Number(data.price))) {
+        const price = Number(data.price);
         const oldVal = parseFloat(quotePriceEl.textContent.replace(/[^\d.-]/g, '')) || 0;
-        quotePriceEl.textContent = data.price.toFixed(2);
-        flashValueChange(quotePriceEl, data.price, oldVal);
+        quotePriceEl.textContent = price.toFixed(2);
+        flashValueChange(quotePriceEl, price, oldVal);
       }
 
-      if (data.change != null) {
+      if (data.change != null && Number.isFinite(Number(data.change))) {
+        const change = Number(data.change);
         const oldVal = parseFloat(quoteChangeEl.textContent.replace(/[^\d.-]/g, '')) || 0;
-        quoteChangeEl.textContent = data.change.toFixed(2);
-        flashValueChange(quoteChangeEl, data.change, oldVal);
+        quoteChangeEl.textContent = change.toFixed(2);
+        flashValueChange(quoteChangeEl, change, oldVal);
       }
 
-      if (data.percent_change != null) {
+      if (data.percent_change != null && Number.isFinite(Number(data.percent_change))) {
+        const percentChange = Number(data.percent_change);
         const oldVal = parseFloat(quotePercentEl.textContent.replace(/[^\d.-]/g, '')) || 0;
-        quotePercentEl.textContent = data.percent_change.toFixed(2) + "%";
-        flashValueChange(quotePercentEl, data.percent_change, oldVal);
+        quotePercentEl.textContent = percentChange.toFixed(2) + "%";
+        flashValueChange(quotePercentEl, percentChange, oldVal);
       }
 
       quoteVolumeEl.textContent = data.volume?.toLocaleString() ?? "-";
@@ -188,24 +188,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Helper to fetch predictions and quotes for a ticker
-  function triggerPredictionAndQuote(ticker) {
-    fetchPrediction(ticker, "hour", "predictionHour");
-    fetchPrediction(ticker, "day", "predictionDay");
-    fetchPrediction(ticker, "week", "predictionWeek");
-    fetchPrediction(ticker, "month", "predictionMonth");
-    fetchQuote(ticker);
+  async function triggerPredictionAndQuote(ticker) {
+    await Promise.all([
+      fetchPrediction(ticker, "hour", "predictionHour"),
+      fetchPrediction(ticker, "day", "predictionDay"),
+      fetchPrediction(ticker, "week", "predictionWeek"),
+      fetchPrediction(ticker, "month", "predictionMonth"),
+      fetchQuote(ticker)
+    ]);
   }
 
   // Button click event to predict ticker
-  predictBtn.addEventListener("click", () => {
+  predictBtn.addEventListener("click", async () => {
+    if (predictionInProgress) return;
+
     const ticker = inputEl.value.trim().toUpperCase();
     if (!ticker) return;
-    triggerPredictionAndQuote(ticker);
-  });
 
-  // Listen for ticker symbol highlight event
-  window.addEventListener("tickerSymbolActive", e => {
-    triggerPredictionAndQuote(e.detail);
+    predictionInProgress = true;
+    predictBtn.disabled = true;
+    const originalButtonMarkup = predictBtn.innerHTML;
+    predictBtn.textContent = "Predicting...";
+    if (panelStatus) {
+      panelStatus.innerHTML = "<i></i> Analyzing signal";
+    }
+
+    try {
+      await triggerPredictionAndQuote(ticker);
+    } finally {
+      predictionInProgress = false;
+      predictBtn.disabled = false;
+      predictBtn.innerHTML = originalButtonMarkup;
+      if (panelStatus) {
+        panelStatus.innerHTML = "<i></i> Signal ready";
+      }
+    }
   });
 
   // Input focus handling: pause ticker for 2 minutes

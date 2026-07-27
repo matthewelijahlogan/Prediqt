@@ -3,91 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PredIQT</title>
-
-  <!-- Favicon -->
+  <meta name="theme-color" content="#06090d">
+  <meta name="description" content="PredIQT turns live market data into clear, multi-horizon stock predictions.">
+  <title>PredIQT — Market Intelligence</title>
   <link rel="icon" href="/img/favicon.png" type="image/png" sizes="16x16">
-
-  <!-- Custom Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Fonts fallback (optional Google Font if local fails) -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="home-page">
+  <div class="ambient-grid" aria-hidden="true"></div>
 
-<!-- Splash Screen -->
-<div id="splashScreen">
-  <div id="blackScreen"></div>
-  <img src="img/splash.png" alt="Splash" id="splashImage">
-</div>
-
-<!-- Main App (hidden initially) -->
-<div id="mainApp" style="display: none;">
-  <div class="container">
-    <!-- Your header, nav, content here (unchanged) -->
-    ...
-  </div>
-</div>
-
-  <div class="container">
-    <!-- Header -->
-    <header class="glass header-bar">
-      <h1 class="app-title">
-        <span class="pred">Pred</span><span class="iq">IQ</span><span class="t">t</span>
-      </h1>
-      <nav class="nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="glass content-box">
-      <!-- Ticker Prediction -->
-      <section>
-        <h2>🔍 Enter a Stock Ticker</h2>
-        <input type="text" id="tickerInput" placeholder="e.g. AAPL">
-        <button id="predictBtn" type="button">Predict</button>
-      </section>
-
-      <!-- Predictions -->
-      <section class="predictionsContainer">
-        <h3>📈 Predictions</h3>
-        <div class="prediction"><strong>Next Hour:</strong> <span id="predictionHour">-</span></div>
-        <div class="prediction"><strong>Next Day:</strong> <span id="predictionDay">-</span></div>
-        <div class="prediction"><strong>Next Week:</strong> <span id="predictionWeek">-</span></div>
-        <div class="prediction"><strong>Next Month:</strong> <span id="predictionMonth">-</span></div>
-      </section>
-
-      <hr>
-
-      <!-- Real-Time Stock Quote -->
-      <section class="quoteContainer">
-        <h3>🧾 Real-Time Stock Data</h3>
-        <div><strong>Price:</strong> <span id="quotePrice">-</span></div>
-        <div><strong>Change:</strong> <span id="quoteChange">-</span></div>
-        <div><strong>% Change:</strong> <span id="quotePercent">-</span></div>
-        <div><strong>Volume:</strong> <span id="quoteVolume">-</span></div>
-        <div><strong>Market Cap:</strong> <span id="quoteMarketCap">-</span></div>
-        <div><strong>Sector:</strong> <span id="quoteSector">-</span></div>
-      </section>
-
-      <hr>
-  </main>
-  </div>
-
-  <!-- Ticker Bar -->
-  <div class="ticker-bar">
-    <div id="newsTicker">
-      <!-- your ticker spans here -->
+  <div id="splashScreen" aria-hidden="true">
+    <div class="splash-scan"></div>
+    <div class="splash-brand">
+      <span class="brand-word">PRED</span><span class="brand-iq">IQ</span><span class="brand-word">T</span>
+      <small>MARKET INTELLIGENCE</small>
     </div>
   </div>
 
-  <!-- JS Scripts (Load Accuracy JS after core logic) -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="PredIQT home">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="brand-lockup">
+        <strong><span>PRED</span><em>IQ</em><span>T</span></strong>
+        <small>MARKET INTELLIGENCE</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html" class="active">Terminal</a>
+      <a href="about.html">Method</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="system-status">
+      <span class="status-dot"></span>
+      Signal engine online
+    </div>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span>01</span> AI-POWERED MARKET SIGNALS</div>
+        <h1>See the signal.<br><span>Skip the noise.</span></h1>
+        <p class="hero-text">
+          Turn live market data into clear forecasts across four time horizons.
+          Enter a symbol and run one focused prediction set.
+        </p>
+
+        <div class="command-card">
+          <div class="command-heading">
+            <div>
+              <span class="field-kicker">SYMBOL INPUT</span>
+              <label for="tickerInput">What are we watching?</label>
+            </div>
+            <span class="command-index">PREDICT / 001</span>
+          </div>
+
+          <div class="input-row">
+            <div class="ticker-input-wrap">
+              <span class="input-prefix">$</span>
+              <input
+                type="text"
+                id="tickerInput"
+                placeholder="AAPL"
+                maxlength="10"
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Stock ticker symbol"
+              >
+            </div>
+            <button id="predictBtn" type="button">
+              <span>Run prediction</span>
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+
+          <div class="command-meta">
+            <span><i class="meta-dot"></i> One result set per click</span>
+            <span>HOUR · DAY · WEEK · MONTH</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="market-visual" aria-label="Live market visualization">
+        <div class="visual-image visual-image-main"></div>
+        <div class="visual-overlay"></div>
+        <div class="visual-topline">
+          <span>LIVE MARKET FEED</span>
+          <span class="live-pill"><i></i> LIVE</span>
+        </div>
+        <div class="visual-readout">
+          <small>COMPOSITE SIGNAL</small>
+          <strong>+12.84%</strong>
+          <span>Momentum detected</span>
+        </div>
+        <div class="mini-market-card mini-card-left">
+          <img src="img/market-board.jpg" alt="">
+          <span>MARKET DEPTH</span>
+        </div>
+        <div class="mini-market-card mini-card-right">
+          <img src="img/market-city.jpg" alt="">
+          <span>GLOBAL FLOW</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="results-grid" aria-label="Prediction results">
+      <div class="terminal-panel predictions-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="panel-kicker">FORECAST MATRIX</span>
+            <h2>Prediction horizon</h2>
+          </div>
+          <span class="panel-status"><i></i> Awaiting symbol</span>
+        </div>
+
+        <div class="prediction-grid">
+          <article class="prediction">
+            <div class="prediction-top">
+              <span class="horizon-code">01H</span>
+              <span class="horizon-arrow">↗</span>
+            </div>
+            <small>Next hour</small>
+            <strong id="predictionHour">—</strong>
+            <span class="prediction-caption">SHORT RANGE</span>
+          </article>
+
+          <article class="prediction">
+            <div class="prediction-top">
+              <span class="horizon-code">01D</span>
+              <span class="horizon-arrow">↗</span>
+            </div>
+            <small>Next day</small>
+            <strong id="predictionDay">—</strong>
+            <span class="prediction-caption">DAILY OUTLOOK</span>
+          </article>
+
+          <article class="prediction">
+            <div class="prediction-top">
+              <span class="horizon-code">01W</span>
+              <span class="horizon-arrow">↗</span>
+            </div>
+            <small>Next week</small>
+            <strong id="predictionWeek">—</strong>
+            <span class="prediction-caption">SWING RANGE</span>
+          </article>
+
+          <article class="prediction">
+            <div class="prediction-top">
+              <span class="horizon-code">01M</span>
+              <span class="horizon-arrow">↗</span>
+            </div>
+            <small>Next month</small>
+            <strong id="predictionMonth">—</strong>
+            <span class="prediction-caption">MACRO RANGE</span>
+          </article>
+        </div>
+      </div>
+
+      <aside class="terminal-panel quote-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="panel-kicker">LIVE QUOTE</span>
+            <h2>Market snapshot</h2>
+          </div>
+          <span class="quote-pulse" aria-hidden="true"></span>
+        </div>
+
+        <div class="quote-primary">
+          <span>LAST PRICE</span>
+          <strong id="quotePrice">—</strong>
+        </div>
+
+        <div class="quote-grid">
+          <div>
+            <span>CHANGE</span>
+            <strong id="quoteChange">—</strong>
+          </div>
+          <div>
+            <span>CHANGE %</span>
+            <strong id="quotePercent">—</strong>
+          </div>
+          <div>
+            <span>VOLUME</span>
+            <strong id="quoteVolume">—</strong>
+          </div>
+          <div>
+            <span>MARKET CAP</span>
+            <strong id="quoteMarketCap">—</strong>
+          </div>
+          <div class="quote-sector">
+            <span>SECTOR</span>
+            <strong id="quoteSector">—</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <p class="risk-note">
+      <span>RISK DISCLOSURE</span>
+      PredIQT is an experimental forecasting tool for educational use—not financial advice.
+    </p>
+  </main>
+
+  <div class="ticker-bar" aria-label="Live market ticker">
+    <div class="ticker-label"><span></span> LIVE MARKET</div>
+    <div class="ticker-window">
+      <div id="newsTicker">Connecting to market feed…</div>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
   <script src="js/ticker.js"></script>
-  <script src="js/accuracy_data.js"></script>
 </body>
 </html>

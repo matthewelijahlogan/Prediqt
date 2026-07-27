@@ -3,43 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact - PredIQT</title>
+  <meta name="theme-color" content="#06090d">
+  <title>Contact — PredIQT</title>
   <link rel="icon" type="image/png" href="/img/favicon.png" sizes="16x16">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <div class="container">
-    <header class="glass">
-      <h1 class="app-title">
-        <span class="pred">Pred</span><span class="iq">IQ</span><span class="t">t</span>
-      </h1>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="active">Contact</a>
-      </nav>
-    </header>
+<body class="info-page">
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="PredIQT home">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="brand-lockup">
+        <strong><span>PRED</span><em>IQ</em><span>T</span></strong>
+        <small>MARKET INTELLIGENCE</small>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html">Terminal</a>
+      <a href="about.html">Method</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="system-status"><span class="status-dot"></span> Signal engine online</div>
+  </header>
 
-    <main class="glass">
-      <h2>Contact Us</h2>
+  <main class="info-shell">
+    <section class="info-hero">
+      <span class="panel-kicker">OPEN CHANNEL / 003</span>
+      <h1>Let’s build what<br>comes next.</h1>
+    </section>
+    <section class="info-content">
       <p>
-        We'd love to hear from you — whether you're curious about our technology, have feedback, or want to collaborate with <strong>Touch of DaVinci</strong>.
+        Questions, product feedback, technical issues, or collaboration ideas are all welcome.
+        Reach out to <strong>Touch of DaVinci Studios</strong> and tell us what you are thinking.
       </p>
 
       <div class="contact-info">
-        <p><strong>Email:</strong> <a href="mailto:matthewelijahlogan@gmail.com">matthewelijahlogan@gmail.com</a></p>
-        <p><strong>Phone:</strong> (724) 953-4505</p>
-        <p>
-          <strong>Studio:</strong> Touch Of Davinci Studios<br>
-          Everson, PA
-        </p>
+        <p><strong>Email</strong><br><a href="mailto:matthewelijahlogan@gmail.com">matthewelijahlogan@gmail.com</a></p>
+        <p><strong>Phone</strong><br>(724) 953-4505</p>
+        <p><strong>Studio</strong><br>Touch of DaVinci Studios · Everson, PA</p>
       </div>
 
-      <h3>Support</h3>
+      <h2>PRODUCT SUPPORT</h2>
       <p>
-        If you're experiencing bugs or have questions about using the PredIQT platform, send an email with details and we’ll get back to you as soon as possible.
+        If you found a bug, include the ticker symbol, prediction horizon, and what you
+        expected to happen. That context helps us resolve the issue faster.
       </p>
-    </main>
-  </div>
+    </section>
+  </main>
 </body>
 </html>
