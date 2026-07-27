@@ -4,7 +4,7 @@ console.log("🔧 script.js loaded");
 const API_BASE =
   window.location.hostname === 'localhost'
     ? 'http://127.0.0.1:8000'
-    : 'https://prediqt.onrender.com';
+    : window.location.origin;
 
 // Predict function with spinner inline in each prediction span
 async function predict() {
