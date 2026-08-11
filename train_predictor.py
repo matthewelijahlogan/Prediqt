@@ -33,13 +33,14 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
     # --- 1) Delisted check ---
     try:
         info = yf.Ticker(ticker).info
-        if not info or info.get("regularMarketPrice") is None:
+        current_price = info.get("regularMarketPrice") if info else None
+        if current_price is None:
             # no price => assume delisted or invalid
             raise HTTPException(status_code=404, detail="Ticker not found or delisted")
     except HTTPException:
         # bubble up our 404
         raise
-    except Exception as e:
+    except Exception:
         # other yfinance error
         raise HTTPException(status_code=503, detail="Error fetching ticker info")
 
@@ -121,6 +122,7 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
     try:
         # Fusion expects dict of results (trainer_results), plus horizon param for scaling
         fused = fusion_model.predict(results, mode="heuristic", horizon=horizon)
+        fused["current_price"] = round(float(current_price), 2)
         print(f"[fusion_model] Output: {fused}")
         return fused
     except Exception as e:

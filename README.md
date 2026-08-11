@@ -25,6 +25,14 @@ Key endpoints used by mobile:
 - `GET /api/ticker-tape`
 - `GET /api/news`
 
+Prediction responses include the prospective target price plus a transparent
+`signal` object: `BUY`, `HOLD`, or `SELL`, expected move, confidence,
+horizon-specific move threshold, qualification state, and plain-language
+rationale. A directional forecast cannot produce BUY or SELL unless model
+error also clears the evidence gate. The web terminal combines the four
+horizons into a composite signal; at least two horizons must agree for a
+composite BUY or SELL.
+
 Optional env vars:
 - `NEWS_API_KEY`
 - `FRED_API_KEY`

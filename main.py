@@ -16,6 +16,7 @@ if load_dotenv is not None:
 
 from backend.routers import ticker_tape, news, quote
 from auto_trainer import start_scheduler
+from backend.signals import classify_signal
 from enum import Enum
 
 
@@ -93,6 +94,12 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
         loop = asyncio.get_event_loop()
         # Run blocking train_and_predict in a thread pool to not block event loop
         result = await loop.run_in_executor(None, train_and_predict, ticker, horizon.value)
+        signal = classify_signal(
+            result.get("current_price"),
+            result.get("predicted_next_close"),
+            result.get("model_mse"),
+            horizon.value,
+        )
         return {
             "ticker": ticker.upper(),
             "horizon": horizon.value,
@@ -100,6 +107,8 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
             "model_mse": result.get("model_mse"),
             "used_models": result.get("used_models"),
             "weights_used": result.get("weights_used"),  # optional, if returned
+            "current_price": result.get("current_price"),
+            "signal": signal,
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

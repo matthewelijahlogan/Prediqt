@@ -20,6 +20,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   let inputPauseTimer = null;
   let predictionInProgress = false;
 
+  const horizonSuffix = {
+    hour: "Hour",
+    day: "Day",
+    week: "Week",
+    month: "Month"
+  };
+
   tickerEl.innerHTML = "Loading...";
 
   // Flash color helper
@@ -116,6 +123,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch prediction for a ticker and horizon, update target element with results
   async function fetchPrediction(ticker, horizon, targetId) {
     const targetEl = document.getElementById(targetId);
+    const suffix = horizonSuffix[horizon];
+    const signalEl = document.getElementById(`signal${suffix}`);
+    const detailEl = document.getElementById(`detail${suffix}`);
+    const cardEl = targetEl.closest(".prediction");
     targetEl.innerHTML = '<span class="spinner"></span>'; // show spinner
 
     try {
@@ -133,15 +144,60 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Animate value change with color flash if numeric
       if (result !== "N/A" && result !== "Error") {
         const oldVal = parseFloat(targetEl.textContent) || 0;
-        targetEl.textContent = result;
+        targetEl.textContent = `$${result}`;
         flashValueChange(targetEl, parseFloat(result), oldVal);
       } else {
         targetEl.textContent = result;
       }
+      const signal = data.signal || {};
+      const action = ["BUY", "HOLD", "SELL"].includes(signal.action)
+        ? signal.action
+        : "HOLD";
+      signalEl.textContent = action;
+      signalEl.className = `decision ${action.toLowerCase()}`;
+      cardEl.dataset.signal = action;
+      const move = Number(signal.expected_move_percent);
+      const confidence = Number(signal.confidence);
+      detailEl.textContent = signal.expected_move_percent != null && Number.isFinite(move)
+        ? `${move >= 0 ? "+" : ""}${move.toFixed(2)}% · ${confidence.toFixed(1)}% CONF`
+        : "SIGNAL UNAVAILABLE";
+      detailEl.title = signal.rationale || "Signal evidence unavailable";
+      return data;
     } catch (err) {
       console.error(`Prediction failed for ${ticker} (${horizon}):`, err);
       targetEl.textContent = "N/A";
+      signalEl.textContent = "HOLD";
+      signalEl.className = "decision hold";
+      cardEl.dataset.signal = "HOLD";
+      detailEl.textContent = "SIGNAL UNAVAILABLE";
+      return null;
     }
+  }
+
+  function renderComposite(results) {
+    const signals = results.flatMap(result => result?.signal ? [result.signal] : []);
+    const buyCount = signals.filter(signal => signal.action === "BUY").length;
+    const sellCount = signals.filter(signal => signal.action === "SELL").length;
+    const action = buyCount >= 2 && buyCount > sellCount
+      ? "BUY"
+      : sellCount >= 2 && sellCount > buyCount
+        ? "SELL"
+        : "HOLD";
+    const moves = signals
+      .flatMap(signal => signal.expected_move_percent == null
+        ? []
+        : [Number(signal.expected_move_percent)])
+      .filter(Number.isFinite);
+    const averageMove = moves.length
+      ? moves.reduce((total, move) => total + move, 0) / moves.length
+      : null;
+    const compositeSignal = document.getElementById("compositeSignal");
+    const compositeMove = document.getElementById("compositeMove");
+    compositeSignal.textContent = action;
+    compositeSignal.dataset.signal = action;
+    compositeMove.textContent = averageMove == null
+      ? "Signal evidence unavailable"
+      : `${buyCount} BUY · ${sellCount} SELL · ${averageMove >= 0 ? "+" : ""}${averageMove.toFixed(2)}% avg move`;
   }
 
   // Fetch quote data for ticker and update quote elements
@@ -189,13 +245,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Helper to fetch predictions and quotes for a ticker
   async function triggerPredictionAndQuote(ticker) {
-    await Promise.all([
+    const [hour, day, week, month] = await Promise.all([
       fetchPrediction(ticker, "hour", "predictionHour"),
       fetchPrediction(ticker, "day", "predictionDay"),
       fetchPrediction(ticker, "week", "predictionWeek"),
       fetchPrediction(ticker, "month", "predictionMonth"),
       fetchQuote(ticker)
     ]);
+    renderComposite([hour, day, week, month]);
   }
 
   // Button click event to predict ticker
