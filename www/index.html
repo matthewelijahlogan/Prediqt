@@ -100,8 +100,8 @@
         </div>
         <div class="visual-readout">
           <small>COMPOSITE SIGNAL</small>
-          <strong>+12.84%</strong>
-          <span>Momentum detected</span>
+          <strong id="compositeSignal">HOLD</strong>
+          <span id="compositeMove">Run a symbol to classify the setup</span>
         </div>
         <div class="mini-market-card mini-card-left">
           <img src="img/market-board.jpg" alt="">
@@ -125,45 +125,54 @@
         </div>
 
         <div class="prediction-grid">
-          <article class="prediction">
+          <article class="prediction" data-horizon="hour">
             <div class="prediction-top">
               <span class="horizon-code">01H</span>
+              <span id="signalHour" class="decision hold">HOLD</span>
               <span class="horizon-arrow">↗</span>
             </div>
             <small>Next hour</small>
             <strong id="predictionHour">—</strong>
-            <span class="prediction-caption">SHORT RANGE</span>
+            <span id="detailHour" class="prediction-caption">AWAITING SIGNAL</span>
           </article>
 
-          <article class="prediction">
+          <article class="prediction" data-horizon="day">
             <div class="prediction-top">
               <span class="horizon-code">01D</span>
+              <span id="signalDay" class="decision hold">HOLD</span>
               <span class="horizon-arrow">↗</span>
             </div>
             <small>Next day</small>
             <strong id="predictionDay">—</strong>
-            <span class="prediction-caption">DAILY OUTLOOK</span>
+            <span id="detailDay" class="prediction-caption">AWAITING SIGNAL</span>
           </article>
 
-          <article class="prediction">
+          <article class="prediction" data-horizon="week">
             <div class="prediction-top">
               <span class="horizon-code">01W</span>
+              <span id="signalWeek" class="decision hold">HOLD</span>
               <span class="horizon-arrow">↗</span>
             </div>
             <small>Next week</small>
             <strong id="predictionWeek">—</strong>
-            <span class="prediction-caption">SWING RANGE</span>
+            <span id="detailWeek" class="prediction-caption">AWAITING SIGNAL</span>
           </article>
 
-          <article class="prediction">
+          <article class="prediction" data-horizon="month">
             <div class="prediction-top">
               <span class="horizon-code">01M</span>
+              <span id="signalMonth" class="decision hold">HOLD</span>
               <span class="horizon-arrow">↗</span>
             </div>
             <small>Next month</small>
             <strong id="predictionMonth">—</strong>
-            <span class="prediction-caption">MACRO RANGE</span>
+            <span id="detailMonth" class="prediction-caption">AWAITING SIGNAL</span>
           </article>
+        </div>
+        <div class="signal-legend" aria-label="Signal definitions">
+          <span><b class="buy">BUY</b> Upside and confidence clear the horizon gate</span>
+          <span><b class="hold">HOLD</b> Evidence or expected move remains below threshold</span>
+          <span><b class="sell">SELL</b> Qualified downside / exit-risk signal, not a short instruction</span>
         </div>
       </div>
 
