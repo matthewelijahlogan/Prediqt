@@ -24,6 +24,9 @@ Key endpoints used by mobile:
 - `GET /api/quote?ticker=...`
 - `GET /api/ticker-tape`
 - `GET /api/news`
+- `GET /api/automation/status`
+- `POST /api/automation/proposals`
+- `POST /api/automation/proposals/{id}/approve|reject`
 
 Prediction responses include the prospective target price plus a transparent
 `signal` object: `BUY`, `HOLD`, or `SELL`, expected move, confidence,
@@ -33,10 +36,19 @@ error also clears the evidence gate. The web terminal combines the four
 horizons into a composite signal; at least two horizons must agree for a
 composite BUY or SELL.
 
+The Automation Machine converts a qualified composite BUY into a proposed
+dollar-notional order. Every proposal remains `PENDING_APPROVAL` until approved
+from the dashboard. Execution is intentionally limited to Alpaca paper trading;
+configure `ALPACA_PAPER_API_KEY` and `ALPACA_PAPER_SECRET_KEY` on Render to
+enable submission. Live brokerage execution is not enabled.
+
 Optional env vars:
 - `NEWS_API_KEY`
 - `FRED_API_KEY`
 - `ENV=prod` on hosted environments
+- `ALPACA_PAPER_API_KEY`
+- `ALPACA_PAPER_SECRET_KEY`
+- `AUTOMATION_MAX_NOTIONAL=100`
 
 ## 2) Render deployment
 
@@ -48,6 +60,8 @@ Steps:
 3. Set secret env vars when prompted:
    - `NEWS_API_KEY`
    - `FRED_API_KEY`
+   - `ALPACA_PAPER_API_KEY`
+   - `ALPACA_PAPER_SECRET_KEY`
 4. Deploy and verify `GET /health` returns `{"status":"ok"}`.
 
 Start command is:

@@ -865,6 +865,73 @@ a {
   grid-column: 1 / -1;
 }
 
+.automation-machine {
+  margin-top: 18px;
+  padding: 26px;
+}
+
+.automation-mode,
+.automation-state {
+  padding: 7px 9px;
+  border: 1px solid rgba(216, 255, 53, 0.3);
+  color: var(--acid);
+  font: 500 0.53rem/1 var(--mono);
+  letter-spacing: 0.1em;
+}
+
+.automation-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+  border: 1px solid var(--line);
+}
+
+.automation-policy,
+.automation-proposal { padding: 24px; }
+
+.automation-policy {
+  border-right: 1px solid var(--line);
+  background: rgba(216, 255, 53, 0.025);
+}
+
+.automation-policy > span,
+.automation-policy label,
+.automation-order-grid span {
+  color: #69747e;
+  font: 500 0.52rem/1 var(--mono);
+  letter-spacing: 0.11em;
+}
+
+.automation-policy strong,
+.automation-proposal > strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+.automation-policy p,
+.automation-proposal p {
+  margin-top: 10px;
+  color: #77838d;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.automation-policy label { display: block; margin-top: 22px; }
+.automation-notional { width: 145px; margin-top: 8px; display: flex; align-items: center; border: 1px solid var(--line-bright); background: #070b0f; }
+.automation-notional span { padding-left: 12px; color: var(--acid); }
+.automation-notional input { width: 100%; padding: 10px; border: 0; outline: 0; background: transparent; color: var(--text); }
+.automation-state { display: inline-block; }
+.automation-state.submitted { border-color: rgba(51, 242, 139, 0.4); color: var(--green); }
+.automation-state.error { border-color: rgba(255, 84, 77, 0.4); color: var(--red); }
+
+.automation-order-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 18px; background: var(--line); border: 1px solid var(--line); }
+.automation-order-grid div { padding: 14px; background: #090e13; }
+.automation-order-grid strong { display: block; margin-top: 7px; font: 500 0.9rem/1 var(--mono); }
+.automation-actions { display: flex; gap: 8px; margin-top: 18px; }
+.automation-actions button { padding: 11px 16px; border: 1px solid var(--line-bright); background: transparent; color: var(--muted); font: 700 0.58rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.automation-actions .approve-order { border-color: rgba(216, 255, 53, 0.5); background: var(--acid); color: #090c05; }
+.automation-error { color: var(--red) !important; }
+
 .risk-note {
   display: flex;
   gap: 16px;
@@ -1068,6 +1135,9 @@ a {
   .results-grid {
     grid-template-columns: 1fr;
   }
+
+  .automation-layout { grid-template-columns: 1fr; }
+  .automation-policy { border-right: 0; border-bottom: 1px solid var(--line); }
 
   .prediction > strong {
     font-size: 2.35rem;

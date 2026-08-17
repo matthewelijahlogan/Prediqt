@@ -14,7 +14,7 @@ except ImportError:
 if load_dotenv is not None:
     load_dotenv()
 
-from backend.routers import ticker_tape, news, quote
+from backend.routers import automation, ticker_tape, news, quote
 from backend.yfinance_client import get_quote
 from auto_trainer import start_scheduler
 from backend.signals import classify_signal
@@ -34,6 +34,7 @@ app = FastAPI()
 app.include_router(ticker_tape.router)
 app.include_router(news.router)
 app.include_router(quote.router)
+app.include_router(automation.router)
 
 SUMMARY_PATH = os.path.join(os.path.dirname(__file__), "predictive_summary.json")
 INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
