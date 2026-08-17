@@ -16,6 +16,7 @@ if load_dotenv is not None:
 
 from backend.routers import automation, ticker_tape, news, quote
 from backend.yfinance_client import get_quote
+from backend.market_data import provider_status
 from auto_trainer import start_scheduler
 from backend.signals import classify_signal
 from enum import Enum
@@ -43,6 +44,11 @@ INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/api/market-data/status")
+def market_data_status():
+    return provider_status()
 
 
 @app.post("/internal/predictive-summary")

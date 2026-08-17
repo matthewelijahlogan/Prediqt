@@ -1,40 +1,14 @@
-import yfinance as yf
 import numpy as np
-import threading
-import time
-
-
-DATA_CACHE_TTL_SECONDS = 300
-_DATA_CACHE = {}
-_DATA_CACHE_LOCK = threading.Lock()
+from backend.market_data import get_daily_history
 
 def fetch_yfinance_data(ticker: str, period="6mo", interval="1d"):
-    key = (ticker.upper(), period, interval)
-    now = time.time()
-    with _DATA_CACHE_LOCK:
-        cached = _DATA_CACHE.get(key)
-        if cached and now - cached[0] < DATA_CACHE_TTL_SECONDS:
-            return cached[1].copy()
-
-        try:
-            data = yf.download(
-                ticker,
-                period=period,
-                interval=interval,
-                progress=False,
-                auto_adjust=True,
-                threads=False,
-            )
-            if data.empty:
-                raise RuntimeError(f"No market history returned for {ticker}")
-            _DATA_CACHE[key] = (now, data.copy())
-            return data
-        except Exception as e:
-            if cached:
-                print(f"[trainer_1_yfinance] Using stale cache for {ticker}: {e}")
-                return cached[1].copy()
-            print(f"[trainer_1_yfinance] Error fetching data for {ticker}: {e}")
-            return None
+    try:
+        data, source = get_daily_history(ticker)
+        data.attrs["provider"] = source
+        return data
+    except Exception as error:
+        print(f"[trainer_1_yfinance] Error fetching data for {ticker}: {error}")
+        return None
 
 def calculate_features_numpy(close_prices):
     # close_prices is a numpy array (1D)
@@ -124,7 +98,8 @@ def predict(ticker: str, horizon="day"):
         "current_price": round(float(current_price), 2),
         "smoothed_trend": round(float(smoothed_trend), 2),
         "volatility": round(float(recent_vol), 4),
-        "predicted_pct_change": round(float(predicted_pct_change), 5)
+        "predicted_pct_change": round(float(predicted_pct_change), 5),
+        "market_data_provider": df.attrs.get("provider", "unknown"),
     }
 
     print(f"[trainer_1_yfinance] Prediction complete: {predicted_next_close:.2f} (conf={confidence:.3f})")

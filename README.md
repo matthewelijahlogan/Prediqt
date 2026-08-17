@@ -24,6 +24,7 @@ Key endpoints used by mobile:
 - `GET /api/quote?ticker=...`
 - `GET /api/ticker-tape`
 - `GET /api/news`
+- `GET /api/market-data/status`
 - `GET /api/automation/status`
 - `POST /api/automation/proposals`
 - `POST /api/automation/proposals/{id}/approve|reject`
@@ -42,6 +43,12 @@ from the dashboard. Execution is intentionally limited to Alpaca paper trading;
 configure `ALPACA_PAPER_API_KEY` and `ALPACA_PAPER_SECRET_KEY` on Render to
 enable submission. Live brokerage execution is not enabled.
 
+Core price history uses a provider chain rather than depending on one scraper:
+Alpaca Market Data, then Alpha Vantage, then Yahoo, followed by a last-known-good
+cache that can remain available for up to 24 hours. Configure
+`ALPHA_VANTAGE_API_KEY` to enable that independent fallback. Provider health is
+visible at `/api/market-data/status`.
+
 Optional env vars:
 - `NEWS_API_KEY`
 - `FRED_API_KEY`
@@ -49,6 +56,7 @@ Optional env vars:
 - `ALPACA_PAPER_API_KEY`
 - `ALPACA_PAPER_SECRET_KEY`
 - `AUTOMATION_MAX_NOTIONAL=100`
+- `ALPHA_VANTAGE_API_KEY`
 
 ## 2) Render deployment
 
@@ -62,6 +70,7 @@ Steps:
    - `FRED_API_KEY`
    - `ALPACA_PAPER_API_KEY`
    - `ALPACA_PAPER_SECRET_KEY`
+   - `ALPHA_VANTAGE_API_KEY`
 4. Deploy and verify `GET /health` returns `{"status":"ok"}`.
 
 Start command is:
