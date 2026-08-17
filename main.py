@@ -14,7 +14,9 @@ except ImportError:
 if load_dotenv is not None:
     load_dotenv()
 
-from backend.routers import ticker_tape, news, quote
+from backend.routers import automation, ticker_tape, news, quote
+from backend.yfinance_client import get_quote
+from backend.market_data import provider_status
 from auto_trainer import start_scheduler
 from backend.signals import classify_signal
 from enum import Enum
@@ -33,6 +35,7 @@ app = FastAPI()
 app.include_router(ticker_tape.router)
 app.include_router(news.router)
 app.include_router(quote.router)
+app.include_router(automation.router)
 
 SUMMARY_PATH = os.path.join(os.path.dirname(__file__), "predictive_summary.json")
 INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
@@ -41,6 +44,11 @@ INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/api/market-data/status")
+def market_data_status():
+    return provider_status()
 
 
 @app.post("/internal/predictive-summary")
@@ -110,8 +118,10 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
             "current_price": result.get("current_price"),
             "signal": signal,
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
 
 
 # --- TICKER ROUTE (LAST MARKET CLOSE) ---
@@ -139,21 +149,10 @@ async def get_ticker_data(ticker: str):
 # --- NEW REAL-TIME QUOTE ROUTE ---
 @app.get("/api/quote")
 async def get_realtime_quote(ticker: str = Query(...)):
-    import yfinance as yf
     try:
-        ticker_obj = yf.Ticker(ticker)
-        info = ticker_obj.info
-        return {
-            "ticker": ticker.upper(),
-            "price": info.get("regularMarketPrice"),
-            "change": info.get("regularMarketChange"),
-            "percent_change": info.get("regularMarketChangePercent"),
-            "volume": info.get("volume"),
-            "market_cap": info.get("marketCap"),
-            "sector": info.get("sector")
-        }
+        return get_quote(ticker)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
 
 
 # --- FRONTEND SETUP ---

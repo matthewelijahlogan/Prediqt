@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const quoteVolumeEl = document.getElementById("quoteVolume");
   const quoteMarketCapEl = document.getElementById("quoteMarketCap");
   const quoteSectorEl = document.getElementById("quoteSector");
+  const automationModeEl = document.getElementById("automationMode");
+  const automationProposalEl = document.getElementById("automationProposal");
+  const automationNotionalEl = document.getElementById("automationNotional");
 
   // State variables
   let tickerPaused = false;
@@ -19,6 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   let pauseTimer = null;
   let inputPauseTimer = null;
   let predictionInProgress = false;
+
+  const escapeHtml = value => String(value).replace(/[&<>'"]/g, character => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+  })[character]);
 
   const horizonSuffix = {
     hour: "Hour",
@@ -169,7 +176,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       signalEl.textContent = "HOLD";
       signalEl.className = "decision hold";
       cardEl.dataset.signal = "HOLD";
-      detailEl.textContent = "SIGNAL UNAVAILABLE";
+      detailEl.textContent = "MARKET FEED UNAVAILABLE";
+      detailEl.title = err instanceof Error ? err.message : "Prediction request failed";
       return null;
     }
   }
@@ -198,6 +206,74 @@ document.addEventListener("DOMContentLoaded", async () => {
     compositeMove.textContent = averageMove == null
       ? "Signal evidence unavailable"
       : `${buyCount} BUY · ${sellCount} SELL · ${averageMove >= 0 ? "+" : ""}${averageMove.toFixed(2)}% avg move`;
+    return { action, buyCount, sellCount, averageMove };
+  }
+
+  function renderAutomationProposal(proposal) {
+    if (!proposal) return;
+    const terminal = ["SUBMITTED", "REJECTED"].includes(proposal.status);
+    const symbol = escapeHtml(proposal.symbol);
+    const side = escapeHtml(proposal.side.toUpperCase());
+    const rationale = escapeHtml(proposal.rationale || "Qualified composite signal");
+    const error = proposal.error ? escapeHtml(proposal.error) : "";
+    const proposalId = escapeHtml(proposal.proposal_id);
+    automationProposalEl.innerHTML = `
+      <span class="automation-state ${proposal.status === "SUBMITTED" ? "submitted" : ""}">${proposal.status.replaceAll("_", " ")}</span>
+      <strong>${side} ${symbol}</strong>
+      <div class="automation-order-grid">
+        <div><span>SYMBOL</span><strong>${symbol}</strong></div>
+        <div><span>SIDE</span><strong>${side}</strong></div>
+        <div><span>NOTIONAL</span><strong>$${Number(proposal.notional).toFixed(2)}</strong></div>
+      </div>
+      <p>${rationale}</p>
+      ${error ? `<p class="automation-error">${error}</p>` : ""}
+      ${terminal ? "" : `<div class="automation-actions"><button class="approve-order" data-action="approve" data-id="${proposalId}">Approve paper order</button><button data-action="reject" data-id="${proposalId}">Reject</button></div>`}
+    `;
+  }
+
+  async function loadAutomationMachine() {
+    try {
+      const [statusResponse, proposalsResponse] = await Promise.all([
+        fetch("/api/automation/status"),
+        fetch("/api/automation/proposals")
+      ]);
+      const status = await statusResponse.json();
+      const proposals = await proposalsResponse.json();
+      automationModeEl.textContent = `PAPER · ${status.connected ? "CONNECTED" : "SETUP REQUIRED"}`;
+      automationNotionalEl.max = String(status.maximum_notional || 100);
+      if (proposals.items?.length) renderAutomationProposal(proposals.items[0]);
+    } catch (error) {
+      automationModeEl.textContent = "PAPER · OFFLINE";
+    }
+  }
+
+  async function prepareAutomationProposal(ticker, composite) {
+    if (composite.action === "SELL") {
+      automationProposalEl.innerHTML = '<span class="automation-state">EXIT RISK</span><strong>Sell automation is position-aware</strong><p>PredIQt will not create a sell order until the connected broker confirms an existing long position.</p>';
+      return;
+    }
+    if (composite.action !== "BUY") {
+      automationProposalEl.innerHTML = '<span class="automation-state">HOLD</span><strong>No qualified order queued</strong><p>The composite signal did not meet the two-horizon BUY gate.</p>';
+      return;
+    }
+
+    const notional = Number(automationNotionalEl.value);
+    const response = await fetch("/api/automation/proposals", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        symbol: ticker,
+        side: "buy",
+        notional,
+        rationale: `${composite.buyCount}/4 BUY horizons · ${composite.averageMove >= 0 ? "+" : ""}${composite.averageMove.toFixed(2)}% average expected move`
+      })
+    });
+    const proposal = await response.json();
+    if (!response.ok) throw new Error(proposal.detail || "Could not prepare order");
+    renderAutomationProposal(proposal);
+    if (window.Notification?.permission === "granted") {
+      new Notification("PredIQt paper order ready", { body: `Approve ${proposal.side.toUpperCase()} ${proposal.symbol} · $${Number(proposal.notional).toFixed(2)}` });
+    }
   }
 
   // Fetch quote data for ticker and update quote elements
@@ -233,6 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = data.volume?.toLocaleString() ?? "-";
       quoteMarketCapEl.textContent = data.market_cap?.toLocaleString() ?? "-";
       quoteSectorEl.textContent = data.sector ?? "-";
+      return true;
     } catch (err) {
       quotePriceEl.textContent = "Error";
       quoteChangeEl.textContent = "Error";
@@ -240,19 +317,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = "Error";
       quoteMarketCapEl.textContent = "Error";
       quoteSectorEl.textContent = "Error";
+      return false;
     }
   }
 
   // Helper to fetch predictions and quotes for a ticker
   async function triggerPredictionAndQuote(ticker) {
-    const [hour, day, week, month] = await Promise.all([
+    const [hour, day, week, month, quoteAvailable] = await Promise.all([
       fetchPrediction(ticker, "hour", "predictionHour"),
       fetchPrediction(ticker, "day", "predictionDay"),
       fetchPrediction(ticker, "week", "predictionWeek"),
       fetchPrediction(ticker, "month", "predictionMonth"),
       fetchQuote(ticker)
     ]);
-    renderComposite([hour, day, week, month]);
+    const composite = renderComposite([hour, day, week, month]);
+    try {
+      await prepareAutomationProposal(ticker, composite);
+    } catch (error) {
+      automationProposalEl.innerHTML = `<span class="automation-state error">AUTOMATION ERROR</span><strong>Proposal could not be prepared</strong><p class="automation-error">${escapeHtml(error instanceof Error ? error.message : "Unknown automation error")}</p>`;
+    }
+    return {
+      signalCount: [hour, day, week, month].filter(Boolean).length,
+      quoteAvailable
+    };
   }
 
   // Button click event to predict ticker
@@ -270,15 +357,37 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelStatus.innerHTML = "<i></i> Analyzing signal";
     }
 
+    let outcome = { signalCount: 0, quoteAvailable: false };
     try {
-      await triggerPredictionAndQuote(ticker);
+      outcome = await triggerPredictionAndQuote(ticker);
     } finally {
       predictionInProgress = false;
       predictBtn.disabled = false;
       predictBtn.innerHTML = originalButtonMarkup;
       if (panelStatus) {
-        panelStatus.innerHTML = "<i></i> Signal ready";
+        panelStatus.innerHTML = outcome.signalCount
+          ? `<i></i> ${outcome.signalCount}/4 signals ready`
+          : "<i></i> Market feed unavailable";
       }
+    }
+  });
+
+  automationProposalEl.addEventListener("click", async event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+    button.disabled = true;
+    const action = button.dataset.action;
+    try {
+      const response = await fetch(`/api/automation/proposals/${button.dataset.id}/${action}`, { method: "POST" });
+      const proposal = await response.json();
+      if (!response.ok) throw new Error(proposal.detail || `Could not ${action} order`);
+      renderAutomationProposal(proposal);
+    } catch (error) {
+      const errorElement = automationProposalEl.querySelector(".automation-error") || document.createElement("p");
+      errorElement.className = "automation-error";
+      errorElement.textContent = error instanceof Error ? error.message : "Automation request failed";
+      automationProposalEl.appendChild(errorElement);
+      button.disabled = false;
     }
   });
 
@@ -298,6 +407,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Initial load
   await loadTickerTape();
+  await loadAutomationMachine();
   startTickerScroll();
 
   // Check highlight every 100ms

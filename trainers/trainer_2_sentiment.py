@@ -21,7 +21,7 @@ def fetch_news_headlines(ticker: str, limit: int = DEFAULT_ARTICLE_LIMIT) -> lis
             "pageSize": limit,
             "apiKey": API_KEY
         }
-        response = requests.get(NEWS_API_ENDPOINT, params=params)
+        response = requests.get(NEWS_API_ENDPOINT, params=params, timeout=8)
         data = response.json()
         if data.get("status") != "ok" or not data.get("articles"):
             return []

@@ -15,3 +15,11 @@ services:
         sync: false
       - key: FRED_API_KEY
         sync: false
+      - key: ALPACA_PAPER_API_KEY
+        sync: false
+      - key: ALPACA_PAPER_SECRET_KEY
+        sync: false
+      - key: AUTOMATION_MAX_NOTIONAL
+        value: "100"
+      - key: ALPHA_VANTAGE_API_KEY
+        sync: false

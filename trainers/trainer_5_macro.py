@@ -5,12 +5,14 @@ from fredapi import Fred
 load_dotenv()
 
 FRED_API_KEY = os.getenv("FRED_API_KEY")
-fred = Fred(api_key=FRED_API_KEY)
 
 def predict(ticker: str, horizon: str = "day") -> dict:
     print(f"[trainer_5_macro] Checking macroeconomic indicators for {ticker}...")
 
     try:
+        if not FRED_API_KEY:
+            raise RuntimeError("FRED_API_KEY is not configured")
+        fred = Fred(api_key=FRED_API_KEY)
         # Fetch most recent data
         cpi_data = fred.get_series_latest_release("CPIAUCSL")       # Consumer Price Index
         fed_data = fred.get_series_latest_release("FEDFUNDS")       # Federal Funds Rate

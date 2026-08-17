@@ -6,7 +6,8 @@
   <meta name="theme-color" content="#06090d">
   <meta name="description" content="PredIQT turns live market data into clear, multi-horizon stock predictions.">
   <title>PredIQT — Market Intelligence</title>
-  <link rel="icon" href="/img/favicon.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/img/prediqt-icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/img/prediqt-icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,21 +18,12 @@
 
   <div id="splashScreen" aria-hidden="true">
     <div class="splash-scan"></div>
-    <div class="splash-brand">
-      <span class="brand-word">PRED</span><span class="brand-iq">IQ</span><span class="brand-word">T</span>
-      <small>MARKET INTELLIGENCE</small>
-    </div>
+    <div class="splash-brand"><img src="img/prediqt-logo.png" alt="PredIQt Market Intelligence"></div>
   </div>
 
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="PredIQT home">
-      <span class="brand-mark" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </span>
-      <span class="brand-lockup">
-        <strong><span>PRED</span><em>IQ</em><span>T</span></strong>
-        <small>MARKET INTELLIGENCE</small>
-      </span>
+      <img class="brand-logo" src="img/prediqt-logo.png" alt="PredIQt Market Intelligence">
     </a>
 
     <nav class="nav" aria-label="Primary navigation">
@@ -213,6 +205,30 @@
           </div>
         </div>
       </aside>
+    </section>
+
+    <section class="automation-machine terminal-panel" aria-labelledby="automationTitle">
+      <div class="panel-heading">
+        <div>
+          <span class="panel-kicker">AUTOMATION MACHINE</span>
+          <h2 id="automationTitle">Signal to approved paper order</h2>
+        </div>
+        <span id="automationMode" class="automation-mode">PAPER · CHECKING</span>
+      </div>
+      <div class="automation-layout">
+        <div class="automation-policy">
+          <span>ORDER POLICY</span>
+          <strong>Approval required</strong>
+          <p>PredIQt may prepare a qualified BUY. It cannot submit anything until you approve it here.</p>
+          <label for="automationNotional">Maximum order amount</label>
+          <div class="automation-notional"><span>$</span><input id="automationNotional" type="number" min="1" max="100" step="1" value="25"></div>
+        </div>
+        <div id="automationProposal" class="automation-proposal" aria-live="polite">
+          <span class="automation-state">STANDING BY</span>
+          <strong>No qualified order queued</strong>
+          <p>Run a prediction. Two or more qualified BUY horizons are required to create a proposal.</p>
+        </div>
+      </div>
     </section>
 
     <p class="risk-note">

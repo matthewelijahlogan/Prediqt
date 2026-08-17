@@ -1,15 +1,13 @@
-import yfinance as yf
 import numpy as np
+from backend.market_data import get_daily_history
 
 def fetch_yfinance_data(ticker: str, period="6mo", interval="1d"):
     try:
-        data = yf.download(ticker, period=period, interval=interval, progress=False, auto_adjust=True)
-        if data.empty:
-            print(f"[trainer_1_yfinance] Warning: No data returned for ticker {ticker}")
-            return None
+        data, source = get_daily_history(ticker)
+        data.attrs["provider"] = source
         return data
-    except Exception as e:
-        print(f"[trainer_1_yfinance] Error fetching data for {ticker}: {e}")
+    except Exception as error:
+        print(f"[trainer_1_yfinance] Error fetching data for {ticker}: {error}")
         return None
 
 def calculate_features_numpy(close_prices):
@@ -75,6 +73,15 @@ def predict(ticker: str, horizon="day"):
         }
 
     current_price = close_prices[-1]
+
+    # Backtest a trailing-ten-close baseline so downstream signal confidence
+    # is evidence-based instead of permanently zero due to a missing MSE.
+    baseline_predictions = np.array([
+        np.mean(close_prices[index - 10:index])
+        for index in range(10, len(close_prices))
+    ])
+    baseline_actuals = close_prices[10:]
+    model_mse = float(np.mean((baseline_actuals - baseline_predictions) ** 2))
     
     # Simple trend: smooth ma10[-5:]
     smoothed_trend = exponential_smoothing(features['ma10'][-5:])
@@ -88,19 +95,21 @@ def predict(ticker: str, horizon="day"):
     predicted_next_close = current_price * (1 + predicted_pct_change)
 
     meta = {
-        "current_price": round(current_price, 2),
-        "smoothed_trend": round(smoothed_trend, 2),
-        "volatility": round(recent_vol, 4),
-        "predicted_pct_change": round(predicted_pct_change, 5)
+        "current_price": round(float(current_price), 2),
+        "smoothed_trend": round(float(smoothed_trend), 2),
+        "volatility": round(float(recent_vol), 4),
+        "predicted_pct_change": round(float(predicted_pct_change), 5),
+        "market_data_provider": df.attrs.get("provider", "unknown"),
     }
 
     print(f"[trainer_1_yfinance] Prediction complete: {predicted_next_close:.2f} (conf={confidence:.3f})")
 
     return {
         "trainer": "base",
-        "prediction": round(predicted_pct_change, 5),
+        "prediction": round(float(predicted_pct_change), 5),
         "confidence": round(confidence, 3),
-        "predicted_next_close": round(predicted_next_close, 2),
+        "model_mse": round(model_mse, 6),
+        "predicted_next_close": round(float(predicted_next_close), 2),
         "meta": meta
     }
 
