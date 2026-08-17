@@ -269,7 +269,12 @@ def heuristic_predict(
             volatility_adjustment = 1 / (1 + recent_volatility / base_price)
             fused_prediction *= volatility_adjustment
 
-    fused_prediction *= HORIZON_SCALING.get(horizon, 1.0)
+    # Scale the forecast return around the current price. Multiplying the
+    # absolute share price made the hour horizon mechanically 25% bearish and
+    # the month horizon mechanically 10% bullish before clamping.
+    horizon_scale = HORIZON_SCALING.get(horizon, 1.0)
+    unscaled_return = fused_prediction / base_price - 1
+    fused_prediction = base_price * (1 + unscaled_return * horizon_scale)
 
     max_move = MAX_MOVE_BY_HORIZON.get(horizon, MAX_SHORT_TERM_MOVE)
     delta = fused_prediction / base_price - 1
@@ -281,7 +286,7 @@ def heuristic_predict(
         fused_prediction = base_price * (1 + np.clip(delta, -max_move, max_move))
 
     return {
-        "predicted_next_close": round(fused_prediction, 2),
+        "predicted_next_close": round(float(fused_prediction), 2),
         "used_models": used_models,
         "model_mse": base.get("model_mse") if base else None,
         "weights_used": weights,
