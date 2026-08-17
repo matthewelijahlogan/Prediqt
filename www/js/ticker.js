@@ -169,7 +169,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       signalEl.textContent = "HOLD";
       signalEl.className = "decision hold";
       cardEl.dataset.signal = "HOLD";
-      detailEl.textContent = "SIGNAL UNAVAILABLE";
+      detailEl.textContent = "MARKET FEED UNAVAILABLE";
+      detailEl.title = err instanceof Error ? err.message : "Prediction request failed";
       return null;
     }
   }
@@ -233,6 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = data.volume?.toLocaleString() ?? "-";
       quoteMarketCapEl.textContent = data.market_cap?.toLocaleString() ?? "-";
       quoteSectorEl.textContent = data.sector ?? "-";
+      return true;
     } catch (err) {
       quotePriceEl.textContent = "Error";
       quoteChangeEl.textContent = "Error";
@@ -240,12 +242,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = "Error";
       quoteMarketCapEl.textContent = "Error";
       quoteSectorEl.textContent = "Error";
+      return false;
     }
   }
 
   // Helper to fetch predictions and quotes for a ticker
   async function triggerPredictionAndQuote(ticker) {
-    const [hour, day, week, month] = await Promise.all([
+    const [hour, day, week, month, quoteAvailable] = await Promise.all([
       fetchPrediction(ticker, "hour", "predictionHour"),
       fetchPrediction(ticker, "day", "predictionDay"),
       fetchPrediction(ticker, "week", "predictionWeek"),
@@ -253,6 +256,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       fetchQuote(ticker)
     ]);
     renderComposite([hour, day, week, month]);
+    return {
+      signalCount: [hour, day, week, month].filter(Boolean).length,
+      quoteAvailable
+    };
   }
 
   // Button click event to predict ticker
@@ -270,14 +277,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       panelStatus.innerHTML = "<i></i> Analyzing signal";
     }
 
+    let outcome = { signalCount: 0, quoteAvailable: false };
     try {
-      await triggerPredictionAndQuote(ticker);
+      outcome = await triggerPredictionAndQuote(ticker);
     } finally {
       predictionInProgress = false;
       predictBtn.disabled = false;
       predictBtn.innerHTML = originalButtonMarkup;
       if (panelStatus) {
-        panelStatus.innerHTML = "<i></i> Signal ready";
+        panelStatus.innerHTML = outcome.signalCount
+          ? `<i></i> ${outcome.signalCount}/4 signals ready`
+          : "<i></i> Market feed unavailable";
       }
     }
   });

@@ -20,7 +20,6 @@ from trainers import trainer_17_news as news_model
 from trainers import trainer_fusion as fusion_model
 
 from datetime import datetime
-import yfinance as yf
 from fastapi import HTTPException
 
 print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting prediction")
@@ -30,21 +29,9 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
     print(f"[orchestrator] Training for {ticker} with horizon '{horizon}'\n")
     results = {}
 
-    # --- 1) Delisted check ---
-    try:
-        info = yf.Ticker(ticker).info
-        current_price = info.get("regularMarketPrice") if info else None
-        if current_price is None:
-            # no price => assume delisted or invalid
-            raise HTTPException(status_code=404, detail="Ticker not found or delisted")
-    except HTTPException:
-        # bubble up our 404
-        raise
-    except Exception:
-        # other yfinance error
-        raise HTTPException(status_code=503, detail="Error fetching ticker info")
-
-    # Base model always runs with ticker and horizon
+    # The base history request validates the symbol and supplies current price.
+    # Avoid Ticker.info here: that endpoint is heavily rate-limited and used to
+    # abort all four horizons before the actual model could run.
     try:
         base_res = base_model.predict(ticker, horizon)
         if "error" in base_res:
@@ -56,6 +43,29 @@ def train_and_predict(ticker: str, horizon: str = "hour"):
     except Exception as e:
         print(f"[base_model] Exception: {e}")
         results['base'] = None
+
+    current_price = None
+    if results['base']:
+        current_price = results['base'].get("meta", {}).get("current_price")
+
+    if current_price is None:
+        from backend.routers.ticker_tape import TICKER_CACHE
+        cached_ticker = next(
+            (item for item in TICKER_CACHE["tickers"] if item.get("symbol") == ticker.upper()),
+            None,
+        )
+        cached_price = cached_ticker.get("price") if cached_ticker else None
+        if isinstance(cached_price, (int, float)):
+            current_price = float(cached_price)
+            results['base'] = {
+                "trainer": "base",
+                "predicted_next_close": current_price,
+                "model_mse": None,
+                "confidence": 0.0,
+                "meta": {"current_price": current_price, "fallback": "ticker_tape"},
+            }
+        else:
+            raise HTTPException(status_code=503, detail="Market history is temporarily unavailable")
 
     # Horizon-specific active models
     horizon_model_map = {

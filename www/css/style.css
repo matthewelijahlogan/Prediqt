@@ -107,25 +107,14 @@ a {
 
 .splash-brand {
   position: relative;
-  text-align: center;
-  font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(3.5rem, 10vw, 7.5rem);
-  line-height: 0.8;
-  letter-spacing: 0.055em;
+  width: min(820px, 86vw);
   animation: splashIn 0.75s ease both;
 }
 
-.splash-brand .brand-iq {
-  color: var(--acid);
-  text-shadow: 0 0 32px rgba(216, 255, 53, 0.45);
-}
-
-.splash-brand small {
+.splash-brand img {
   display: block;
-  margin-top: 24px;
-  color: var(--muted);
-  font: 500 0.68rem/1 var(--mono);
-  letter-spacing: 0.45em;
+  width: 100%;
+  filter: drop-shadow(0 0 28px rgba(216, 255, 53, 0.28));
 }
 
 @keyframes splashScan {
@@ -152,8 +141,16 @@ a {
   display: inline-flex;
   justify-self: start;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
+}
+
+.brand-logo {
+  display: block;
+  width: 205px;
+  height: 62px;
+  object-fit: contain;
+  object-position: left center;
+  filter: drop-shadow(0 0 10px rgba(216, 255, 53, 0.12));
 }
 
 .brand-mark {
@@ -1093,6 +1090,11 @@ a {
     min-height: 72px;
     padding-right: 14px;
     padding-left: 14px;
+  }
+
+  .brand-logo {
+    width: 150px;
+    height: 52px;
   }
 
   .brand-lockup small,

@@ -15,6 +15,7 @@ if load_dotenv is not None:
     load_dotenv()
 
 from backend.routers import ticker_tape, news, quote
+from backend.yfinance_client import get_quote
 from auto_trainer import start_scheduler
 from backend.signals import classify_signal
 from enum import Enum
@@ -110,8 +111,10 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
             "current_price": result.get("current_price"),
             "signal": signal,
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
 
 
 # --- TICKER ROUTE (LAST MARKET CLOSE) ---
@@ -139,21 +142,10 @@ async def get_ticker_data(ticker: str):
 # --- NEW REAL-TIME QUOTE ROUTE ---
 @app.get("/api/quote")
 async def get_realtime_quote(ticker: str = Query(...)):
-    import yfinance as yf
     try:
-        ticker_obj = yf.Ticker(ticker)
-        info = ticker_obj.info
-        return {
-            "ticker": ticker.upper(),
-            "price": info.get("regularMarketPrice"),
-            "change": info.get("regularMarketChange"),
-            "percent_change": info.get("regularMarketChangePercent"),
-            "volume": info.get("volume"),
-            "market_cap": info.get("marketCap"),
-            "sector": info.get("sector")
-        }
+        return get_quote(ticker)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e))
 
 
 # --- FRONTEND SETUP ---
