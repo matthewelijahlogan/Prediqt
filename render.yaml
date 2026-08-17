@@ -21,3 +21,5 @@ services:
         sync: false
       - key: AUTOMATION_MAX_NOTIONAL
         value: "100"
+      - key: ALPHA_VANTAGE_API_KEY
+        sync: false

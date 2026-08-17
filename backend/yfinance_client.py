@@ -17,22 +17,16 @@ def _single_series(frame, column):
 
 
 def get_quote(ticker):
-    import yfinance as yf
+    from backend.market_data import get_daily_history
 
     symbol = ticker.upper()
     price = _ticker_tape_price(symbol)
     previous_close = None
     volume = None
+    history_source = "ticker_tape_cache"
 
     try:
-        history = yf.download(
-            symbol,
-            period="5d",
-            interval="1d",
-            auto_adjust=False,
-            progress=False,
-            threads=False,
-        )
+        history, history_source = get_daily_history(symbol)
         if not history.empty:
             closes = _single_series(history, "Close")
             volumes = _single_series(history, "Volume")
@@ -63,5 +57,5 @@ def get_quote(ticker):
         "volume": volume,
         "market_cap": None,
         "sector": None,
-        "source": "ticker_tape_cache" if _ticker_tape_price(symbol) is not None else "daily_history",
+        "source": "ticker_tape_cache" if _ticker_tape_price(symbol) is not None else history_source,
     }
