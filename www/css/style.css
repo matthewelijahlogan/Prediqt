@@ -28,6 +28,17 @@
   --sans: "Manrope", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+.kingmaker-panel { margin: 24px 0; padding: 24px; }
+.kingmaker-panel p { color: var(--muted); margin: 12px 0; }
+.kingmaker-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
+.kingmaker-controls label { display: grid; gap: 8px; flex: 1; min-width: 160px; }
+.kingmaker-controls input, .kingmaker-controls select { padding: 12px; background: var(--ink); color: var(--text); border: 1px solid var(--line-bright); border-radius: 8px; width: 100%; }
+.kingmaker-controls button { padding: 12px 20px; background: var(--acid); color: var(--ink); border: 0; border-radius: 8px; cursor: pointer; }
+.kingmaker-controls button:disabled { opacity: .5; cursor: wait; }
+.kingmaker-table-wrap { overflow-x: auto; }
+.kingmaker-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.kingmaker-table th, .kingmaker-table td { padding: 12px; border-bottom: 1px solid var(--line); }
+
 * {
   box-sizing: border-box;
   margin: 0;

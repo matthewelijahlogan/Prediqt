@@ -16,6 +16,7 @@ def classify_signal(
     predicted_price: float | None,
     model_mse: float | None,
     horizon: str,
+    validation_confidence: float | None = None,
 ) -> dict[str, Any]:
     """Turn a prospective price forecast into a transparent action signal."""
     threshold = MOVE_THRESHOLDS.get(horizon, MOVE_THRESHOLDS["day"])
@@ -35,6 +36,8 @@ def classify_signal(
     else:
         normalized_rmse = math.sqrt(model_mse) / current_price
         confidence = max(0.0, min(100.0, 100 / (1 + normalized_rmse * 10)))
+        if validation_confidence is not None:
+            confidence = min(confidence, max(0.0, min(100.0, validation_confidence)))
 
     evidence_passes = confidence >= MINIMUM_CONFIDENCE
     if evidence_passes and expected_move >= threshold:

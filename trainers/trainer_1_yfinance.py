@@ -1,121 +1,164 @@
 import numpy as np
-from backend.market_data import get_daily_history
+from sklearn.linear_model import Ridge
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
-def fetch_yfinance_data(ticker: str, period="6mo", interval="1d"):
+from backend.market_data import get_history
+
+
+FORWARD_BARS = {"hour": 1, "day": 1, "week": 5, "month": 21}
+
+# Guardrails against turning an unstable fit into an actionable signal.
+MAX_BASE_RETURN = {"hour": 0.015, "day": 0.03, "week": 0.08, "month": 0.15}
+
+
+def fetch_market_data(ticker: str, horizon: str = "day"):
     try:
-        data, source = get_daily_history(ticker)
+        data, source = get_history(ticker, horizon)
         data.attrs["provider"] = source
         return data
     except Exception as error:
         print(f"[trainer_1_yfinance] Error fetching data for {ticker}: {error}")
         return None
 
-def calculate_features_numpy(close_prices):
-    # close_prices is a numpy array (1D)
-    returns = np.diff(close_prices) / close_prices[:-1]
-    ma5 = np.convolve(close_prices, np.ones(5)/5, mode='valid')
-    ma10 = np.convolve(close_prices, np.ones(10)/10, mode='valid')
-    
-    # Volatility: rolling std of returns (window 10)
-    vol = np.array([np.std(returns[i:i+10]) for i in range(len(returns)-9)])
-    
-    # Momentum: difference of close price - close price 5 steps ago
-    momentum = close_prices[5:] - close_prices[:-5]
-    
-    # Align lengths (shortest length to use for prediction)
-    min_len = min(len(ma10), len(vol), len(momentum))
-    
-    # Truncate all to min_len
-    ma10 = ma10[-min_len:]
-    vol = vol[-min_len:]
-    momentum = momentum[-min_len:]
-    ma5 = ma5[-min_len:]
-    
-    return {
-        "returns": returns[-min_len:],
-        "ma5": ma5,
-        "ma10": ma10,
-        "volatility": vol,
-        "momentum": momentum
-    }
 
-def exponential_smoothing(values, alpha=0.5):
-    if len(values) == 0:
-        return 0.0
-    smoothed = values[0]
-    for v in values[1:]:
-        smoothed = alpha * v + (1 - alpha) * smoothed
-    return smoothed
+# Preserve the former helper for external callers while honoring the interval.
+def fetch_yfinance_data(ticker: str, period="6mo", interval="1d", horizon=None):
+    selected_horizon = horizon or ("hour" if interval == "1h" else "day")
+    return fetch_market_data(ticker, selected_horizon)
+
+
+def _feature_vector(close_prices: np.ndarray, index: int) -> np.ndarray:
+    window = close_prices[index - 20:index + 1]
+    returns = np.diff(np.log(window))
+    current = close_prices[index]
+    return np.array([
+        returns[-1], returns[-2], returns[-3],
+        returns[-5:].mean(), returns[-10:].mean(), returns.mean(),
+        returns[-5:].std(), returns[-10:].std(), returns.std(),
+        current / window[-6:-1].mean() - 1,
+        current / window[-11:-1].mean() - 1,
+        current / window[:-1].mean() - 1,
+    ], dtype=float)
+
+
+def _training_set(close_prices: np.ndarray, forward_bars: int):
+    features = []
+    targets = []
+    for index in range(20, len(close_prices) - forward_bars):
+        features.append(_feature_vector(close_prices, index))
+        targets.append(np.log(close_prices[index + forward_bars] / close_prices[index]))
+    return np.asarray(features), np.asarray(targets)
+
 
 def predict(ticker: str, horizon="day"):
-    print(f"[trainer_1_yfinance] Starting prediction for {ticker} horizon={horizon}")
-    df = fetch_yfinance_data(ticker)
-    if df is None or len(df) < 20:
+    normalized_horizon = horizon if horizon in FORWARD_BARS else "day"
+    print(f"[trainer_1_yfinance] Starting prediction for {ticker} horizon={normalized_horizon}")
+    df = fetch_market_data(ticker, normalized_horizon)
+    forward_bars = FORWARD_BARS[normalized_horizon]
+    minimum_rows = max(70, 20 + forward_bars + 30)
+    if df is None or len(df) < minimum_rows:
         return {
-            "trainer": "base",
-            "error": "Insufficient data",
-            "confidence": 0.0,
-            "predicted_next_close": 0.0,
-            "meta": {}
+            "trainer": "base", "error": "Insufficient horizon-matched market data",
+            "confidence": 0.0, "predicted_next_close": 0.0,
+            "meta": {"horizon": normalized_horizon},
         }
 
-    close_prices = df['Close'].to_numpy().flatten()  # <-- Flatten here
-
-    features = calculate_features_numpy(close_prices)
-
-    if len(features['ma10']) < 5:
+    close_prices = np.asarray(df["Close"], dtype=float).reshape(-1)
+    close_prices = close_prices[np.isfinite(close_prices) & (close_prices > 0)]
+    if len(close_prices) < minimum_rows:
         return {
-            "trainer": "base",
-            "error": "Not enough data after feature calculation",
-            "confidence": 0.0,
-            "predicted_next_close": float(close_prices[-1]),
-            "meta": {}
+            "trainer": "base", "error": "Insufficient valid close prices",
+            "confidence": 0.0, "predicted_next_close": 0.0,
+            "meta": {"horizon": normalized_horizon},
         }
 
-    current_price = close_prices[-1]
+    features, targets = _training_set(close_prices, forward_bars)
+    split = max(30, int(len(features) * 0.8))
+    if len(features) - split < 10:
+        split = len(features) - 10
+    # Purge labels that reach the first validation feature timestamp. Each
+    # expanding fold only sees outcomes already known before that fold starts.
+    validation_predictions = []
+    fold_details = []
+    for indices in np.array_split(np.arange(split, len(features)), 3):
+        if not len(indices):
+            continue
+        start = int(indices[0])
+        train_end = start - forward_bars
+        model = make_pipeline(StandardScaler(), Ridge(alpha=8.0))
+        model.fit(features[:train_end], targets[:train_end])
+        validation_predictions.extend(model.predict(features[indices]).tolist())
+        fold_details.append({"train_samples": train_end, "validation_start": start,
+                             "validation_samples": len(indices), "purge_bars": forward_bars})
+    validation_predictions = np.asarray(validation_predictions)
+    y_validation = targets[split:]
+    validation_errors = validation_predictions - y_validation
+    return_mse = float(np.mean(validation_errors ** 2))
+    baseline_mse = float(np.mean(y_validation ** 2))
+    direction_accuracy = float(
+        np.mean(np.sign(validation_predictions) == np.sign(y_validation))
+    )
 
-    # Backtest a trailing-ten-close baseline so downstream signal confidence
-    # is evidence-based instead of permanently zero due to a missing MSE.
-    baseline_predictions = np.array([
-        np.mean(close_prices[index - 10:index])
-        for index in range(10, len(close_prices))
-    ])
-    baseline_actuals = close_prices[10:]
-    model_mse = float(np.mean((baseline_actuals - baseline_predictions) ** 2))
-    
-    # Simple trend: smooth ma10[-5:]
-    smoothed_trend = exponential_smoothing(features['ma10'][-5:])
+    latest = _feature_vector(close_prices, len(close_prices) - 1).reshape(1, -1)
+    # Refit for the prospective forecast only after recording holdout errors.
+    model = make_pipeline(StandardScaler(), Ridge(alpha=8.0))
+    model.fit(features, targets)
+    raw_return = float(model.predict(latest)[0])
 
-    predicted_pct_change = (smoothed_trend - current_price) / current_price
-    predicted_pct_change = np.clip(predicted_pct_change, -0.1, 0.1)
+    # If the fit cannot beat a no-change baseline out of sample, shrink to zero.
+    relative_skill = 0.0 if baseline_mse <= 0 else float(
+        np.clip(1.0 - (return_mse / baseline_mse), 0.0, 1.0)
+    )
+    shrunk_return = raw_return * relative_skill
+    predicted_return = float(np.clip(
+        shrunk_return, -MAX_BASE_RETURN[normalized_horizon], MAX_BASE_RETURN[normalized_horizon]
+    ))
 
-    recent_vol = features['volatility'][-1]
-    confidence = float(np.clip(1.0 - recent_vol * 5, 0.1, 1.0))
-
-    predicted_next_close = current_price * (1 + predicted_pct_change)
+    current_price = float(close_prices[-1])
+    predicted_next_close = current_price * np.exp(predicted_return)
+    price_rmse = current_price * np.sqrt(return_mse)
+    model_mse = float(price_rmse ** 2)
+    error_confidence = 1.0 / (1.0 + (price_rmse / current_price) * 10.0)
+    validation_quality = (0.5 * direction_accuracy) + (0.5 * error_confidence)
+    validation_confidence = float(np.clip(
+        validation_quality * (0.25 + 0.75 * relative_skill), 0.0, 1.0
+    ))
 
     meta = {
-        "current_price": round(float(current_price), 2),
-        "smoothed_trend": round(float(smoothed_trend), 2),
-        "volatility": round(float(recent_vol), 4),
-        "predicted_pct_change": round(float(predicted_pct_change), 5),
+        "current_price": round(current_price, 2),
+        "bar_interval": df.attrs.get("bar_interval", "1h" if normalized_horizon == "hour" else "1d"),
+        "forward_bars": forward_bars,
+        "raw_return_percent": round(float((np.exp(raw_return) - 1) * 100), 4),
+        "predicted_return_percent": round(float((np.exp(predicted_return) - 1) * 100), 4),
+        "relative_skill": round(relative_skill, 4),
+        "direction_accuracy": round(direction_accuracy, 4),
+        "validation_samples": int(len(y_validation)),
+        "validation_method": "purged_expanding_window",
+        "validation_folds": fold_details,
+        "return_mse": return_mse,
+        "baseline_return_mse": baseline_mse,
+        "last_bar_at": str(df.index[-1]),
         "market_data_provider": df.attrs.get("provider", "unknown"),
     }
-
-    print(f"[trainer_1_yfinance] Prediction complete: {predicted_next_close:.2f} (conf={confidence:.3f})")
-
+    print(
+        f"[trainer_1_yfinance] Prediction complete: {predicted_next_close:.2f} "
+        f"(skill={relative_skill:.3f}, direction={direction_accuracy:.3f})"
+    )
     return {
         "trainer": "base",
-        "prediction": round(float(predicted_pct_change), 5),
-        "confidence": round(confidence, 3),
+        "prediction": round(float(np.exp(predicted_return) - 1), 6),
+        "confidence": round(validation_confidence, 3),
+        "validation_confidence": round(validation_confidence * 100, 1),
         "model_mse": round(model_mse, 6),
         "predicted_next_close": round(float(predicted_next_close), 2),
-        "meta": meta
+        "meta": meta,
     }
 
-# Local test
+
 if __name__ == "__main__":
+    import json
     import sys
-    ticker = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
-    result = predict(ticker)
-    print(result)
+    symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
+    selected_horizon = sys.argv[2] if len(sys.argv) > 2 else "day"
+    print(json.dumps(predict(symbol, selected_horizon), indent=2))

@@ -27,12 +27,9 @@ DEFAULT_WEIGHTS = {
     "news": 0.05,
 }
 
-HORIZON_SCALING = {
-    "hour": 0.75,
-    "day": 1.0,
-    "week": 1.05,
-    "month": 1.1,
-}
+# Supplemental trainers are heuristic signals, not independently validated
+# price models. Keep their impact subordinate to the time-series base model.
+AUXILIARY_RELIABILITY = 0.25
 
 MAX_SHORT_TERM_MOVE = 0.03
 MAX_MOVE_BY_HORIZON = {
@@ -220,11 +217,17 @@ def heuristic_predict(
         "news": news,
     }
 
-    base_price = base.get("predicted_next_close") if base and "predicted_next_close" in base else 100
-    if base_price == 100:
-        print("[fusion_model] Warning: base price not found. Using default 100.")
+    base_price = base.get("predicted_next_close") if base and "predicted_next_close" in base else None
+    current_price = base.get("meta", {}).get("current_price") if base else None
+    if not isinstance(current_price, (int, float)) or current_price <= 0:
+        current_price = base_price
+    if not isinstance(current_price, (int, float)) or current_price <= 0:
+        current_price = 100.0
+        print("[fusion_model] Warning: current price not found. Using default 100.")
+    if not isinstance(base_price, (int, float)) or base_price <= 0:
+        base_price = current_price
 
-    weighted_values = []
+    weighted_returns = []
     total_weight = 0
     used_models = []
 
@@ -233,62 +236,67 @@ def heuristic_predict(
         if val is not None:
             w = weights.get(model_name, 0)
             if model_name == "base":
-                weighted_values.append(val * w)
+                model_return = float(val) / current_price - 1
+                # The base return has already been shrunk by out-of-sample skill.
+                raw_confidence = 1.0
             else:
-                weighted_values.append(base_price * val * w)
-            total_weight += w
+                model_return = float(val) - 1
+                raw_confidence = res.get("confidence", 0.0)
+                w *= AUXILIARY_RELIABILITY
+            confidence = float(raw_confidence) if isinstance(raw_confidence, (int, float)) else 0.0
+            confidence = float(np.clip(confidence, 0.0, 1.0))
+            effective_weight = w * confidence
+            if effective_weight <= 0:
+                continue
+            weighted_returns.append(model_return * effective_weight)
+            total_weight += effective_weight
             used_models.append(model_name)
 
     if total_weight == 0:
-        print("[fusion_model] Warning: no valid model predictions found, returning base_price")
+        print("[fusion_model] Warning: no confidence-weighted predictions, returning current price")
         return {
-            "predicted_next_close": base_price,
+            "predicted_next_close": current_price,
             "used_models": used_models,
             "model_mse": base.get("model_mse") if base else None,
+            "validation_confidence": base.get("validation_confidence") if base else None,
         }
 
-    fused_prediction = sum(weighted_values) / total_weight
+    fused_return = sum(weighted_returns) / total_weight
 
     direction_votes = 0
     for model_name, res in inputs.items():
         val = extract_value(model_name, res)
         if model_name != "base" and val is not None:
-            predicted_price = base_price * val
-            if predicted_price > base_price:
+            predicted_price = current_price * val
+            if predicted_price > current_price:
                 direction_votes += 1
-            elif predicted_price < base_price:
+            elif predicted_price < current_price:
                 direction_votes -= 1
 
     if abs(direction_votes) >= 4:
-        fused_prediction *= 1.01 if direction_votes > 0 else 0.99
+        fused_return += 0.0025 if direction_votes > 0 else -0.0025
 
     if base and "recent_prices" in base:
         recent_prices = base["recent_prices"]
         if len(recent_prices) >= 10:
             recent_volatility = np.std(recent_prices[-10:])
-            volatility_adjustment = 1 / (1 + recent_volatility / base_price)
-            fused_prediction *= volatility_adjustment
-
-    # Scale the forecast return around the current price. Multiplying the
-    # absolute share price made the hour horizon mechanically 25% bearish and
-    # the month horizon mechanically 10% bullish before clamping.
-    horizon_scale = HORIZON_SCALING.get(horizon, 1.0)
-    unscaled_return = fused_prediction / base_price - 1
-    fused_prediction = base_price * (1 + unscaled_return * horizon_scale)
+            volatility_adjustment = 1 / (1 + recent_volatility / current_price)
+            fused_return *= volatility_adjustment
 
     max_move = MAX_MOVE_BY_HORIZON.get(horizon, MAX_SHORT_TERM_MOVE)
-    delta = fused_prediction / base_price - 1
-    if abs(delta) > max_move:
+    if abs(fused_return) > max_move:
         print(
-            f"[fusion_model] Clamping {horizon} prediction from {round(delta * 100, 2)}% "
+            f"[fusion_model] Clamping {horizon} prediction from {round(fused_return * 100, 2)}% "
             f"to +/-{max_move * 100}%"
         )
-        fused_prediction = base_price * (1 + np.clip(delta, -max_move, max_move))
+        fused_return = float(np.clip(fused_return, -max_move, max_move))
+    fused_prediction = current_price * (1 + fused_return)
 
     return {
         "predicted_next_close": round(float(fused_prediction), 2),
         "used_models": used_models,
         "model_mse": base.get("model_mse") if base else None,
+        "validation_confidence": base.get("validation_confidence") if base else None,
         "weights_used": weights,
     }
 

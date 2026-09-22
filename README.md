@@ -1,5 +1,35 @@
 # PredIQT
 
+Kingmaker v1 now powers `/predict/{ticker}` and the web terminal. It builds on
+the existing price-feature Ridge model, with three expanding validation folds,
+purged horizon-overlapping labels, and a final refit on available labeled data.
+This is a new implementation; the older Kingmaker described in `GPT_Recap.txt`
+was not present in this checkout. Legacy heuristic trainers remain available
+through `legacy_train_and_predict` but do not affect Kingmaker forecasts.
+
+Open `http://127.0.0.1:8000` after starting the backend to use the watchlist scanner.
+`GET /api/kingmaker/scan?tickers=AAPL,MSFT,NVDA&horizon=day` compares up to 20
+symbols and includes per-symbol failures. `GET /api/kingmaker/status` describes
+the model. Forecasts expose validation errors, a no-change baseline, fold sizes,
+data provider, and the last bar timestamp. Confidence is a validation quality
+score, not a calibrated probability of profit. Stale fallback history and bars
+older than four calendar days cannot qualify for a directional signal.
+
+Profitability is unproven: these are forecast-error checks, not a portfolio
+backtest with costs or a live trading record. The scheduler no longer scores new
+forecasts against the current price. First-seen forecasts for each symbol,
+horizon, model version, and origin bar are recorded in `data/kingmaker.sqlite3`.
+`GET /api/kingmaker/forecasts` lists them; `POST /api/kingmaker/settle` records
+observed outcomes only when a subsequent bar proves the target bar has ended.
+The enabled scheduler also settles earlier forecasts before each batch. Set
+`KINGMAKER_LEDGER_PATH` to persistent storage on hosted deployments; Render's
+ephemeral filesystem does not retain this ledger across redeploys.
+No weekly income target is guaranteed. Broker
+execution remains paper-only and requires configured credentials and approval.
+
+Verify backend changes with `python -m pytest backend/tests -q` (install `pytest`
+and `httpx` in your development environment if needed).
+
 PredIQT is now structured as:
 - `main.py` + `backend/` + `trainers/`: FastAPI backend and prediction pipeline.
 - `mobile-native-app/`: Bare React Native CLI app (vanilla JavaScript, no Expo).

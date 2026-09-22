@@ -47,6 +47,9 @@ def load_tickers():
 
 async def run_predictions():
     from train_predictor import train_and_predict
+    from kingmaker.ledger import settle
+
+    await asyncio.to_thread(settle)
 
     tickers = load_tickers()
     selected = random.sample(tickers, min(BATCH_SIZE, len(tickers)))
@@ -102,7 +105,9 @@ def update_metrics_and_fusion(batch_results, threshold=0.01):
 
     for entry in batch_results:
         result = entry.get("result", {})
-        actual = get_actual_price(entry["ticker"])
+        # Freshly generated forecasts have no observed outcome yet. Never
+        # report agreement with today's price as future prediction accuracy.
+        actual = entry.get("actual_close")
         if not actual:
             continue
 

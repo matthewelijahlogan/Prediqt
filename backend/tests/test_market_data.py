@@ -22,15 +22,24 @@ class MarketDataResilienceTests(unittest.TestCase):
         self.assertIsNone(quote["percent_change"])
 
     def test_base_forecast_includes_finite_model_error(self):
-        closes = np.linspace(100.0, 125.0, 60)
+        closes = np.linspace(100.0, 125.0, 120)
         history = pd.DataFrame({"Close": closes})
-        with patch.object(trainer_1_yfinance, "fetch_yfinance_data", return_value=history):
+        history.attrs.update({"provider": "test", "bar_interval": "1h"})
+        with patch.object(trainer_1_yfinance, "fetch_market_data", return_value=history):
             result = trainer_1_yfinance.predict("AAPL", "hour")
 
         self.assertGreaterEqual(result["model_mse"], 0)
         self.assertTrue(np.isfinite(result["model_mse"]))
         self.assertIsInstance(result["predicted_next_close"], float)
         self.assertIsInstance(result["meta"]["current_price"], float)
+        self.assertEqual(result["meta"]["bar_interval"], "1h")
+        self.assertEqual(result["meta"]["forward_bars"], 1)
+        self.assertLessEqual(
+            abs(result["predicted_next_close"] / result["meta"]["current_price"] - 1),
+            0.0151,
+        )
+        if result["meta"]["relative_skill"] == 0:
+            self.assertLess(result["validation_confidence"], 55)
 
 
 if __name__ == "__main__":

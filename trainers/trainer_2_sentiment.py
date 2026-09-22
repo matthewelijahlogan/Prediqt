@@ -1,10 +1,11 @@
+import os
 import requests
 import pandas as pd
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from datetime import datetime, timedelta
 
 NEWS_API_ENDPOINT = "https://newsapi.org/v2/everything"
-API_KEY = "0de95c014fa249419f4c8a7b839ae2a9" 
+API_KEY = os.environ.get("NEWS_API_KEY", "")
 DEFAULT_ARTICLE_LIMIT = 20
 DAYS_LOOKBACK = 3
 

@@ -52,6 +52,16 @@ class MarketDataProviderTests(unittest.TestCase):
         self.assertEqual(len(first), len(second))
         alpaca.assert_called_once()
 
+    def test_keeps_hourly_and_daily_history_in_separate_cache_entries(self):
+        frame = history_frame()
+        with patch.object(market_data, "_alpaca_history", return_value=frame) as alpaca:
+            market_data.get_history("AAPL", "hour")
+            market_data.get_history("AAPL", "day")
+
+        self.assertEqual(alpaca.call_count, 2)
+        self.assertEqual(alpaca.call_args_list[0].args, ("AAPL", "hour"))
+        self.assertEqual(alpaca.call_args_list[1].args, ("AAPL", "day"))
+
 
 if __name__ == "__main__":
     unittest.main()

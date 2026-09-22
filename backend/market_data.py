@@ -27,16 +27,26 @@ def _record(provider: str, healthy: bool, error: str | None = None) -> None:
     })
 
 
-def _alpaca_history(symbol: str) -> pd.DataFrame:
+def _alpaca_history(symbol: str, horizon: str = "day") -> pd.DataFrame:
     key = os.environ.get("ALPACA_PAPER_API_KEY", "").strip()
     secret = os.environ.get("ALPACA_PAPER_SECRET_KEY", "").strip()
     _health["alpaca"]["configured"] = bool(key and secret)
     if not key or not secret:
         raise RuntimeError("not configured")
-    start = (datetime.now(timezone.utc) - timedelta(days=400)).isoformat()
+    intraday = horizon == "hour"
+    start = (
+        datetime.now(timezone.utc) - timedelta(days=120 if intraday else 1100)
+    ).isoformat()
     response = requests.get(
         f"https://data.alpaca.markets/v2/stocks/{symbol}/bars",
-        params={"timeframe": "1Day", "start": start, "limit": 1000, "adjustment": "all", "feed": "iex"},
+        params={
+            "timeframe": "1Hour" if intraday else "1Day",
+            "start": start,
+            "limit": 1000,
+            "sort": "desc",
+            "adjustment": "all",
+            "feed": "iex",
+        },
         headers={"APCA-API-KEY-ID": key, "APCA-API-SECRET-KEY": secret},
         timeout=15,
     )
@@ -51,19 +61,28 @@ def _alpaca_history(symbol: str) -> pd.DataFrame:
     return frame.set_index(pd.to_datetime(frame.pop("Date"))).sort_index()
 
 
-def _alpha_vantage_history(symbol: str) -> pd.DataFrame:
+def _alpha_vantage_history(symbol: str, horizon: str = "day") -> pd.DataFrame:
     key = os.environ.get("ALPHA_VANTAGE_API_KEY", "").strip()
     _health["alpha_vantage"]["configured"] = bool(key)
     if not key:
         raise RuntimeError("not configured")
+    intraday = horizon == "hour"
+    params = {
+        "function": "TIME_SERIES_INTRADAY" if intraday else "TIME_SERIES_DAILY",
+        "symbol": symbol,
+        "outputsize": "full" if intraday else "compact",
+        "apikey": key,
+    }
+    if intraday:
+        params["interval"] = "60min"
     response = requests.get(
         "https://www.alphavantage.co/query",
-        params={"function": "TIME_SERIES_DAILY", "symbol": symbol, "outputsize": "compact", "apikey": key},
+        params=params,
         timeout=15,
     )
     response.raise_for_status()
     payload = response.json()
-    series = payload.get("Time Series (Daily)")
+    series = payload.get("Time Series (60min)" if intraday else "Time Series (Daily)")
     if not series:
         raise RuntimeError(payload.get("Note") or payload.get("Information") or payload.get("Error Message") or "no daily series")
     rows = [{
@@ -75,11 +94,15 @@ def _alpha_vantage_history(symbol: str) -> pd.DataFrame:
     return frame.set_index(pd.to_datetime(frame.pop("Date"))).sort_index()
 
 
-def _yahoo_history(symbol: str) -> pd.DataFrame:
+def _yahoo_history(symbol: str, horizon: str = "day") -> pd.DataFrame:
     import yfinance as yf
 
+    intraday = horizon == "hour"
     frame = yf.download(
-        symbol, period="1y", interval="1d", progress=False,
+        symbol,
+        period="6mo" if intraday else "3y",
+        interval="1h" if intraday else "1d",
+        progress=False,
         auto_adjust=True, threads=False,
     )
     if frame.empty:
@@ -89,11 +112,13 @@ def _yahoo_history(symbol: str) -> pd.DataFrame:
     return frame
 
 
-def get_daily_history(symbol: str) -> tuple[pd.DataFrame, str]:
+def get_history(symbol: str, horizon: str = "day") -> tuple[pd.DataFrame, str]:
     normalized = symbol.strip().upper()
+    normalized_horizon = horizon if horizon in {"hour", "day", "week", "month"} else "day"
+    cache_key = f"{normalized}:{normalized_horizon}"
     now = time.time()
     with _lock:
-        cached = _cache.get(normalized)
+        cached = _cache.get(cache_key)
         if cached and now - cached[0] < FRESH_TTL_SECONDS:
             return cached[1].copy(), cached[2]
 
@@ -103,11 +128,12 @@ def get_daily_history(symbol: str) -> tuple[pd.DataFrame, str]:
             ("yahoo", _yahoo_history),
         ):
             try:
-                frame = fetcher(normalized)
+                frame = fetcher(normalized, normalized_horizon)
                 if frame.empty or len(frame) < 30:
                     raise RuntimeError("insufficient history")
                 _record(provider, True)
-                _cache[normalized] = (now, frame.copy(), provider)
+                frame.attrs["bar_interval"] = "1h" if normalized_horizon == "hour" else "1d"
+                _cache[cache_key] = (now, frame.copy(), provider)
                 return frame, provider
             except Exception as error:
                 if str(error) != "not configured":
@@ -116,6 +142,11 @@ def get_daily_history(symbol: str) -> tuple[pd.DataFrame, str]:
         if cached and now - cached[0] < STALE_TTL_SECONDS:
             return cached[1].copy(), f"{cached[2]}_stale"
         raise RuntimeError(f"No market-data provider returned history for {normalized}")
+
+
+def get_daily_history(symbol: str) -> tuple[pd.DataFrame, str]:
+    """Backward-compatible daily history interface used by quote endpoints."""
+    return get_history(symbol, "day")
 
 
 def provider_status() -> dict:

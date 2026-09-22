@@ -35,6 +35,12 @@ class SignalClassificationTests(unittest.TestCase):
         self.assertEqual(result["action"], "HOLD")
         self.assertIsNone(result["expected_move_percent"])
 
+    def test_validation_confidence_caps_error_based_confidence(self):
+        result = classify_signal(100, 103, 0.01, "day", validation_confidence=42)
+
+        self.assertEqual(result["action"], "HOLD")
+        self.assertEqual(result["confidence"], 42.0)
+
 
 if __name__ == "__main__":
     unittest.main()

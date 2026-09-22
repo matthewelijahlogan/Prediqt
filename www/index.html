@@ -34,7 +34,7 @@
 
     <div class="system-status">
       <span class="status-dot"></span>
-      Signal engine online
+      Kingmaker v1
     </div>
   </header>
 
@@ -104,6 +104,23 @@
           <span>GLOBAL FLOW</span>
         </div>
       </aside>
+    </section>
+
+    <section class="terminal-panel kingmaker-panel" aria-label="Kingmaker watchlist scanner">
+      <div class="panel-heading">
+        <div><span class="panel-kicker">KINGMAKER / WATCHLIST</span><h2>Find qualified setups</h2></div>
+      </div>
+      <p>Compare up to 20 symbols. Quality scores measure historical validation, not probability of profit.</p>
+      <form id="kingmakerScan" class="kingmaker-controls">
+        <label>Symbols<input id="scanSymbols" value="AAPL,MSFT,NVDA,SPY" maxlength="220" required></label>
+        <label>Horizon<select id="scanHorizon"><option value="hour">Hour</option><option value="day" selected>Day</option><option value="week">Week</option><option value="month">Month</option></select></label>
+        <button type="submit">Scan watchlist</button>
+      </form>
+      <p id="scanStatus" role="status">Ready to scan.</p>
+      <div class="kingmaker-table-wrap"><table class="kingmaker-table">
+        <thead><tr><th>Symbol</th><th>Signal</th><th>Forecast</th><th>Move</th><th>Quality</th><th>Evidence</th></tr></thead>
+        <tbody id="scanResults"></tbody>
+      </table></div>
     </section>
 
     <section class="results-grid" aria-label="Prediction results">
@@ -246,5 +263,6 @@
 
   <script src="js/script.js"></script>
   <script src="js/ticker.js"></script>
+  <script src="js/kingmaker.js"></script>
 </body>
 </html>

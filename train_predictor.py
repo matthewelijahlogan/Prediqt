@@ -1,24 +1,5 @@
 # train_predictor.py
 
-from trainers import trainer_1_yfinance as base_model
-from trainers import trainer_2_sentiment as sentiment_model
-from trainers import trainer_3_pelosi as pelosi_model
-from trainers import trainer_4_weather as weather_model
-from trainers import trainer_5_macro as macro_model
-from trainers import trainer_6_earnings as earnings_model
-from trainers import trainer_7_social as social_model
-from trainers import trainer_8_sector as sector_model
-from trainers import trainer_9_insider_trading as insider_model
-from trainers import trainer_10_options_flow as options_model
-from trainers import trainer_11_technical_indicators as technical_model
-from trainers import trainer_12_etf_sector_model as etf_sector_model
-from trainers import trainer_13_volume as volume_model
-from trainers import trainer_14_patterns as patterns_model
-from trainers import trainer_15_volatility as volatility_model
-from trainers import trainer_16_predictivelog as predictivelog_model
-from trainers import trainer_17_news as news_model
-from trainers import trainer_fusion as fusion_model
-
 from datetime import datetime
 from fastapi import HTTPException
 
@@ -26,6 +7,30 @@ print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Starting prediction")
 
 
 def train_and_predict(ticker: str, horizon: str = "hour"):
+    from kingmaker.model import predict
+    return predict(ticker, horizon)
+
+
+def legacy_train_and_predict(ticker: str, horizon: str = "hour"):
+    from trainers import trainer_1_yfinance as base_model
+    from trainers import trainer_2_sentiment as sentiment_model
+    from trainers import trainer_3_pelosi as pelosi_model
+    from trainers import trainer_4_weather as weather_model
+    from trainers import trainer_5_macro as macro_model
+    from trainers import trainer_6_earnings as earnings_model
+    from trainers import trainer_7_social as social_model
+    from trainers import trainer_8_sector as sector_model
+    from trainers import trainer_9_insider_trading as insider_model
+    from trainers import trainer_10_options_flow as options_model
+    from trainers import trainer_11_technical_indicators as technical_model
+    from trainers import trainer_12_etf_sector_model as etf_sector_model
+    from trainers import trainer_13_volume as volume_model
+    from trainers import trainer_14_patterns as patterns_model
+    from trainers import trainer_15_volatility as volatility_model
+    from trainers import trainer_16_predictivelog as predictivelog_model
+    from trainers import trainer_17_news as news_model
+    from trainers import trainer_fusion as fusion_model
+
     print(f"[orchestrator] Training for {ticker} with horizon '{horizon}'\n")
     results = {}
 

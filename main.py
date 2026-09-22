@@ -15,6 +15,7 @@ if load_dotenv is not None:
     load_dotenv()
 
 from backend.routers import automation, ticker_tape, news, quote
+from backend.routers import kingmaker
 from backend.yfinance_client import get_quote
 from backend.market_data import provider_status
 from auto_trainer import start_scheduler
@@ -36,6 +37,7 @@ app.include_router(ticker_tape.router)
 app.include_router(news.router)
 app.include_router(quote.router)
 app.include_router(automation.router)
+app.include_router(kingmaker.router)
 
 SUMMARY_PATH = os.path.join(os.path.dirname(__file__), "predictive_summary.json")
 INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")
@@ -102,17 +104,25 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
         loop = asyncio.get_event_loop()
         # Run blocking train_and_predict in a thread pool to not block event loop
         result = await loop.run_in_executor(None, train_and_predict, ticker, horizon.value)
-        signal = classify_signal(
+        signal = result.get("signal") or classify_signal(
             result.get("current_price"),
             result.get("predicted_next_close"),
             result.get("model_mse"),
             horizon.value,
+            result.get("validation_confidence"),
         )
         return {
+            "model": result.get("model"),
+            "forecast_id": result.get("forecast_id"),
+            "generated_at": result.get("generated_at"),
+            "evidence": result.get("evidence"),
+            "data_quality": result.get("data_quality"),
+            "confidence_description": result.get("confidence_description"),
             "ticker": ticker.upper(),
             "horizon": horizon.value,
             "predicted_next_close": result.get("predicted_next_close"),
             "model_mse": result.get("model_mse"),
+            "validation_confidence": result.get("validation_confidence"),
             "used_models": result.get("used_models"),
             "weights_used": result.get("weights_used"),  # optional, if returned
             "current_price": result.get("current_price"),
@@ -120,6 +130,8 @@ async def predict(ticker: str, horizon: HorizonEnum = HorizonEnum.hour):
         }
     except HTTPException:
         raise
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=503, detail=str(e))
 
