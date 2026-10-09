@@ -5,6 +5,12 @@ from kingmaker.model import MODEL_VERSION, predict
 router = APIRouter(prefix="/api/kingmaker", tags=["kingmaker"])
 
 
+@router.get("/webull/status")
+def webull_status():
+    from backend.webull_data import status
+    return status()
+
+
 @router.get("/status")
 def status():
     return {"model": MODEL_VERSION, "validation": "purged_expanding_window",
