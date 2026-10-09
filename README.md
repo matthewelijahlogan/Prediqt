@@ -1,5 +1,45 @@
 # PredIQT
 
+## Kingmaker opportunity desk / Webull
+
+The homepage now includes **Top 5 BIG movers**, **Top 10 daily drivers**, and
+interactive price, score-contribution and dollar-scenario graphics. Scan the
+default 25-symbol watchlist or supply up to 30 symbols. Rankings cover that
+universe, not the whole stock market. Change the horizon for hourly/weekly/monthly
+lists; only the day view is labeled daily drivers.
+
+Movement potential is a transparent volatility/volume/momentum/forecast heuristic,
+including downside moves. Daily drivers prefer qualified BUY forecasts with positive
+estimated returns after the selected round-trip cost assumption. Other entries remain
+WATCH ONLY. These are experimental forecasts, not a calibrated probability of profit.
+Stale or failed symbols are omitted and reported; lists are not padded with fake data.
+Missing volume contributes zero. Costs are assumptions, not actual spread/fill quotes.
+The chart's historical validation RMSE band is not a confidence interval or loss limit.
+
+`POST /api/kingmaker/opportunities` accepts `tickers`, `horizon` and `cost_bps`,
+returns a job ID, and `GET /api/kingmaker/opportunities/{job_id}` reports progress
+and results. One scan runs at a time. Matching requests reuse the scan; completed
+jobs expire after five minutes. Jobs are in memory and can be rerun after a restart.
+
+For Webull, first obtain approved [official OpenAPI access](https://developer.webull.com/apis/docs/getting-started/)
+and the required market-data entitlement. Configure `WEBULL_APP_KEY` and
+`WEBULL_APP_SECRET` server-side. They are application credentials, not your login.
+The pinned official SDK reads completed regular-session historical bars, with bounded
+timeouts and credential-bearing SDK error logs disabled. Webull is tried before
+the existing Alpaca, Alpha Vantage and Yahoo history providers. Without Webull
+credentials, those fallbacks remain available.
+
+`GET /api/kingmaker/webull/status` reports configuration, not verified access.
+The new desk exports research CSV for a manual Webull handoff; it is not an order
+or a guaranteed Webull watchlist-import format. This change does not enable Webull
+execution. The homepage hides legacy Alpaca paper-order controls and does not
+automatically create Alpaca proposals; legacy backend paper endpoints remain available.
+No broker account or paid data subscription was created.
+
+Hourly forecasts now require a bar no older than two hours. Other horizons retain
+the four-calendar-day ceiling. Closed sessions can consequently leave the hourly
+desk empty; it does not promote an old bar into a fresh trading signal.
+
 Kingmaker v1 now powers `/predict/{ticker}` and the web terminal. It builds on
 the existing price-feature Ridge model, with three expanding validation folds,
 purged horizon-overlapping labels, and a final refit on available labeled data.

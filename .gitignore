@@ -36,4 +36,8 @@ mobile-native/
 __pycache__/
 *.py[cod]
 .runtime/
+.venv/
+.local-tools/
+webull*_sdk.log*
+conf/token.txt
 data/kingmaker.sqlite3*

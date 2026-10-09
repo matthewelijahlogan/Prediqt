@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/opportunities.css">
 </head>
 <body class="home-page">
   <div class="ambient-grid" aria-hidden="true"></div>
@@ -104,6 +105,30 @@
           <span>GLOBAL FLOW</span>
         </div>
       </aside>
+    </section>
+
+    <section class="terminal-panel opportunity-desk" aria-labelledby="deskTitle">
+      <div class="panel-heading"><div><span class="panel-kicker">KINGMAKER / ALEA YACHTA EST</span><h2 id="deskTitle">The opportunity desk.</h2></div><span class="desk-tag">WEBULL WORKFLOW</span></div>
+      <p>Find movement. Inspect the evidence. Top candidates from your watchlist, with speculative potential separated from qualified signals.</p>
+      <form id="opportunityForm" class="desk-controls">
+        <label>Universe (up to 30 symbols)<textarea id="deskSymbols" rows="2" maxlength="330" required>AAPL,MSFT,NVDA,AMZN,GOOGL,META,TSLA,AMD,AVGO,PLTR,COIN,HOOD,SOFI,RKLB,IONQ,SMCI,MU,INTC,UBER,SHOP,SPY,QQQ,IWM,GLD,XLE</textarea></label>
+        <label>Forecast horizon<select id="deskHorizon"><option value="day">Day</option><option value="hour">Hour</option><option value="week">Week</option><option value="month">Month</option></select></label>
+        <label>Round-trip cost assumption (bps)<input id="deskCosts" type="number" min="0" max="500" step="1" value="20" required></label>
+        <button type="submit">FIRE UP KINGMAKER</button>
+      </form>
+      <p id="deskStatus" role="status">Ready. Run a scan to load sourced calculations; no demo prices.</p>
+      <p id="webullStatus">Webull manual workflow. Checking market-data configuration...</p>
+      <div class="desk-lists"><section><span class="panel-kicker">SPECULATIVE / BOTH DIRECTIONS</span><h3>Top 5 BIG movers</h3><p>Volatility, volume and momentum. High movement potential can include sharp losses.</p><ol id="bigMovers"></ol></section>
+      <section><span class="panel-kicker">EVIDENCE / LONG RETURN AFTER ASSUMED COSTS</span><h3 id="driversHeading">Top 10 daily drivers</h3><p>Qualified BUYs first. Other candidates remain WATCH ONLY.</p><ol id="dailyDrivers"></ol></section></div>
+      <button id="exportWatchlist" type="button" disabled>Export ranked watchlist CSV</button>
+      <p>Open the symbols in Webull to verify current quotes and place any chosen order there. CSV is a research handoff, not an order or a guaranteed Webull import format.</p>
+      <section id="deskDetail" hidden aria-labelledby="detailTitle"><h3 id="detailTitle">Calculation detail</h3>
+        <div class="desk-chart-grid"><div><h4>Price history + next target</h4><div id="priceChart"></div></div><div><h4>Movement score breakdown</h4><div id="scoreChart"></div></div></div>
+        <p id="detailEvidence"></p><label>Scenario amount ($)<input id="scenarioAmount" type="number" min="1" max="10000000" step="1" value="100"></label>
+        <div id="scenarioChart"></div><p id="scenarioText"></p>
+        <p>Scenario calculations assume fractional shares at the last historical close. Neither the forecast nor its RMSE range is a guaranteed outcome or a maximum loss; a stock can lose its full value.</p>
+      </section>
+      <details><summary>How Kingmaker calculates these lists</summary><p id="deskMethod">Movement score: 35 points volatility, 25 relative volume, 25 absolute momentum, 15 absolute forecast move. Scores are ranking heuristics, not profit probabilities. This scans your selected universe, not the entire market. Cost assumptions are adjustable and are not current spreads or broker quotes.</p></details>
     </section>
 
     <section class="terminal-panel kingmaker-panel" aria-label="Kingmaker watchlist scanner">
@@ -224,7 +249,7 @@
       </aside>
     </section>
 
-    <section class="automation-machine terminal-panel" aria-labelledby="automationTitle">
+    <section class="automation-machine terminal-panel" aria-labelledby="automationTitle" hidden>
       <div class="panel-heading">
         <div>
           <span class="panel-kicker">AUTOMATION MACHINE</span>
@@ -264,5 +289,6 @@
   <script src="js/script.js"></script>
   <script src="js/ticker.js"></script>
   <script src="js/kingmaker.js"></script>
+  <script src="js/opportunities.js"></script>
 </body>
 </html>

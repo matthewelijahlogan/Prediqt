@@ -232,6 +232,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadAutomationMachine() {
+    if (automationProposalEl.closest('section').hidden) return;
     try {
       const [statusResponse, proposalsResponse] = await Promise.all([
         fetch("/api/automation/status"),
@@ -248,6 +249,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function prepareAutomationProposal(ticker, composite) {
+    if (automationProposalEl.closest('section').hidden) return;
     if (composite.action === "SELL") {
       automationProposalEl.innerHTML = '<span class="automation-state">EXIT RISK</span><strong>Sell automation is position-aware</strong><p>PredIQt will not create a sell order until the connected broker confirms an existing long position.</p>';
       return;
