@@ -23,7 +23,8 @@ def predict(ticker: str, horizon: str = "day") -> dict:
     provider = evidence["market_data_provider"]
     last_bar = pd.to_datetime(evidence["last_bar_at"], utc=True, errors="coerce")
     age = (pd.Timestamp.now(tz="UTC") - last_bar).total_seconds() if pd.notna(last_bar) else None
-    data_usable = age is not None and 0 <= age <= 4 * 86400 and not provider.endswith("_stale")
+    max_age = 2 * 3600 if horizon == "hour" else 4 * 86400
+    data_usable = age is not None and 0 <= age <= max_age and not provider.endswith("_stale")
     if not data_usable:
         confidence = 0.0
     result = {

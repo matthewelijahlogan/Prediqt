@@ -65,10 +65,11 @@ def predict(ticker: str, horizon="day"):
         }
 
     close_prices = np.asarray(df["Close"], dtype=float).reshape(-1)
-    close_prices = close_prices[np.isfinite(close_prices) & (close_prices > 0)]
-    if len(close_prices) < minimum_rows:
+    # Removing a bad row changes the meaning of forward_bars and can attach
+    # an old close to the newest timestamp. Reject that history instead.
+    if not (np.isfinite(close_prices) & (close_prices > 0)).all():
         return {
-            "trainer": "base", "error": "Insufficient valid close prices",
+            "trainer": "base", "error": "Invalid close prices in market history",
             "confidence": 0.0, "predicted_next_close": 0.0,
             "meta": {"horizon": normalized_horizon},
         }

@@ -38,6 +38,40 @@ def recent(limit=100):
     return [dict(row, payload=json.loads(row["payload"])) for row in rows]
 
 
+def metrics():
+    """Observed first-seen forecast errors, never in-sample validation scores."""
+    import math
+    with connect() as db:
+        rows = db.execute("SELECT horizon,payload,actual_close FROM forecasts").fetchall()
+    db.close()
+    groups = {}
+    for row in rows:
+        group = groups.setdefault(row["horizon"], {"recorded": 0, "settled": 0,
+                                                   "errors": [], "baseline": [], "direction": []})
+        group["recorded"] += 1
+        if row["actual_close"] is None:
+            continue
+        payload = json.loads(row["payload"])
+        actual = row["actual_close"]
+        target, origin = payload["predicted_next_close"], payload["current_price"]
+        group["settled"] += 1
+        group["errors"].append(target - actual)
+        group["baseline"].append(origin - actual)
+        sign = lambda value: (value > 0) - (value < 0)
+        group["direction"].append(sign(target - origin) == sign(actual - origin))
+    result = {}
+    for horizon, group in groups.items():
+        n = group["settled"]
+        result[horizon] = {"recorded": group["recorded"], "settled": n,
+                           "pending": group["recorded"] - n,
+                           "mae_dollars": sum(abs(e) for e in group["errors"]) / n if n else None,
+                           "rmse_dollars": math.sqrt(sum(e*e for e in group["errors"]) / n) if n else None,
+                           "baseline_rmse_dollars": math.sqrt(sum(e*e for e in group["baseline"]) / n) if n else None,
+                           "direction_accuracy": sum(group["direction"]) / n if n else None}
+    return {"horizons": result, "profitability": "unproven",
+            "methodology": "First-seen forecasts versus later observed closes. Dollar errors pool symbols with different prices; direction includes flat outcomes. No trade fills, costs or portfolio P/L."}
+
+
 def settle(limit=100):
     from backend.market_data import get_history
     from trainers.trainer_1_yfinance import FORWARD_BARS

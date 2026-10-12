@@ -15,7 +15,7 @@ _cache: dict[str, tuple[float, pd.DataFrame, str]] = {}
 _lock = Lock()
 _health: dict[str, dict] = {
     provider: {"configured": provider == "yahoo", "healthy": None, "last_error": None}
-    for provider in ("alpaca", "alpha_vantage", "yahoo")
+    for provider in ("webull", "alpaca", "alpha_vantage", "yahoo")
 }
 
 
@@ -123,6 +123,7 @@ def get_history(symbol: str, horizon: str = "day") -> tuple[pd.DataFrame, str]:
             return cached[1].copy(), cached[2]
 
         for provider, fetcher in (
+            ("webull", _webull_history),
             ("alpaca", _alpaca_history),
             ("alpha_vantage", _alpha_vantage_history),
             ("yahoo", _yahoo_history),
@@ -150,8 +151,16 @@ def get_daily_history(symbol: str) -> tuple[pd.DataFrame, str]:
 
 
 def provider_status() -> dict:
+    from backend.webull_data import status
+    _health["webull"]["configured"] = status()["configured"]
     return {
         "providers": _health,
         "fresh_cache_seconds": FRESH_TTL_SECONDS,
         "stale_cache_seconds": STALE_TTL_SECONDS,
     }
+
+
+def _webull_history(symbol: str, horizon: str = "day"):
+    from backend.webull_data import get_history, status
+    _health["webull"]["configured"] = status()["configured"]
+    return get_history(symbol, horizon)

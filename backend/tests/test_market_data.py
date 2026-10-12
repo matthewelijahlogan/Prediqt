@@ -10,6 +10,15 @@ from trainers import trainer_1_yfinance
 
 
 class MarketDataResilienceTests(unittest.TestCase):
+    def test_invalid_closes_do_not_shift_horizons_or_origin(self):
+        for bad_value in (np.nan, np.inf, 0, -1):
+            with self.subTest(bad_value=bad_value):
+                history = pd.DataFrame({"Close": np.linspace(100, 125, 120)})
+                history.loc[119, "Close"] = bad_value
+                with patch.object(trainer_1_yfinance, "fetch_market_data", return_value=history):
+                    result = trainer_1_yfinance.predict("AAPL", "week")
+                self.assertEqual(result["error"], "Invalid close prices in market history")
+
     def test_quote_uses_ticker_tape_when_history_is_rate_limited(self):
         cached = {"tickers": [{"symbol": "AAPL", "price": 306.05}], "last_updated": 1}
         with patch.dict(TICKER_CACHE, cached, clear=True), patch(

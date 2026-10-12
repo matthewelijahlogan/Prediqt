@@ -16,6 +16,7 @@ if load_dotenv is not None:
 
 from backend.routers import automation, ticker_tape, news, quote
 from backend.routers import kingmaker
+from backend.routers import opportunities
 from backend.yfinance_client import get_quote
 from backend.market_data import provider_status
 from auto_trainer import start_scheduler
@@ -38,6 +39,7 @@ app.include_router(news.router)
 app.include_router(quote.router)
 app.include_router(automation.router)
 app.include_router(kingmaker.router)
+app.include_router(opportunities.router)
 
 SUMMARY_PATH = os.path.join(os.path.dirname(__file__), "predictive_summary.json")
 INTERNAL_SYNC_TOKEN = os.environ.get("INTERNAL_SYNC_TOKEN", "")

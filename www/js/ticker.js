@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const move = Number(signal.expected_move_percent);
       const confidence = Number(signal.confidence);
       detailEl.textContent = signal.expected_move_percent != null && Number.isFinite(move)
-        ? `${move >= 0 ? "+" : ""}${move.toFixed(2)}% · ${confidence.toFixed(1)}% CONF`
+        ? `${ticker} · ${move >= 0 ? "+" : ""}${move.toFixed(2)}% · QUALITY ${confidence.toFixed(1)}/100 · ${data.data_quality?.usable === false ? "STALE DATA" : data.data_quality?.provider || "unknown source"} · origin ${data.evidence?.last_bar_at || "unverified"}`
         : "SIGNAL UNAVAILABLE";
       detailEl.title = signal.rationale || "Signal evidence unavailable";
       return data;
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       signalEl.textContent = "HOLD";
       signalEl.className = "decision hold";
       cardEl.dataset.signal = "HOLD";
-      detailEl.textContent = "MARKET FEED UNAVAILABLE";
+      detailEl.textContent = `${ticker} · MARKET FEED UNAVAILABLE`;
       detailEl.title = err instanceof Error ? err.message : "Prediction request failed";
       return null;
     }
@@ -232,6 +232,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadAutomationMachine() {
+    if (automationProposalEl.closest('section').hidden) return;
     try {
       const [statusResponse, proposalsResponse] = await Promise.all([
         fetch("/api/automation/status"),
@@ -248,6 +249,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function prepareAutomationProposal(ticker, composite) {
+    if (automationProposalEl.closest('section').hidden) return;
     if (composite.action === "SELL") {
       automationProposalEl.innerHTML = '<span class="automation-state">EXIT RISK</span><strong>Sell automation is position-aware</strong><p>PredIQt will not create a sell order until the connected broker confirms an existing long position.</p>';
       return;
@@ -278,6 +280,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetch quote data for ticker and update quote elements
   async function fetchQuote(ticker) {
+    // Clear every field before loading another symbol, including nullable fields.
+    for (const element of [quotePriceEl, quoteChangeEl, quotePercentEl,
+      quoteVolumeEl, quoteMarketCapEl, quoteSectorEl]) element.textContent = "—";
+    document.getElementById("quoteSource").textContent = `${ticker} · Loading snapshot...`;
     try {
       const res = await fetch(`/api/quote?ticker=${ticker}`);
       const data = await res.json();
@@ -309,6 +315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = data.volume?.toLocaleString() ?? "-";
       quoteMarketCapEl.textContent = data.market_cap?.toLocaleString() ?? "-";
       quoteSectorEl.textContent = data.sector ?? "-";
+      document.getElementById("quoteSource").textContent = `${ticker} · ${data.source || "unknown source"} · snapshot price; freshness not verified`;
       return true;
     } catch (err) {
       quotePriceEl.textContent = "Error";
@@ -317,6 +324,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteVolumeEl.textContent = "Error";
       quoteMarketCapEl.textContent = "Error";
       quoteSectorEl.textContent = "Error";
+      document.getElementById("quoteSource").textContent = `${ticker} · Snapshot unavailable`;
       return false;
     }
   }
@@ -348,6 +356,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const ticker = inputEl.value.trim().toUpperCase();
     if (!ticker) return;
+    if (!/^[A-Z][A-Z0-9.-]{0,9}$/.test(ticker)) {
+      panelStatus.textContent = "Enter a valid stock or ETF symbol.";
+      return;
+    }
 
     predictionInProgress = true;
     predictBtn.disabled = true;

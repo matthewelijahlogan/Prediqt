@@ -5,6 +5,12 @@ from kingmaker.model import MODEL_VERSION, predict
 router = APIRouter(prefix="/api/kingmaker", tags=["kingmaker"])
 
 
+@router.get("/webull/status")
+def webull_status():
+    from backend.webull_data import status
+    return status()
+
+
 @router.get("/status")
 def status():
     return {"model": MODEL_VERSION, "validation": "purged_expanding_window",
@@ -16,6 +22,12 @@ def status():
 def forecasts(limit: int = Query(100, ge=1, le=500)):
     from kingmaker.ledger import recent
     return {"items": recent(limit)}
+
+
+@router.get("/metrics")
+def forecast_metrics():
+    from kingmaker.ledger import metrics
+    return metrics()
 
 
 @router.post("/settle")
