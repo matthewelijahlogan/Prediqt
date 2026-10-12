@@ -24,6 +24,12 @@ def forecasts(limit: int = Query(100, ge=1, le=500)):
     return {"items": recent(limit)}
 
 
+@router.get("/metrics")
+def forecast_metrics():
+    from kingmaker.ledger import metrics
+    return metrics()
+
+
 @router.post("/settle")
 def settle_forecasts():
     from kingmaker.ledger import settle

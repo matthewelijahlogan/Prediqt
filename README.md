@@ -2,6 +2,20 @@
 
 ## Kingmaker opportunity desk / Webull
 
+The day scan also shows up to ten percentage gainers and ten percentage losers
+within the selected watchlist, without padding missing candidates. These use the
+latest daily historical close versus the preceding close, may include an unfinished
+session, and are not market-wide rankings. Select any candidate to view its price
+history, model target, historical validation RMSE range and dollar scenarios.
+
+The observed metrics panel reads `GET /api/kingmaker/metrics`: recorded, pending
+and settled first-seen forecasts by horizon, observed MAE/RMSE, no-change baseline
+RMSE and direction accuracy. Click **Check completed outcomes** to request
+settlement; collection is driven by predictions/scans and settlement is manual
+unless the optional scheduler is enabled. Pending outcomes are never scored.
+These metrics are forecast errors, not trading P/L. Dollar errors pool differently
+priced symbols. Persist `KINGMAKER_LEDGER_PATH` for hosted collection.
+
 The homepage now includes **Top 5 BIG movers**, **Top 10 daily drivers**, and
 interactive price, score-contribution and dollar-scenario graphics. Scan the
 default 25-symbol watchlist or supply up to 30 symbols. Rankings cover that
@@ -88,6 +102,12 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 Health check:
 - `GET /health`
+
+On Windows, create a local environment once with `py -m venv .venv`, then
+install dependencies with `.\.venv\Scripts\python.exe -m pip install -r requirements.txt`.
+Run `powershell -ExecutionPolicy Bypass -File .\start-local.ps1` from the repo
+to start the dashboard and open your browser. Use `-NoBrowser` to skip opening
+the browser or `-Port 8001` to choose another port. Press Ctrl+C to stop.
 
 Key endpoints used by mobile:
 - `GET /predict/{ticker}?horizon=hour|day|week|month`

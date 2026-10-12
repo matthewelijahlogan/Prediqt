@@ -83,8 +83,16 @@ def build_board(symbols, horizon="day", cost_bps=20, progress=None):
     drivers = sorted(items,
                      key=lambda x: (not x["qualified_driver"], -x["estimated_net_move_percent"],
                                     -x["forecast"]["validation_confidence"], x["ticker"]))[:10]
+    # Daily realized moves are separate from speculative movement scores.
+    daily = items if horizon == "day" else []
+    gainers = sorted((item for item in daily if item.get("change_percent", 0) > 0),
+                     key=lambda item: (-item["change_percent"], item["ticker"]))[:10]
+    losers = sorted((item for item in daily if item.get("change_percent", 0) < 0),
+                    key=lambda item: (item["change_percent"], item["ticker"]))[:10]
     return {"generated_at": datetime.now(timezone.utc).isoformat(), "horizon": horizon,
             "universe": symbols, "evaluated": len(items), "errors": errors,
             "big_movers": movers, "daily_drivers": drivers,
+            "daily_gainers": gainers, "daily_losers": losers,
+            "daily_ranking_basis": "Latest daily historical close versus preceding close within the selected watchlist; may include an unfinished session. Not market-wide or a live quote ranking.",
             "round_trip_cost_bps": cost_bps, "profitability": "unproven",
             "methodology": "Watchlist only. Movement score = volatility/5% capped *35 + relative volume/3 capped *25 + abs(5-bar momentum)/10% capped *25 + abs(forecast move)/3% capped *15. Daily drivers prefer qualified BUYs, then estimated long return after assumed costs. No padding with failed/stale symbols. Missing volume contributes zero. Costs are assumptions, not broker quotes."}

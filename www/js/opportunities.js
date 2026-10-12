@@ -73,13 +73,13 @@
     $('detailEvidence').textContent = `Movement score ${fmt(item.movement_score)}/100 · quality ${fmt(item.forecast.validation_confidence, 1)}/100 · forecast ${fmt(item.forecast_move_percent)}% · estimated net long move ${fmt(item.estimated_net_move_percent)}% · 20-bar volatility ${fmt(item.volatility_20_bars_percent)}% · relative volume ${item.relative_volume === null ? 'unavailable' : `${fmt(item.relative_volume)}×`} · ${item.forecast.data_quality.provider} · origin ${item.forecast.evidence.last_bar_at}. ${item.forecast.signal.rationale} ${item.error_band.label}.`;
     scenario();
   }
-  function list(id, items, movers) {
+  function list(id, items, movers, daily = false) {
     const parent = $(id); parent.replaceChildren();
     if (!items.length) {parent.append(element('li', 'No usable candidates. Missing evidence is not replaced with fabricated rankings.')); return;}
     items.forEach((item, i) => {
       const button = element('button', undefined, 'desk-candidate'); button.type = 'button';
       button.append(element('strong', `${String(i+1).padStart(2, '0')} / ${item.ticker}`),
-        element('span', movers ? `MOVEMENT ${fmt(item.movement_score)} / 100` : item.driver_status, movers ? 'desk-speculative' : 'desk-signal'),
+        element('span', daily ? `DAILY ${fmt(item.change_percent)}% / ${item.driver_status}` : movers ? `MOVEMENT ${fmt(item.movement_score)} / 100` : item.driver_status, movers ? 'desk-speculative' : 'desk-signal'),
         element('span', `Forecast ${fmt(item.forecast_move_percent)}% · last $${fmt(item.last_price)} · quality ${fmt(item.forecast.validation_confidence, 1)}/100`));
       button.addEventListener('click', () => detail(item));
       const li = element('li'); li.append(button); parent.append(li);
@@ -106,6 +106,9 @@
       board = job.result;
       $('driversHeading').textContent = board.horizon === 'day' ? 'Top 10 daily drivers' : `Top 10 ${board.horizon} drivers`;
       list('bigMovers', board.big_movers, true); list('dailyDrivers', board.daily_drivers, false);
+      list('dailyGainers', board.daily_gainers || [], false, true);
+      list('dailyLosers', board.daily_losers || [], false, true);
+      $('dailyRankingBasis').textContent = board.horizon === 'day' ? board.daily_ranking_basis : 'Select Day and scan for daily gainers and losers. These lists do not rank hourly, weekly or monthly changes.';
       $('deskMethod').textContent = board.methodology;
       $('deskStatus').textContent = `${board.evaluated}/${board.universe.length} usable · ${board.errors.length} unavailable · snapshot ${board.generated_at}. ` + board.errors.map(e => e.ticker).join(', ');
       $('exportWatchlist').disabled = !board.evaluated;

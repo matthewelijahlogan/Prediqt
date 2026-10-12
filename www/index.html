@@ -120,6 +120,8 @@
       <p id="webullStatus">Webull manual workflow. Checking market-data configuration...</p>
       <div class="desk-lists"><section><span class="panel-kicker">SPECULATIVE / BOTH DIRECTIONS</span><h3>Top 5 BIG movers</h3><p>Volatility, volume and momentum. High movement potential can include sharp losses.</p><ol id="bigMovers"></ol></section>
       <section><span class="panel-kicker">EVIDENCE / LONG RETURN AFTER ASSUMED COSTS</span><h3 id="driversHeading">Top 10 daily drivers</h3><p>Qualified BUYs first. Other candidates remain WATCH ONLY.</p><ol id="dailyDrivers"></ol></section></div>
+      <div class="desk-lists"><section><h3>Top 10 daily gainers</h3><ol id="dailyGainers"></ol></section><section><h3>Top 10 daily losers</h3><ol id="dailyLosers"></ol></section></div>
+      <p id="dailyRankingBasis">Select Day and scan to rank percentage changes within your watchlist. Select a symbol to view its forecast chart.</p>
       <button id="exportWatchlist" type="button" disabled>Export ranked watchlist CSV</button>
       <p>Open the symbols in Webull to verify current quotes and place any chosen order there. CSV is a research handoff, not an order or a guaranteed Webull import format.</p>
       <section id="deskDetail" hidden aria-labelledby="detailTitle"><h3 id="detailTitle">Calculation detail</h3>
@@ -131,6 +133,14 @@
       <details><summary>How Kingmaker calculates these lists</summary><p id="deskMethod">Movement score: 35 points volatility, 25 relative volume, 25 absolute momentum, 15 absolute forecast move. Scores are ranking heuristics, not profit probabilities. This scans your selected universe, not the entire market. Cost assumptions are adjustable and are not current spreads or broker quotes.</p></details>
     </section>
 
+    <section class="terminal-panel" aria-labelledby="metricsTitle">
+      <h2 id="metricsTitle">Observed forecast metrics</h2>
+      <button id="refreshMetrics" type="button">Refresh metrics</button>
+      <button id="settleMetrics" type="button">Check completed outcomes</button>
+      <p id="metricsStatus" role="status">Loading recorded forecasts...</p>
+      <div class="kingmaker-table-wrap"><table class="kingmaker-table"><thead><tr><th>Horizon</th><th>Recorded</th><th>Pending</th><th>Settled</th><th>MAE ($)</th><th>RMSE ($)</th><th>No-change RMSE ($)</th><th>Direction</th></tr></thead><tbody id="metricsResults"></tbody></table></div>
+      <p>Observed outcomes are separate from training validation. Errors pool symbols with different prices. Forecast metrics do not measure trading profit.</p>
+    </section>
     <section class="terminal-panel kingmaker-panel" aria-label="Kingmaker watchlist scanner">
       <div class="panel-heading">
         <div><span class="panel-kicker">KINGMAKER / WATCHLIST</span><h2>Find qualified setups</h2></div>
@@ -213,7 +223,7 @@
       <aside class="terminal-panel quote-panel">
         <div class="panel-heading">
           <div>
-            <span class="panel-kicker">LIVE QUOTE</span>
+            <span class="panel-kicker">PRICE SNAPSHOT</span>
             <h2>Market snapshot</h2>
           </div>
           <span class="quote-pulse" aria-hidden="true"></span>
@@ -223,6 +233,7 @@
           <span>LAST PRICE</span>
           <strong id="quotePrice">—</strong>
         </div>
+        <p id="quoteSource" role="status">Awaiting symbol. Snapshot prices may be delayed.</p>
 
         <div class="quote-grid">
           <div>
@@ -290,5 +301,6 @@
   <script src="js/ticker.js"></script>
   <script src="js/kingmaker.js"></script>
   <script src="js/opportunities.js"></script>
+  <script src="js/metrics.js"></script>
 </body>
 </html>
